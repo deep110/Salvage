@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using System;
 
 [RequireComponent(typeof(InputManager))]
 public class PlayerManager : MonoBehaviour {
+
     public Transform playerOne;
     public Transform playerTwo;
+    public float positionCorrection = -0.4f;
 
     private InputManager inputManager;
 
@@ -35,11 +38,10 @@ public class PlayerManager : MonoBehaviour {
     private void handleJumpAndFall() {
     	if (pointerClicked) {
     		pointerClicked = false;
-    		float playerOnePosY = playerOne.position.y;
-    		float playerTwoPosY = playerTwo.position.y;
+    		double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 4);
+    		double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 4);
 
         	if(inputManager.pointerPos.y >= playerOnePosY){
-
         		if (playerOnePosY > playerTwoPosY){
         			playerTwoController.Jump();
         		} else {
@@ -47,7 +49,7 @@ public class PlayerManager : MonoBehaviour {
         		}
         	} else {
         		if (playerOnePosY > playerTwoPosY) {
-    				if (inputManager.pointerPos.y > playerOnePosY + playerTwoPosY / 2) {
+    				if (inputManager.pointerPos.y > (playerOnePosY + playerTwoPosY) / 2) {
     					playerTwoController.Jump();
     				} else {
     					playerOneController.Fall();
