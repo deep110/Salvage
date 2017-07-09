@@ -1,9 +1,4 @@
-﻿/*
- * Act as top level manager for player. Gets Data from various other Managers and uses to build and control player in the game.
- * Like takes input from InputManager and passes to PlayerController, etc.
- */
-
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(InputManager))]
 public class PlayerManager : MonoBehaviour {
@@ -15,14 +10,22 @@ public class PlayerManager : MonoBehaviour {
     private PlayerController playerOneController;
     private PlayerController playerTwoController;
 
+    private bool pointerClicked;
+
     void Start() {
         inputManager = GetComponent<InputManager>();
 
         playerOneController = playerOne.GetComponent<PlayerController>();
         playerTwoController = playerTwo.GetComponent<PlayerController>();
     }
-	
+
     void Update() {
+    	if (inputManager.pointerClick){
+    		pointerClicked = true;
+    	}
+    }
+	
+    void FixedUpdate() {
         playerOneController.Move(inputManager.pointerPos.x);
         playerTwoController.Move(inputManager.pointerPos.x);
 
@@ -30,15 +33,14 @@ public class PlayerManager : MonoBehaviour {
     }
 
     private void handleJumpAndFall() {
-    	if (inputManager.pointerClick) {
-    		Debug.Log("click called");
+    	if (pointerClicked) {
+    		pointerClicked = false;
     		float playerOnePosY = playerOne.position.y;
     		float playerTwoPosY = playerTwo.position.y;
 
         	if(inputManager.pointerPos.y >= playerOnePosY){
 
         		if (playerOnePosY > playerTwoPosY){
-        			// Debug.Log(playerOnePosY+"/"+playerTwoPosY+"/"+inputManager.pointerPos.y);
         			playerTwoController.Jump();
         		} else {
         			playerOneController.Jump();

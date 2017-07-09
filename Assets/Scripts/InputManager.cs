@@ -7,14 +7,6 @@ public class InputManager : MonoBehaviour {
 
 	[HideInInspector]
 	public bool pointerClick;
-
-	void Start() {
-		// if (Application.isMobilePlatform) {
-			
-		// } else {
-		// 	pointerX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-		// }
-	}
 	
 	void Update () {
 

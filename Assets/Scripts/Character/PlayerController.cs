@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 		platformLayer = LayerMask.NameToLayer("Platform");
 	}
 		
-	void FixedUpdate(){
+	void Update(){
 		
 		// exit update if player cannot move or game is paused
 		//if (!playerCanMove || (Time.timeScale == 0f))
