@@ -23,9 +23,7 @@ public class PlayerManager : MonoBehaviour {
     }
 
     void Update() {
-    	if (inputManager.pointerClick){
-    		pointerClicked = true;
-    	}
+    	pointerClicked |= inputManager.pointerClick;
     }
 	
     void FixedUpdate() {

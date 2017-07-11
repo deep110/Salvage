@@ -114,9 +114,8 @@ public class PlayerController : MonoBehaviour {
 	// Checking to see if the sprite should be flipped
 	// this is done in LateUpdate since the Animator may override the localScale
 	// this code will flip the player even if the animator is controlling scale
-	void LateUpdate(){
+	void LateUpdate() {
 		
-		// get the current scale
 		Vector3 localScale = _transform.localScale;
 
 		// moving right so face right
