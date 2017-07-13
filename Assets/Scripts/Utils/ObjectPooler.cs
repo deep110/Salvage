@@ -17,12 +17,12 @@ public class ObjectPooler {
 
 	public ObjectPooler(GameObject pooledObject, int amount, bool willGrow){
 		WillGrow = willGrow;
-		Init(pooledObject,amount);
+		init(pooledObject, amount);
 	}
 
-	private void Init(GameObject pooledObject, int amount){
+	private void init(GameObject pooledObject, int amount) {
 
-		if(pooledObjects != null || pooledObject == null || amount <1){
+		if(pooledObjects != null || pooledObject == null || amount < 1){
 			return;
 		}
 

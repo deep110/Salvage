@@ -1,5 +1,5 @@
 {
-	"FormattingOptions": {
+	"CSharpFormattingOptions": {
 		"NewLinesForBracesInLambdaExpressionBody": false,
 		"NewLinesForBracesInAnonymousMethods": false,
 		"NewLinesForBracesInAnonymousTypes": false,
