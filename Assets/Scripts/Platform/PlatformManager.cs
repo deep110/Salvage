@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-/*
- * genrates platform
- * use object pooler
- */
+
 namespace Platform {
     public class PlatformManager : MonoBehaviour {
 
@@ -64,7 +61,7 @@ namespace Platform {
 
         private void addPlatform(int platformIndex) {
             float currentPlatformPos = initialPlatformPos + platformIndex * platformGap;
-            hashMap.Add(platformIndex, objectPooler.Spawn(new Vector3(0, currentPlatformPos, 0)));
+            hashMap.Add(platformIndex, objectPooler.Spawn(new Vector3(0, currentPlatformPos, 5)));
         }
 
     }

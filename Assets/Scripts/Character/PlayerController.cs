@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
 			// reset current vertical motion to 0 prior to jump
 			vy = 0f;
 			// add a force in the down direction
-			_rigidbody.AddForce (new Vector2 (0, -1*jumpForce));
+			_rigidbody.AddForce (new Vector2 (0, -10*jumpForce));
 		}
 	}
 
