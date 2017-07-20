@@ -20,7 +20,7 @@ namespace Platform {
             if (other.gameObject.tag.Equals("Platform")) {
             	if (_transform.position.y > lastPosition) {
                     if (isTopEdge) {
-        		        platforManager.GeneratePlatform(true);
+        		        platforManager.AddPlatform(true);
                     } else {
                         platforManager.RemovePlatform(false);
                     }
@@ -28,7 +28,7 @@ namespace Platform {
                     if (isTopEdge) {
                         platforManager.RemovePlatform(true);
                     } else {
-                        platforManager.GeneratePlatform(false);
+                        platforManager.AddPlatform(false);
                     }
             	}
 

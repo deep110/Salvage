@@ -24,19 +24,19 @@ namespace Platform {
 
         private void initPlatforms() {
             for (int i = 0; i < 5; i++) {
-                GeneratePlatform(true);
+                AddPlatform(true);
             }
         }
 
-        public void GeneratePlatform(bool up) {
+        public void AddPlatform(bool up) {
             if (up) { 
                 currentPlatformIndex = maxPlatformIndex;
-                addPlatform(currentPlatformIndex);
+                generatePlatform(currentPlatformIndex);
                 maxPlatformIndex++;
             } else {
                 currentPlatformIndex = minPlatformIndex;
                 if (currentPlatformIndex >= 0) {   
-                    addPlatform(currentPlatformIndex);
+                    generatePlatform(currentPlatformIndex);
                     minPlatformIndex--;
                 } else {
                     minPlatformIndex = -2;
@@ -59,7 +59,7 @@ namespace Platform {
             }
         }
 
-        private void addPlatform(int platformIndex) {
+        private void generatePlatform(int platformIndex) {
             float currentPlatformPos = initialPlatformPos + platformIndex * platformGap;
             hashMap.Add(platformIndex, objectPooler.Spawn(new Vector3(0, currentPlatformPos, 5)));
         }
