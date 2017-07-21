@@ -23,7 +23,7 @@ namespace Platform {
         }
 
         private void initPlatforms() {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 6; i++) {
                 AddPlatform(true);
             }
         }

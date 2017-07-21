@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
@@ -136,6 +136,6 @@ public class PlayerController : MonoBehaviour {
 
 
 	void OnCollisionEnter2D(Collision2D other){
-		canFall = other.transform.tag.Equals ("Platform");
+		canFall = other.transform.CompareTag ("Platform");
 	}
 }
