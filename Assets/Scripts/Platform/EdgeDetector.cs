@@ -17,7 +17,7 @@ namespace Platform {
         }
 
         void OnTriggerExit2D(Collider2D other) {
-            if (other.gameObject.tag.Equals("Platform")) {
+            if (other.gameObject.CompareTag("Platform")) {
             	if (_transform.position.y > lastPosition) {
                     if (isTopEdge) {
         		        platforManager.AddPlatform(true);

@@ -6,14 +6,13 @@ public class PlayerManager : MonoBehaviour {
 
     public Transform playerOne;
     public Transform playerTwo;
-    public float positionCorrection = -0.4f;
 
     private InputManager inputManager;
-
     private PlayerController playerOneController;
     private PlayerController playerTwoController;
 
     private bool pointerClicked;
+    private const float positionCorrection = -0.4f;
 
     void Start() {
         inputManager = GetComponent<InputManager>();

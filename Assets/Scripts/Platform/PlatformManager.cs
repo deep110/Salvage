@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-
 namespace Platform {
     public class PlatformManager : MonoBehaviour {
 
@@ -17,7 +16,7 @@ namespace Platform {
         private Dictionary<int, GameObject> hashMap;
 
         void Start() {
-            objectPooler = new ObjectPooler(platform, 8);
+            objectPooler = new ObjectPooler(platform, 10, false);
             hashMap = new Dictionary<int, GameObject>();
             initPlatforms();
         }
@@ -61,7 +60,7 @@ namespace Platform {
 
         private void generatePlatform(int platformIndex) {
             float currentPlatformPos = initialPlatformPos + platformIndex * platformGap;
-            hashMap.Add(platformIndex, objectPooler.Spawn(new Vector3(0, currentPlatformPos, 5)));
+            hashMap.Add(platformIndex, objectPooler.Spawn(new Vector3(0, currentPlatformPos, 0)));
         }
 
     }

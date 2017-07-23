@@ -9,10 +9,6 @@ public class ObjectPooler {
 	private GameObject pooledObject;
 	private List<GameObject> pooledObjects;
 
-	public ObjectPooler(){
-		WillGrow = true;
-	}
-
 	public ObjectPooler(GameObject pooledObject, int amount) : this(pooledObject, amount, true){}
 
 	public ObjectPooler(GameObject pooledObject, int amount, bool willGrow){

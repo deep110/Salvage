@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinManager : MonoBehaviour {
+/*
+* generates coin and poweups
+* on platform randomly.
+*/
+
+public class CollectibleGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
