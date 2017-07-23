@@ -6,7 +6,6 @@ public class CameraFollow : MonoBehaviour {
 	public float damping = 0.25f;
 	public Vector3 distanceCorrection = new Vector3 (0, 1.0f, 0);
 
-	// private variables
 	private Transform _transform;
 	private float offsetZ;
 	private Vector3 currentVelocity;
@@ -20,7 +19,7 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		enable = (target.position.y  > -1.0f);
+		enable = (target.localPosition.y  > 1.48f);
 
 		if (enable) {
 			Vector3 targetPos = target.position + Vector3.forward*offsetZ + distanceCorrection;

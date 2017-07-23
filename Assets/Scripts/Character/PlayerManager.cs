@@ -23,9 +23,9 @@ public class PlayerManager : MonoBehaviour {
     }
 
     void Update() {
-    	pointerClicked |= inputManager.pointerClick;
+        pointerClicked |= inputManager.pointerClick;
     }
-	
+
     void FixedUpdate() {
         playerOneController.Move(inputManager.pointerPos.x);
         playerTwoController.Move(inputManager.pointerPos.x);
@@ -34,31 +34,29 @@ public class PlayerManager : MonoBehaviour {
     }
 
     private void handleJumpAndFall() {
-    	if (pointerClicked) {
-    		pointerClicked = false;
-    		double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 4);
-    		double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 4);
+        if (pointerClicked) {
+            pointerClicked = false;
+            double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 2);
+            double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 2);
 
-        	if(inputManager.pointerPos.y >= playerOnePosY){
-        		if (playerOnePosY > playerTwoPosY){
-        			playerTwoController.Jump();
-        		} else {
-        			playerOneController.Jump();
-        		}
-        	} else {
-        		if (playerOnePosY > playerTwoPosY) {
-    				if (inputManager.pointerPos.y > (playerOnePosY + playerTwoPosY) / 2) {
-    					playerTwoController.Jump();
-    				} else {
-    					playerOneController.Fall();
-    				}
-    			}else {
-    				playerTwoController.Fall();
-    			}
-        	}
+            if(inputManager.pointerPos.y >= playerOnePosY){
+                if (playerOnePosY > playerTwoPosY){
+                    playerTwoController.Jump();
+                } else {
+                    playerOneController.Jump();
+                }
+            } else {
+                if (playerOnePosY > playerTwoPosY) {
+                    if (inputManager.pointerPos.y > (playerOnePosY + playerTwoPosY) / 2) {
+                        playerTwoController.Jump();
+                    } else {
+                        playerOneController.Fall();
+                    }
+                } else {
+                    playerTwoController.Fall();
+                }
+            }
         }
     }
-
-	
 }
 
