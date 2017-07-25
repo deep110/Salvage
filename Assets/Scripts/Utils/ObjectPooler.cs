@@ -67,8 +67,19 @@ public class ObjectPooler {
 		return Spawn (position, Quaternion.identity);
 	}
 
+	public int CountPooled() {
+		int count = 0;
+		for(int i=0; i< pooledObjects.Count; i++){
+			if(pooledObjects[i].activeInHierarchy){
+				count++;
+			}
+		}
+
+		return count;
+	}
+
 	public override string ToString() {
-		return PoolSize.ToString ();
+		return string.Format("PoolSize: {0}", PoolSize);
 	}
 	
 }
