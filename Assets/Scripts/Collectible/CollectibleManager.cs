@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 
-public class CoinManager : MonoBehaviour {
+public class CollectibleManager : Singleton<CollectibleManager> {
 
 	public GameObject coin;
 
 	private ObjectPooler coinObjectPooler;
 
 	void Start () {
-		coinObjectPooler = new ObjectPooler(coin, 50);
+		coinObjectPooler = new ObjectPooler(coin, 30);
 	}
 
-	public void SpawnCoin(Vector3 position) {
-		coinObjectPooler.Spawn(position);
+	public GameObject GetCoin() {
+		return coinObjectPooler.GetPooledObject();
 	}
-	
-	
+
 }

@@ -10,13 +10,13 @@ namespace Platform {
 		private PlatformManager platforManager;
 		private float lastPosition;
 
-		void Start() {
+		private void Start() {
 			_transform = GetComponent<Transform>();
             lastPosition = _transform.position.y;
             platforManager = _transform.parent.GetComponent<PlatformManager>();
         }
 
-        void OnTriggerExit2D(Collider2D other) {
+        private void OnTriggerExit2D(Collider2D other) {
             if (other.gameObject.CompareTag("Platform")) {
             	if (_transform.position.y > lastPosition) {
                     if (isTopEdge) {

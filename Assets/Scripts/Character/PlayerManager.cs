@@ -35,8 +35,8 @@ public class PlayerManager : MonoBehaviour {
     private void handleJumpAndFall() {
         if (pointerClicked) {
             pointerClicked = false;
-            double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 2);
-            double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 2);
+            double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 1);
+            double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 1);
 
             if(inputManager.pointerPos.y >= playerOnePosY){
                 if (playerOnePosY > playerTwoPosY){
