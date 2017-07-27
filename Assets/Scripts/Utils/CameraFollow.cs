@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		enable = (target.localPosition.y  > 1.48f);
+		enable = (target.localPosition.y  > 1.4f);
 
 		if (enable) {
 			Vector3 targetPos = target.position + Vector3.forward*offsetZ + distanceCorrection;

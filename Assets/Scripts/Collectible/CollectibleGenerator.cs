@@ -12,9 +12,12 @@ public class CollectibleGenerator : MonoBehaviour {
 	private CollectibleManager collectibleManager;
 	private Transform coinsParent;
 
+	private int coinsIndex;
+
 	private void Awake() {
 		collectibleManager = CollectibleManager.Instance;
 		coinsParent = transform.Find("coins");
+		coinsIndex = -1;
 	}
 
 	private void OnEnable () {
@@ -23,6 +26,14 @@ public class CollectibleGenerator : MonoBehaviour {
 			coin.transform.parent = coinsParent;
 			SpawnCoin(coin, coinPositions[i]);
 		}
+	}
+
+	private void OnDisable() {
+
+	}
+
+	public void SetIndex(int index) {
+		coinsIndex = index;
 	}
 
 	private void SpawnCoin(GameObject coin, Vector3 localPosition) {
