@@ -13,13 +13,13 @@ public class FPSCounter : MonoBehaviour{
     private Text text;
 
 
-    private void Start(){
+    void Start(){
         fpsNextPeriod = Time.realtimeSinceStartup + fpsMeasurePeriod;
         text = GetComponent<Text>();
     }
 
 
-    private void Update(){
+    void Update(){
         // measure average frames per second
         fpsAccumulator++;
         if (Time.realtimeSinceStartup > fpsNextPeriod){

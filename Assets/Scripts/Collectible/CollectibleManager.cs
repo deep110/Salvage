@@ -3,28 +3,31 @@ using UnityEngine;
 
 public class CollectibleManager : Singleton<CollectibleManager> {
 
-	public GameObject coin;
+    public GameObject coin;
 
-	private ObjectPooler coinObjectPooler;
-	private Dictionary<int, string> coinHashMap;
+    private ObjectPooler coinObjectPooler;
+    private Dictionary<int, bool[]> coinHashMap;
 
-	void Start () {
-		coinObjectPooler = new ObjectPooler(coin, 30);
-		coinHashMap = new Dictionary<int, string>();
-	}
+    void Start() {
+        coinObjectPooler = new ObjectPooler(coin, 30);
+        coinHashMap = new Dictionary<int, bool[]>();
+    }
 
-	public GameObject GetCoin() {
-		return coinObjectPooler.GetPooledObject();
-	}
+    public GameObject GetCoin() {
+        return coinObjectPooler.GetPooledObject();
+    }
 
-	public string GetCoinData(int coinsIndex) {
-		string coinData;
-		coinHashMap.TryGetValue(coinsIndex, out coinData);
-		return coinData;
-	}
+    public bool[] GetCoinData(int platformIndex) {
+        bool[] coinData;
+        coinHashMap.TryGetValue(platformIndex, out coinData);
 
-	public void SaveCoinData(int coinsIndex, string data) {
-		coinHashMap[coinsIndex] = data;
-	}
+        if (coinData == null)
+            coinData = new [] { true, true, true, true };
+        return coinData;
+    }
+
+    public void SaveCoinData(int platformIndex, bool[] data) {
+        coinHashMap[platformIndex] = data;
+    }
 
 }

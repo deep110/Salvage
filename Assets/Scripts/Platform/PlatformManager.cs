@@ -9,6 +9,7 @@ public class PlatformManager : MonoBehaviour {
     public float _initialPlatformPos = -2.0f;
 
     private ObjectPooler objectPooler;
+    private Vector3 platformPosition;
     private int minPlatformIndex = -2;
     private int maxPlatformIndex;
     private int currentPlatformIndex;
@@ -61,9 +62,14 @@ public class PlatformManager : MonoBehaviour {
 
     private void generatePlatform(int platformIndex) {
         float currentPlatformPos = _initialPlatformPos + platformIndex * _platformGap;
+        platformPosition.Set(0, currentPlatformPos, 0);
 
-        GameObject platform = objectPooler.Spawn(new Vector3(0, currentPlatformPos, 0));
-        platform.GetComponent<CollectibleGenerator>().SetIndex(platformIndex);
+        GameObject platform = objectPooler.GetPooledObject();
+        Transform platformTransform = platform.transform;
+        platformTransform.GetChild(1).GetComponent<CollectibleGenerator>().SetIndex(platformIndex);
+        platformTransform.position = platformPosition;
+        platformTransform.rotation = Quaternion.identity;
+        platform.SetActive(true);
 
         hashMap.Add(platformIndex, platform);
     }

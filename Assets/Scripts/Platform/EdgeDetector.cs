@@ -9,13 +9,13 @@ public class EdgeDetector : MonoBehaviour {
 	private PlatformManager platforManager;
 	private float lastPosition;
 
-	private void Start() {
+	void Start() {
 		_transform = GetComponent<Transform>();
         lastPosition = _transform.position.y;
         platforManager = _transform.parent.GetComponent<PlatformManager>();
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
+    void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("Platform")) {
         	if (_transform.position.y > lastPosition) {
                 if (isTopEdge) {
