@@ -19,7 +19,9 @@ public class Coin : MonoBehaviour {
 			if (!hasFallen) {
 				Fall();
 			} else {
+				EventManager.CoinCollected();
 				gameObject.SetActive(false);
+				hasFallen = false;
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleManager : Singleton<CollectibleManager> {
+public class CollectibleManager : Singleton <CollectibleManager> {
 
     public GameObject coin;
 
