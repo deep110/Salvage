@@ -77,9 +77,9 @@ public class PlayerController : MonoBehaviour {
 
 	public void Move(float inputX){
 		int deltaX = 0;
-		if (inputX > _transform.position.x + 0.2f) {
+		if (inputX > _transform.position.x + 0.15f) {
 			deltaX = 1;
-		} else if (inputX + 0.2f < _transform.position.x) deltaX = -1;
+		} else if (inputX + 0.15f < _transform.position.x) deltaX = -1;
 		vx = deltaX * maxSpeed;
 
 		_animator.SetFloat("Speed", Mathf.Abs(vx));
