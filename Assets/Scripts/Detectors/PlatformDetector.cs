@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class EdgeDetector : MonoBehaviour {
+public class PlatformDetector : MonoBehaviour {
 
     public bool isTopEdge = true;
 
