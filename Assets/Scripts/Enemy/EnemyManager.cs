@@ -1,16 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyManager : MonoBehaviour {
+public class EnemyManager : Singleton <EnemyManager> {
 
-	// Use this for initialization
-	void Start () {
-		
+	[System.Serializable]
+	public class Enemies {
+		public GameObject ball;
 	}
+
+	// // Use this for initialization
+	// void Start () {
+		
+	// }
 	
-	// Update is called once per frame
-	void Update () {
+	// // Update is called once per frame
+	// void Update () {
 		
-	}
+	// }
 }

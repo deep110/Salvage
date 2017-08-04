@@ -2,16 +2,16 @@
 
 public abstract class Enemy : MonoBehaviour {
 
-	// void Start () {
-		
-	// }
-	
-	// void Update () {
-		
-	// }
-
 	protected void OnTriggerEnter2D(Collider2D other) {
-		if (other.transform.CompareTag("PlayerOne") || other.transform.CompareTag("PlayerTwo")) {
+		sendGameOverEvent(other.transform);
+	}
+
+	protected void OnCollisionEnter2D(Collision2D other) {
+		sendGameOverEvent(other.transform);
+	}
+
+	private void sendGameOverEvent(Transform other) {
+		if (other.CompareTag("PlayerOne") || other.CompareTag("PlayerTwo")) {
 			EventManager.GameOver();
 		}
 	}
