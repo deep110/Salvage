@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof (Text))]
-public class FPSCounter : MonoBehaviour{
+public class FPSCounter : MonoBehaviour {
 
     const float fpsMeasurePeriod = 0.5f;
     private int fpsAccumulator;
@@ -13,13 +13,13 @@ public class FPSCounter : MonoBehaviour{
     private Text text;
 
 
-    void Start(){
+    void Start() {
         fpsNextPeriod = Time.realtimeSinceStartup + fpsMeasurePeriod;
         text = GetComponent<Text>();
     }
 
 
-    void Update(){
+    void Update() {
         // measure average frames per second
         fpsAccumulator++;
         if (Time.realtimeSinceStartup > fpsNextPeriod){

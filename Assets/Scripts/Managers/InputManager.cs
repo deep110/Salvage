@@ -10,8 +10,7 @@ public class InputManager : MonoBehaviour {
 
 	private bool dragging;
 	
-	void Update () {
-
+	void Update() {
 		if (Application.isMobilePlatform) {
 			MapMobileInput ();
 		} else {
@@ -36,7 +35,7 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
-	private void MapKeyBoardInput(){
+	private void MapKeyBoardInput() {
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		pointerPos.x = mousePos.x;
 		pointerPos.y = mousePos.y;

@@ -4,8 +4,7 @@ public class PlayerController : MonoBehaviour {
 
 	// player controls
 	public float maxSpeed = 2f;
-	public float jumpForce = 100f;
-	public bool isAlive = true;
+	public float jumpForce = 28f;
 
 	// LayerMask to determine what is considered ground for the player
 	public LayerMask whatIsGround;
@@ -13,7 +12,11 @@ public class PlayerController : MonoBehaviour {
 	// Transform just below feet for checking if player is grounded
 	public Transform groundCheck;
 
-	// store references to components on the gameObject
+	[HideInInspector]
+	public Vector3 CurrentPlatformPosition {get; private set;}
+
+	// private variables
+
 	private Transform _transform;
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
@@ -23,12 +26,11 @@ public class PlayerController : MonoBehaviour {
 	private float vy;
 
 	// player tracking
-	bool facingRight = true;
-	bool isGrounded = true;
-	bool isJumping;
-	bool isFalling;
-
-	bool canFall = true;
+	private bool facingRight = true;
+	private bool isGrounded = true;
+	private bool isJumping;
+	private bool isFalling;
+	private bool canFall = true;
 
 	// store the layer the player is on (setup in Awake)
 	private int playerLayer;
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 	// layer of platform(setup in Awake)
 	private int platformLayer;
 	
-	void Awake () {
+	void Awake() {
 		// get a reference to the components we are going to be changing and store a reference for efficiency purposes
 		_transform = GetComponent<Transform> ();
 		
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 		platformLayer = LayerMask.NameToLayer("Platform");
 	}
 		
-	void Update(){
+	void Update() {
 		
 		// exit update if player cannot move or game is paused
 		//if (!playerCanMove || (Time.timeScale == 0f))
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	public void Move(float inputX){
+	public void Move(float inputX) {
 		int deltaX = 0;
 		if (inputX > _transform.position.x + 0.15f) {
 			deltaX = 1;
@@ -119,11 +121,9 @@ public class PlayerController : MonoBehaviour {
 		Vector3 localScale = _transform.localScale;
 
 		// moving right so face right
-		if (vx > 0){
+		if (vx > 0) {
 			facingRight = true;
-		} else if (vx < 0) { // moving left so face left
-			facingRight = false;
-		}
+		} else facingRight &= !(vx < 0); // moving left so face left
 
 		// check to see if scale x is right for the player
 		// if not, multiple by -1 which is an easy way to flip a sprite
@@ -135,7 +135,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-	void OnCollisionEnter2D(Collision2D other){
-		canFall = other.transform.CompareTag ("Platform");
+	void OnCollisionEnter2D(Collision2D other) {
+		if (other.transform.CompareTag ("Platform")) {
+			canFall = true;
+			CurrentPlatformPosition = other.transform.position;
+		} else if (other.transform.CompareTag ("Ground")) {
+			CurrentPlatformPosition = other.transform.position;
+		} else {
+			canFall = false;
+		}
 	}
 }

@@ -22,7 +22,7 @@ public class PlatformManager : MonoBehaviour {
         initPlatforms();
     }
 
-    private void initPlatforms() {
+    private void initPlatforms () {
         for (int i = 0; i < 6; i++) {
             AddPlatform(true);
         }

@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour {
 	private Vector3 currentVelocity;
 	private bool enable;
 
-	void Start(){
+	void Start() {
 		_transform = GetComponent<Transform>();
 		offsetZ = (_transform.position - target.position).z;
 

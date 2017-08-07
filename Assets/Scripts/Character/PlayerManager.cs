@@ -2,7 +2,7 @@
 using System;
 
 [RequireComponent(typeof(InputManager))]
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : Singleton <PlayerManager> {
 
     public Transform playerOne;
     public Transform playerTwo;
@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour {
     private bool pointerClicked;
     private const float positionCorrection = -0.4f;
 
-    void Start() {
+    void Awake() {
         inputManager = GetComponent<InputManager>();
 
         playerOneController = playerOne.GetComponent<PlayerController>();

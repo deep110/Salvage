@@ -6,7 +6,7 @@ public class CollectibleManager : Singleton <CollectibleManager> {
     public GameObject coin;
 
     private ObjectPooler coinObjectPooler;
-    private Dictionary<int, bool[]> coinHashMap;
+    private Dictionary <int, bool[]> coinHashMap;
 
     void Start() {
         coinObjectPooler = new ObjectPooler(coin, 30);

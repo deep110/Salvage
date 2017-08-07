@@ -16,24 +16,7 @@ public class ObjectPooler {
 		init(pooledObject, amount);
 	}
 
-	private void init(GameObject pooledObject, int amount) {
-
-		if(pooledObjects != null || pooledObject == null || amount < 1){
-			return;
-		}
-
-		this.pooledObject = pooledObject;
-
-		pooledObjects = new List<GameObject>(amount);
-
-		for(int i=0; i<amount;i++){
-			GameObject obj = Object.Instantiate(pooledObject);
-			obj.SetActive(false);
-			pooledObjects.Add(obj);
-		}
-	}
-
-	public GameObject GetPooledObject(){
+	public GameObject GetPooledObject () {
 
 		if(pooledObjects==null) return null;
 
@@ -64,7 +47,7 @@ public class ObjectPooler {
 	}
 
 	public GameObject Spawn(Vector3 position){
-		return Spawn (position, Quaternion.identity);
+		return Spawn(position, Quaternion.identity);
 	}
 
 	public int CountPooled() {
@@ -80,6 +63,23 @@ public class ObjectPooler {
 
 	public override string ToString() {
 		return string.Format("PoolSize: {0}", PoolSize);
+	}
+
+	private void init (GameObject pObject, int amount) {
+
+		if(pooledObjects != null || pObject == null || amount < 1){
+			return;
+		}
+
+		pooledObject = pObject;
+
+		pooledObjects = new List<GameObject>(amount);
+
+		for(int i=0; i < amount; i++) {
+			GameObject obj = Object.Instantiate(pooledObject);
+			obj.SetActive(false);
+			pooledObjects.Add(obj);
+		}
 	}
 	
 }

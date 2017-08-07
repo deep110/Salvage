@@ -21,7 +21,7 @@ public class CollectibleGenerator : MonoBehaviour {
 		platformIndex = -1;
 	}
 
-	void OnEnable () {
+	void OnEnable() {
 		if (platformIndex != -1) {
 			coinsData = collectibleManager.GetCoinData(platformIndex);
 			for (int i = 0; i < coinPositions.Length; i++) {

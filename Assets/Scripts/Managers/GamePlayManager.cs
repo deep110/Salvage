@@ -10,11 +10,11 @@ public class GamePlayManager : Singleton <GamePlayManager> {
 	public int score;
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		
 	}
 	
-	void OnEnable () {
+	void OnEnable() {
 		EventManager.CoinCollectEvent += onCoinCollected;
 	}
 

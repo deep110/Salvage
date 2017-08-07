@@ -7,12 +7,20 @@ public class EnemyManager : Singleton <EnemyManager> {
 		public GameObject ball;
 	}
 
-	// // Use this for initialization
+	public Enemies enemies;
+
+	private ObjectPooler ballObjectPooler;
+
+	void Awake () {
+		ballObjectPooler = new ObjectPooler(enemies.ball, 4);
+	}
+
+
 	// void Start () {
 		
 	// }
 	
-	// // Update is called once per frame
+
 	// void Update () {
 		
 	// }

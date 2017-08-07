@@ -8,7 +8,7 @@ public class Coin : MonoBehaviour {
 	private bool hasFallen;
 	private int index = -1;
 	
-	void Awake () {
+	void Awake() {
 		_rigidbody = GetComponent<Rigidbody2D> ();
 	}
 

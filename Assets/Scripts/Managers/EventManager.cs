@@ -1,20 +1,20 @@
 ﻿
-public class EventManager {
+public static class EventManager {
 
-	// game over event
 	public delegate void Call();
+	
+	// game over event
 	public static event Call GameOverEvent;
 
-	public static void GameOver () {
+	public static void GameOver() {
 		if(GameOverEvent != null)
 	        GameOverEvent();
 	}
 
 	// coin collect event
-	// private delegate void Call();
 	public static event Call CoinCollectEvent;
 
-	public static void CoinCollected () {
+	public static void CoinCollected() {
 		if(CoinCollectEvent != null)
 	        CoinCollectEvent();
 	}
