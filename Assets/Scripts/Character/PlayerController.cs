@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
 	private bool isGrounded = true;
 	private bool isJumping;
 	private bool isFalling;
-	private bool canFall = true;
+	private bool canFall;
 
 	// store the layer the player is on (setup in Awake)
 	private int playerLayer;
@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour {
 			lastStablePosition.y = other.transform.position.y;
 		} else if (other.transform.CompareTag ("Ground")) {
 			lastStablePosition.y = other.transform.position.y + 1.21f;
-		} else {
 			canFall = false;
 		}
 	}
