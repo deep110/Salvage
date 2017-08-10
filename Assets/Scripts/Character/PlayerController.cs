@@ -12,14 +12,12 @@ public class PlayerController : MonoBehaviour {
 	// Transform just below feet for checking if player is grounded
 	public Transform groundCheck;
 
-	[HideInInspector]
-	public Vector3 CurrentPlatformPosition {get; private set;}
-
 	// private variables
 
 	private Transform _transform;
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
+	private Vector2 lastStablePosition;
 
 	// hold player motion in this timestep
 	private float vx;
@@ -48,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 
 		playerLayer = gameObject.layer;
 		platformLayer = LayerMask.NameToLayer("Platform");
+		lastStablePosition = new Vector2(_transform.position.x, _transform.position.y);
 	}
 		
 	void Update() {
@@ -74,7 +73,6 @@ public class PlayerController : MonoBehaviour {
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
 			isFalling = false;
 		}
-
 	}
 
 	public void Move(float inputX) {
@@ -127,7 +125,7 @@ public class PlayerController : MonoBehaviour {
 
 		// check to see if scale x is right for the player
 		// if not, multiple by -1 which is an easy way to flip a sprite
-		if (((facingRight) && (localScale.x<0)) || ((!facingRight) && (localScale.x>0))) {
+		if (((facingRight) && (localScale.x < 0)) || ((!facingRight) && (localScale.x > 0))) {
 			localScale.x *= -1;
 		}
 		// update the scale
@@ -138,11 +136,16 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.transform.CompareTag ("Platform")) {
 			canFall = true;
-			CurrentPlatformPosition = other.transform.position;
+			lastStablePosition.y = other.transform.position.y;
 		} else if (other.transform.CompareTag ("Ground")) {
-			CurrentPlatformPosition = other.transform.position;
+			lastStablePosition.y = other.transform.position.y;
 		} else {
 			canFall = false;
 		}
+	}
+
+	public Vector2 GetLastStablePosition() {
+		lastStablePosition.x = _transform.position.x;
+		return lastStablePosition;
 	}
 }

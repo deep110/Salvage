@@ -7,14 +7,19 @@ public class PlayerManager : Singleton <PlayerManager> {
     public Transform playerOne;
     public Transform playerTwo;
 
-    private InputManager inputManager;
-    private PlayerController playerOneController;
-    private PlayerController playerTwoController;
+    [HideInInspector]
+    public PlayerController playerOneController;
 
+    [HideInInspector]
+    public PlayerController playerTwoController;
+
+    private InputManager inputManager;
     private bool pointerClicked;
     private const float positionCorrection = -0.4f;
 
-    void Awake() {
+    protected override void Awake() {
+        base.Awake();
+
         inputManager = GetComponent<InputManager>();
 
         playerOneController = playerOne.GetComponent<PlayerController>();
