@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour {
 			canFall = true;
 			lastStablePosition.y = other.transform.position.y;
 		} else if (other.transform.CompareTag ("Ground")) {
-			lastStablePosition.y = other.transform.position.y;
+			lastStablePosition.y = other.transform.position.y + 1.21f;
 		} else {
 			canFall = false;
 		}

@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Ball : Enemy {
 
-	private Vector2 velocity = new Vector2(1.2f, 0);
-	private Vector3 localPosition = new Vector3(-3f, 1f, 0);
+	private Vector2 velocity;
+	private Vector3 localPosition;
+
+	void OnEnable() {
+		GetComponent<Rigidbody2D>().velocity = velocity;	
+	}
 
 	/**
 	 * @param {boolean} right - indicating whether ball should start from left
@@ -19,6 +23,5 @@ public class Ball : Enemy {
 		}
 
 		GetComponent<Transform>().position += localPosition;
-		GetComponent<Rigidbody2D>().velocity = velocity;
 	}
 }

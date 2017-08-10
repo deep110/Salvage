@@ -50,6 +50,18 @@ public class ObjectPooler {
 		return Spawn(position, Quaternion.identity);
 	}
 
+	public GameObject SpawnInActive(Vector3 position, Quaternion rotation){
+		GameObject obj = GetPooledObject();
+		obj.transform.position = position;
+		obj.transform.rotation = rotation;
+
+		return obj;
+	}
+
+	public GameObject SpawnInActive(Vector3 position){
+		return SpawnInActive(position, Quaternion.identity);
+	}
+
 	public int CountPooled() {
 		int count = 0;
 		for(int i=0; i< pooledObjects.Count; i++){

@@ -13,17 +13,28 @@ public class EnemyManager : Singleton <EnemyManager> {
 	private PlayerController playerOneController;
 	private bool isGameOver;
 
+	// corutines
+	private IEnumerator ballCoroutine;
+
 	void OnEnable() {
 		EventManager.GameOverEvent += gameOver;
 	}
 
 	void Start () {
+		isGameOver = false;
 		playerOneController = PlayerManager.Instance.playerOneController;
-		StartCoroutine(ManageBall());
+		ballCoroutine = ManageBall();
+
+		// start the coroutines
+		StartCoroutine(ballCoroutine);
 	}
 
 	void OnDisable() {
+		// unsubscribe events
 		EventManager.GameOverEvent -= gameOver;
+
+		// stop coroutines
+		StopCoroutine(ballCoroutine);
 	}
 
 	private void gameOver() {
@@ -40,8 +51,17 @@ public class EnemyManager : Singleton <EnemyManager> {
 
         // spawn enemies till game is not over
         while (!isGameOver) {
-			print(playerOneController.GetLastStablePosition());
-			yield return new WaitForSeconds(2f);
+			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
+
+			GameObject ball = ballPooler.SpawnInActive(new Vector3(0, lastStablePos.y, 0));
+			if (lastStablePos.x > 0) {
+				ball.GetComponent<Ball>().Roll(true);
+			} else {
+				ball.GetComponent<Ball>().Roll(false);
+			}
+			ball.SetActive(true);
+
+			yield return new WaitForSeconds(3.5f);
         }
 		
 	}
