@@ -30,21 +30,15 @@ public class EnemyManager : Singleton <EnemyManager> {
 	}
 
 	void OnDisable() {
-		// unsubscribe events
 		EventManager.GameOverEvent -= gameOver;
 
 		// stop coroutines
 		StopCoroutine(ballCoroutine);
 	}
 
-	private void gameOver() {
-		isGameOver = true;
-	}
-	
-
 	private IEnumerator ManageBall() {
 		// intialize necessary variables
-		var ballPooler = new ObjectPooler(enemies.ball, 4);
+		var ballPooler = new ObjectPooler(enemies.ball, 3);
 
 		// wait for some time to spawn enemies
         yield return new WaitForSeconds(5f);
@@ -63,6 +57,9 @@ public class EnemyManager : Singleton <EnemyManager> {
 
 			yield return new WaitForSeconds(3.5f);
         }
-		
+	}
+
+	private void gameOver() {
+		isGameOver = true;
 	}
 }

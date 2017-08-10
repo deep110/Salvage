@@ -62,9 +62,15 @@ public class ObjectPooler {
 		return SpawnInActive(position, Quaternion.identity);
 	}
 
+	public void Recycle() {
+		for(int i=0; i< pooledObjects.Count; i++) {
+			pooledObjects[i].SetActive(false);
+		}
+	}
+
 	public int CountPooled() {
 		int count = 0;
-		for(int i=0; i< pooledObjects.Count; i++){
+		for(int i=0; i< pooledObjects.Count; i++) {
 			if(pooledObjects[i].activeInHierarchy){
 				count++;
 			}
