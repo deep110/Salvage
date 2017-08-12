@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+	public bool isFirstPlayer = true;
+
 	// player controls
 	public float maxSpeed = 2f;
 	public float jumpForce = 28f;
@@ -13,7 +15,6 @@ public class PlayerController : MonoBehaviour {
 	public Transform groundCheck;
 
 	// private variables
-
 	private Transform _transform;
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
@@ -35,25 +36,23 @@ public class PlayerController : MonoBehaviour {
 
 	// layer of platform(setup in Awake)
 	private int platformLayer;
+
+	private int platformsClimbed;
 	
 	void Awake() {
 		// get a reference to the components we are going to be changing and store a reference for efficiency purposes
 		_transform = GetComponent<Transform> ();
-		
 		_rigidbody = GetComponent<Rigidbody2D> ();
-
 		_animator = GetComponent<Animator> ();
 
 		playerLayer = gameObject.layer;
 		platformLayer = LayerMask.NameToLayer("Platform");
+
 		lastStablePosition = new Vector2(_transform.position.x, _transform.position.y);
 	}
 		
 	void Update() {
 		
-		// exit update if player cannot move or game is paused
-		//if (!playerCanMove || (Time.timeScale == 0f))
-		//	return;
 		vy = _rigidbody.velocity.y;
 
 		// Change the actual velocity on the rigidbody
@@ -137,6 +136,9 @@ public class PlayerController : MonoBehaviour {
 		if (other.transform.CompareTag ("Platform")) {
 			canFall = true;
 			lastStablePosition.y = other.transform.position.y;
+			if (isFirstPlayer) {
+				updatePlatformsClimbed(other.transform.GetChild(1).GetComponent<CollectibleGenerator>().platformIndex);
+			}
 		} else if (other.transform.CompareTag ("Ground")) {
 			lastStablePosition.y = other.transform.position.y + 1.21f;
 			canFall = false;
@@ -146,5 +148,12 @@ public class PlayerController : MonoBehaviour {
 	public Vector2 GetLastStablePosition() {
 		lastStablePosition.x = _transform.position.x;
 		return lastStablePosition;
+	}
+
+	private void updatePlatformsClimbed(int platformIndex) {
+		if (platformIndex + 1 > platformsClimbed) {
+			platformsClimbed = platformIndex + 1;
+			EventManager.PlatformClimbed(platformsClimbed);
+		}
 	}
 }

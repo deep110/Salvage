@@ -12,32 +12,31 @@ public class EnemyManager : Singleton <EnemyManager> {
 
 	private PlayerController playerOneController;
 	private bool isGameOver;
-
-	// corutines
-	private IEnumerator ballCoroutine;
+	private int platformNumber;
 
 	void OnEnable() {
 		EventManager.GameOverEvent += gameOver;
+		EventManager.PlatformClimbEvent += platformClimbed;
 	}
 
 	void Start () {
 		isGameOver = false;
 		playerOneController = PlayerManager.Instance.playerOneController;
-		ballCoroutine = ManageBall();
 
 		// start the coroutines
-		StartCoroutine(ballCoroutine);
+		StartCoroutine(ManageBall());
+		StartCoroutine(ManageBoulder());
 	}
 
 	void OnDisable() {
 		EventManager.GameOverEvent -= gameOver;
+		EventManager.PlatformClimbEvent -= platformClimbed;
 
 		// stop coroutines
-		StopCoroutine(ballCoroutine);
+		StopAllCoroutines();
 	}
 
 	private IEnumerator ManageBall() {
-		// intialize necessary variables
 		var ballPooler = new ObjectPooler(enemies.ball, 3);
 
 		// wait for some time to spawn enemies
@@ -57,6 +56,16 @@ public class EnemyManager : Singleton <EnemyManager> {
 
 			yield return new WaitForSeconds(3.5f);
         }
+	}
+
+	private IEnumerator ManageBoulder() {
+		yield return new WaitWhile(() => platformNumber <= 12);
+
+		Debug.Log("start bouldering");
+	}
+
+	private void platformClimbed(int platformNo) {
+		platformNumber = platformNo;
 	}
 
 	private void gameOver() {

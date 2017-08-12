@@ -2,30 +2,25 @@
 using UnityEngine;
 
 
-public class PlatformManager : MonoBehaviour {
+public class PlatformManager : Singleton <PlatformManager> {
 
     public GameObject _platform;
-    public float _platformGap = 1.45f;
-    public float _initialPlatformPos = -2.0f;
+    public float _platformGap = 1.4f;
+    public float _initialPlatformPos = -1.25f;
 
     private ObjectPooler objectPooler;
     private Vector3 platformPosition;
+
     private int minPlatformIndex = -2;
     private int maxPlatformIndex;
     private int currentPlatformIndex;
 
-    private Dictionary<int, GameObject> hashMap;
+    private Dictionary <int, GameObject> hashMap;
 
     void Start() {
         objectPooler = new ObjectPooler(_platform, 10, false);
-        hashMap = new Dictionary<int, GameObject>();
+        hashMap = new Dictionary <int, GameObject>();
         initPlatforms();
-    }
-
-    private void initPlatforms () {
-        for (int i = 0; i < 6; i++) {
-            AddPlatform(true);
-        }
     }
 
     public void AddPlatform(bool up) {
@@ -64,13 +59,16 @@ public class PlatformManager : MonoBehaviour {
         float currentPlatformPos = _initialPlatformPos + platformIndex * _platformGap;
         platformPosition.Set(0, currentPlatformPos, 0);
 
-        GameObject platform = objectPooler.GetPooledObject();
-        Transform platformTransform = platform.transform;
-        platformTransform.GetChild(1).GetComponent<CollectibleGenerator>().SetIndex(platformIndex);
-        platformTransform.position = platformPosition;
-        platformTransform.rotation = Quaternion.identity;
+        GameObject platform = objectPooler.SpawnInActive(platformPosition);
+        platform.transform.GetChild(1).GetComponent<CollectibleGenerator>().platformIndex = platformIndex;
         platform.SetActive(true);
 
         hashMap.Add(platformIndex, platform);
+    }
+
+    private void initPlatforms () {
+        for (int i = 0; i < 6; i++) {
+            AddPlatform(true);
+        }
     }
 }

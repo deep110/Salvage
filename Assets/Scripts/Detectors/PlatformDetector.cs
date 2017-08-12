@@ -6,28 +6,28 @@ public class PlatformDetector : MonoBehaviour {
     public bool isTopEdge = true;
 
 	private Transform _transform;
-	private PlatformManager platforManager;
+	private PlatformManager platformManager;
 	private float lastPosition;
 
 	void Start() {
 		_transform = GetComponent<Transform>();
         lastPosition = _transform.position.y;
-        platforManager = _transform.parent.GetComponent<PlatformManager>();
+        platformManager = PlatformManager.Instance;
     }
 
     void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("Platform")) {
         	if (_transform.position.y > lastPosition) {
                 if (isTopEdge) {
-    		        platforManager.AddPlatform(true);
+		            platformManager.AddPlatform(true);
                 } else {
-                    platforManager.RemovePlatform(false);
+                    platformManager.RemovePlatform(false);
                 }
         	} else {
                 if (isTopEdge) {
-                    platforManager.RemovePlatform(true);
+                    platformManager.RemovePlatform(true);
                 } else {
-                    platforManager.AddPlatform(false);
+                    platformManager.AddPlatform(false);
                 }
         	}
 

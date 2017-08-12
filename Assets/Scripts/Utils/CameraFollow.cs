@@ -14,8 +14,6 @@ public class CameraFollow : MonoBehaviour {
 	void Start() {
 		_transform = GetComponent<Transform>();
 		offsetZ = (_transform.position - target.position).z;
-
-		if (target==null) Debug.LogError("Target not set on Camera2DFollow.");
 	}
 
 	void LateUpdate() {

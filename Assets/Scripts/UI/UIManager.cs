@@ -5,24 +5,33 @@ public class UIManager : MonoBehaviour {
 
 	public GameObject gameOverDialog;
 
-	private GamePlayManager gamePlayManager;
 	private Text scoreText;
+	private Text platformText;
+
+	private int score;
 
 	void OnEnable() {
 		EventManager.GameOverEvent += gameOver;
-	}
+		EventManager.CoinCollectEvent += coinCollected;
+		EventManager.PlatformClimbEvent += platformClimbed;
 
-	void Start() {
-		gamePlayManager = GamePlayManager.Instance;
 		scoreText = transform.GetChild(0).GetComponent<Text>();
-	}
-	
-	void Update() {
-		scoreText.text = gamePlayManager.score.ToString();
+		platformText = transform.GetChild(1).GetComponent<Text>();
 	}
 
 	void OnDisable() {
 		EventManager.GameOverEvent -= gameOver;
+		EventManager.CoinCollectEvent -= coinCollected;
+		EventManager.PlatformClimbEvent -= platformClimbed;
+	}
+
+	private void coinCollected() {
+		score++;
+		scoreText.text = score.ToString();
+	}
+
+	private void platformClimbed(int platformNo) {
+		platformText.text = platformNo.ToString();
 	}
 
 	private void gameOver() {

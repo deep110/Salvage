@@ -9,10 +9,16 @@ public class CollectibleGenerator : MonoBehaviour {
 
 	public Vector3[] coinPositions;
 
+	/**
+	* set by platformManager to set Index
+	* so that we can keep track of coins on each
+	* platform.
+	*/
+	[HideInInspector]
+	public int platformIndex;
+
 	private Transform _transform;
 	private CollectibleManager collectibleManager;
-
-	private int platformIndex;
 	private bool[] coinsData;
 
 	void Awake() {
@@ -40,19 +46,10 @@ public class CollectibleGenerator : MonoBehaviour {
 			collectibleManager.SaveCoinData(platformIndex, coinsData);
 
 			// deactivate the coins attached on this platform.
-			for( int i=0; i< _transform.childCount; i++) {
+			for (int i = 0; i < _transform.childCount; i++) {
 				_transform.GetChild(i).gameObject.SetActive(false);
 			}
 		}
-	}
-
-	/**
-	* called by platformManager to set Index
-	* so that we can keep track of coins on each 
-	* platform.
-	*/
-	public void SetIndex(int platformIndex) {
-		this.platformIndex = platformIndex;
 	}
 
 	/**
