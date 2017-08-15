@@ -2,7 +2,15 @@
 
 public class Book : Enemy {
 
-	void Start () {
-		GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2f);
+	public Vector2 velocity = new Vector2(0, -1.3f);
+	private Rigidbody2D _rigidbody;
+
+	void OnEnable() {
+		_rigidbody = GetComponent<Rigidbody2D>();
+		_rigidbody.velocity = velocity;
+	}
+
+	void FixedUpdate() {
+		_rigidbody.rotation += 1.2f;
 	}
 }

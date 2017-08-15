@@ -6,6 +6,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 	[System.Serializable]
 	public class Enemies {
 		public GameObject ball;
+		public GameObject book;
 	}
 
 	public Enemies enemies;
@@ -59,9 +60,16 @@ public class EnemyManager : Singleton <EnemyManager> {
 	}
 
 	private IEnumerator ManageBoulder() {
-		yield return new WaitWhile(() => platformNumber <= 12);
+		var bookPooler = new ObjectPooler(enemies.book, 3);
 
-		Debug.Log("start bouldering");
+		yield return new WaitWhile(() => platformNumber <= 10);
+
+		while (!isGameOver) {
+			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
+
+			bookPooler.Spawn(new Vector3(lastStablePos.x, lastStablePos.y + 6f, 0));
+			yield return new WaitForSeconds(5f);
+        }
 	}
 
 	private void platformClimbed(int platformNo) {
