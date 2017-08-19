@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 			isJumping = false;
 		}
 
-		if (isFalling && vy < -4) {
+		if (isFalling && vy < -6) {
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
 			isFalling = false;
 		}
@@ -76,9 +76,9 @@ public class PlayerController : MonoBehaviour {
 
 	public void Move(float inputX) {
 		int deltaX = 0;
-		if (inputX > _transform.position.x + 0.15f) {
+		if (inputX > _transform.position.x + 0.12f) {
 			deltaX = 1;
-		} else if (inputX + 0.15f < _transform.position.x) deltaX = -1;
+		} else if (inputX + 0.12f < _transform.position.x) deltaX = -1;
 		vx = deltaX * maxSpeed;
 
 		_animator.SetFloat("Speed", Mathf.Abs(vx));
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour {
 			// reset current vertical motion to 0 prior to jump
 			vy = 0f;
 			// add a force in the down direction
-			_rigidbody.AddForce (new Vector2 (0, -30*jumpForce));
+			_rigidbody.AddForce (new Vector2 (0, -60*jumpForce));
 		}
 	}
 
