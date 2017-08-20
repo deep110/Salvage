@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour {
 
@@ -19,7 +20,8 @@ public class InputManager : MonoBehaviour {
 	}
 
 	private void MapMobileInput() {
-		if (Input.touchCount > 0) {
+		// check touch count and touch is not UI click
+		if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null) {
 			Touch touch = Input.GetTouch(0);
 			if (touch.phase == TouchPhase.Ended && touch.tapCount == 1 && !dragging) {
 				pointerPos.y = Camera.main.ScreenToWorldPoint(touch.position).y;
@@ -36,10 +38,13 @@ public class InputManager : MonoBehaviour {
 	}
 
 	private void MapKeyBoardInput() {
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		pointerPos.x = mousePos.x;
-		pointerPos.y = mousePos.y;
+		// check first if its not UI click
+		if (!EventSystem.current.IsPointerOverGameObject()) {
+			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			pointerPos.x = mousePos.x;
+			pointerPos.y = mousePos.y;
 
-		pointerClick = Input.GetMouseButtonDown(0);
+			pointerClick = Input.GetMouseButtonDown(0);
+		}
 	}
 }

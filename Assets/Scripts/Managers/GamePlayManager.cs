@@ -7,17 +7,30 @@
 */
 public class GamePlayManager : Singleton <GamePlayManager> {
 
-	// public int score;
+	public int score;
+	public GameObject gameOverDialog;
 
-	// void Start() {
-	// 	EventManager.CoinCollectEvent += onCoinCollected;
-	// }
+	void Start() {
+		Time.timeScale = 1;
 
-	// void OnDisable() {
-	// 	EventManager.CoinCollectEvent -= onCoinCollected;
-	// }
+		EventManager.CoinCollectEvent += onCoinCollected;
+		EventManager.GameOverEvent += onGameOver;
+	}
 
-	// private void onCoinCollected() {
-	// 	score++;
-	// }
+	void OnDisable() {
+		EventManager.CoinCollectEvent -= onCoinCollected;
+		EventManager.GameOverEvent -= onGameOver;
+	}
+
+	private void onCoinCollected() {
+		score++;
+	}
+
+	private void onGameOver() {
+		// pause the game
+		Time.timeScale = 0;
+
+		// show the gameOver dialog
+		gameOverDialog.SetActive(true);
+	}
 }
