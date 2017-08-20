@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour {
 
 		playerLayer = gameObject.layer;
 		platformLayer = LayerMask.NameToLayer("Platform");
+		Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
 
 		lastStablePosition = new Vector2(_transform.position.x, _transform.position.y);
 	}
