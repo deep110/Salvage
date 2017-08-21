@@ -7,6 +7,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 	public class Enemies {
 		public GameObject ball;
 		public GameObject book;
+		public GameObject bee;
 	}
 
 	public Enemies enemies;
