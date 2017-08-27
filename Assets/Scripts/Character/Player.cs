@@ -16,8 +16,7 @@ public class Player : MonoBehaviour {
 	private Vector2 lastStablePosition;
 
 	// hold player motion in this timestep
-	private float vx;
-	private float vy;
+	private Vector2 velocity;
 
 	// player tracking
 	private bool facingRight = true;
@@ -49,17 +48,17 @@ public class Player : MonoBehaviour {
 		
 	void Update() {
 		
-		vy = _rigidbody.velocity.y;
+		velocity.y = _rigidbody.velocity.y;
 
 		// Change the actual velocity on the rigidbody
-		_rigidbody.velocity = new Vector2(vx, vy);
+		_rigidbody.velocity = velocity;
 
-		if (isJumping && vy < 0) {
+		if (isJumping && velocity.y < 0) {
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
 			isJumping = false;
 		}
 
-		if (isFalling && vy < -6) {
+		if (isFalling && velocity.y < -6) {
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
 			isFalling = false;
 		}
@@ -67,12 +66,12 @@ public class Player : MonoBehaviour {
 
 	public void Move(float inputX) {
 		if (Mathf.Abs(inputX - _transform.position.x) > 0.1f) {
-			vx = Math.Sign(inputX - _transform.position.x) * maxSpeed;
+			velocity.x = Math.Sign(inputX - _transform.position.x) * maxSpeed;
 		} else {
-			vx = 0;
+			velocity.x = 0;
 		}
 
-		_animator.SetFloat("Speed", Mathf.Abs(vx));
+		_animator.SetFloat("Speed", Mathf.Abs(velocity.x));
 	}
 
 	public void Jump() {
@@ -82,7 +81,7 @@ public class Player : MonoBehaviour {
 
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer);
 			// reset current vertical motion to 0 prior to jump
-			vy = 0f;
+			velocity.y = 0f;
 			// add a force in the up direction
 			_rigidbody.AddForce (new Vector2 (0, 100*jumpForce));
 			// play the jump sound
@@ -96,7 +95,7 @@ public class Player : MonoBehaviour {
 
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer);
 			// reset current vertical motion to 0 prior to jump
-			vy = 0f;
+			velocity.y = 0f;
 			// add a force in the down direction
 			_rigidbody.AddForce (new Vector2 (0, -60*jumpForce));
 		}
@@ -110,9 +109,9 @@ public class Player : MonoBehaviour {
 		Vector3 localScale = _transform.localScale;
 
 		// moving right so face right
-		if (vx > 0) {
+		if (velocity.x > 0) {
 			facingRight = true;
-		} else facingRight &= !(vx < 0); // moving left so face left
+		} else facingRight &= !(velocity.x < 0); // moving left so face left
 
 		// check to see if scale x is right for the player
 		// if not, multiple by -1 which is an easy way to flip a sprite
