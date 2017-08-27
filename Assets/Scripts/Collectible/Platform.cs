@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
-/*
-* generates coin and poweups
-* on platform randomly.
+/**
+* generate coins on platform based on coin positions.
 */
 
 public class Platform : MonoBehaviour {
@@ -10,9 +9,8 @@ public class Platform : MonoBehaviour {
 	public Vector3[] coinPositions;
 
 	/**
-	* set by platformManager to set Index
-	* so that we can keep track of coins on each
-	* platform.
+	* - unique index of platform
+	* - set by Platform Manager
 	*/
 	[HideInInspector]
 	public int platformIndex;

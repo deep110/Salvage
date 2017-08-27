@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour {
 
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour {
 		// whatIsGround layer
 		isGrounded = Physics2D.Linecast(_transform.position, groundCheck.position, whatIsGround);
 
-		if (isJumping && vy < 0){
+		if (isJumping && vy < 0) {
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
 			isJumping = false;
 		}
@@ -76,11 +77,11 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Move(float inputX) {
-		int deltaX = 0;
-		if (inputX > _transform.position.x + 0.1f) {
-			deltaX = 1;
-		} else if (inputX + 0.1f < _transform.position.x) deltaX = -1;
-		vx = deltaX * maxSpeed;
+		if (Mathf.Abs(inputX - _transform.position.x) > 0.1f) {
+			vx = Math.Sign(inputX - _transform.position.x) * maxSpeed;
+		} else {
+			vx = 0;
+		}
 
 		_animator.SetFloat("Speed", Mathf.Abs(vx));
 	}
