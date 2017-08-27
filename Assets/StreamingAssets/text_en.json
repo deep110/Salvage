@@ -1,0 +1,12 @@
+{
+	"items": [
+		{
+			"key":"game_title",
+			"value":"Unnamed"
+		},
+		{
+			"key":"button_start",
+			"value":"Start"
+		}
+	]
+}

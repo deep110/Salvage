@@ -5,7 +5,7 @@ public class GameOverDialogManager : MonoBehaviour {
 	
 	public void OnRestartAccepted() {
 		// reload the scene
-		SceneManager.LoadScene (1);
+		SceneManager.LoadScene (2);
 	}
 
 	public void OnRestartDeclined() {
