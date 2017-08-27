@@ -27,7 +27,7 @@ public class Coin : MonoBehaviour {
 	}
 
 	/**
-	* called by CollectibleGenerator to set Index
+	* called by Platform to set Index
 	* so that we can keep track of coins.
 	*/
 	public void SetIndex(int index) {
@@ -38,7 +38,7 @@ public class Coin : MonoBehaviour {
 		hasFallen = true;
 		_rigidbody.velocity = new Vector2(0, -1 * fallSpeed);
 		if (index != -1) {
-			transform.parent.GetComponent<CollectibleGenerator>().SetCoinState(index);
+			transform.parent.GetComponent<Platform>().SetCoinState(index);
 			index = -1;
 		}
 	}

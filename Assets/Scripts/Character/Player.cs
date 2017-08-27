@@ -138,7 +138,7 @@ public class Player : MonoBehaviour {
 			canFall = true;
 			lastStablePosition.y = other.transform.position.y;
 			if (isFirstPlayer) {
-				updatePlatformsClimbed(other.transform.GetChild(1).GetComponent<CollectibleGenerator>().platformIndex);
+				updatePlatformsClimbed(other.gameObject.GetComponent<Platform>().platformIndex);
 			}
 		} else if (other.transform.CompareTag ("Ground")) {
 			lastStablePosition.y = other.transform.position.y + 1.21f;

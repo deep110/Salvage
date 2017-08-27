@@ -60,7 +60,7 @@ public class PlatformManager : Singleton <PlatformManager> {
         platformPosition.Set(0, currentPlatformPos, 0);
 
         GameObject platform = objectPooler.SpawnInActive(platformPosition);
-        platform.transform.GetChild(1).GetComponent<CollectibleGenerator>().platformIndex = platformIndex;
+        platform.GetComponent<Platform>().platformIndex = platformIndex;
         platform.SetActive(true);
 
         hashMap.Add(platformIndex, platform);

@@ -5,7 +5,7 @@
 * on platform randomly.
 */
 
-public class CollectibleGenerator : MonoBehaviour {
+public class Platform : MonoBehaviour {
 
 	public Vector3[] coinPositions;
 
@@ -46,7 +46,8 @@ public class CollectibleGenerator : MonoBehaviour {
 			collectibleManager.SaveCoinData(platformIndex, coinsData);
 
 			// deactivate the coins attached on this platform.
-			for (int i = 0; i < _transform.childCount; i++) {
+			// i.e from second child, since first is sprites
+			for (int i = 1; i < _transform.childCount -1; i++) {
 				_transform.GetChild(i).gameObject.SetActive(false);
 			}
 		}
