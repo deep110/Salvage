@@ -6,14 +6,8 @@ public class Player : MonoBehaviour {
 	public bool isFirstPlayer = true;
 
 	// player controls
-	public float maxSpeed = 2f;
-	public float jumpForce = 28f;
-
-	// LayerMask to determine what is considered ground for the player
-	public LayerMask whatIsGround;
-
-	// Transform just below feet for checking if player is grounded
-	public Transform groundCheck;
+	public float maxSpeed = 1.7f;
+	public float jumpForce = 27f;
 
 	// private variables
 	private Transform _transform;
@@ -27,7 +21,6 @@ public class Player : MonoBehaviour {
 
 	// player tracking
 	private bool facingRight = true;
-	private bool isGrounded = true;
 	private bool isJumping;
 	private bool isFalling;
 	private bool canFall;
@@ -35,13 +28,14 @@ public class Player : MonoBehaviour {
 	// store the layer the player is on (setup in Awake)
 	private int playerLayer;
 
-	// layer of platform(setup in Awake)
+	// layer of platform (setup in Awake)
 	private int platformLayer;
 
 	private int platformsClimbed;
 	
 	void Awake() {
-		// get a reference to the components we are going to be changing and store a reference for efficiency purposes
+		// get a reference to the components we are going to be changing and store
+		// a reference for efficiency purposes
 		_transform = GetComponent<Transform> ();
 		_rigidbody = GetComponent<Rigidbody2D> ();
 		_animator = GetComponent<Animator> ();
@@ -59,11 +53,6 @@ public class Player : MonoBehaviour {
 
 		// Change the actual velocity on the rigidbody
 		_rigidbody.velocity = new Vector2(vx, vy);
-
-		// Check to see if character is grounded by raycasting from the middle of the player
-		// down to the groundCheck position and see if collected with gameobjects on the
-		// whatIsGround layer
-		isGrounded = Physics2D.Linecast(_transform.position, groundCheck.position, whatIsGround);
 
 		if (isJumping && vy < 0) {
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
@@ -87,10 +76,10 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Jump() {
-		if(isGrounded && !isJumping){
+		if(!isJumping){
 			isJumping = true;
-			
 			_animator.SetTrigger("Jump");
+
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer);
 			// reset current vertical motion to 0 prior to jump
 			vy = 0f;
@@ -101,9 +90,10 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Fall() {
-		if (isGrounded && canFall && !isFalling) {
+		if (canFall && !isFalling) {
 			isFalling = true;
 			_animator.SetTrigger("Jump");
+
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer);
 			// reset current vertical motion to 0 prior to jump
 			vy = 0f;
