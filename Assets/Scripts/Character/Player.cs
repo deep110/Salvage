@@ -101,7 +101,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Fall() {
-		if(isGrounded && canFall && !isFalling){
+		if (isGrounded && canFall && !isFalling) {
 			isFalling = true;
 			_animator.SetTrigger("Jump");
 			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer);
