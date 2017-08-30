@@ -18,7 +18,7 @@ public class PlatformManager : Singleton <PlatformManager> {
     private Dictionary <int, GameObject> hashMap;
 
     void Start() {
-        objectPooler = new ObjectPooler(_platform, 10, false);
+        objectPooler = new ObjectPooler(_platform, 10);
         hashMap = new Dictionary <int, GameObject>();
         initPlatforms();
     }

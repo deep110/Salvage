@@ -18,9 +18,9 @@ public class ObjectPooler {
 
 	public GameObject GetPooledObject () {
 
-		if(pooledObjects==null) return null;
+		if(pooledObjects == null) return null;
 
-		for(int i=0; i< pooledObjects.Count; i++){
+		for(int i = 0; i < pooledObjects.Count; i++){
 
 			if(!pooledObjects[i].activeInHierarchy){
 				return pooledObjects[i];

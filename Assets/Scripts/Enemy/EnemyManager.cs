@@ -24,7 +24,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 		playerOneController = PlayerManager.Instance.playerOneController;
 
 		// start the coroutines
-		StartCoroutine(ManageBall());
+		StartCoroutine(ManageBallAndBee());
 		StartCoroutine(ManageBook());
 		StartCoroutine(ManageBee());
 	}
@@ -37,8 +37,9 @@ public class EnemyManager : Singleton <EnemyManager> {
 		StopAllCoroutines();
 	}
 
-	private IEnumerator ManageBall() {
+	private IEnumerator ManageBallAndBee() {
 		var ballPooler = new ObjectPooler(enemies.ball, 3);
+		// var beePooler = new ObjectPooler(enemies.bee, 2);
 
 		// wait for some time to spawn enemies
         yield return new WaitForSeconds(5f);

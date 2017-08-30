@@ -11,7 +11,7 @@ public class GameManager : PersistentSingleton <GameManager> {
             yield return null;
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.2f);
 
         SceneManager.LoadScene(1);
     }

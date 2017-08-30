@@ -2,12 +2,9 @@
 
 public class Book : Enemy {
 
-	public Vector2 velocity = new Vector2(0, -1.3f);
-	private Rigidbody2D _rigidbody;
-
 	void OnEnable() {
-		_rigidbody = GetComponent<Rigidbody2D>();
-		_rigidbody.velocity = velocity;
+		_velocity.Set(0, -1.3f);
+		_rigidbody.velocity = _velocity;
 	}
 
 	void FixedUpdate() {
