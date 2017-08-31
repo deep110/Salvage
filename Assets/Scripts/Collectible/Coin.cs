@@ -11,6 +11,7 @@ public class Coin : MonoBehaviour {
 	/// so that we can keep track of coins.
 	public void SetIndex(int index) {
 		this.index = index;
+		isFalling = false;
 	}
 
 	public void Fall() {

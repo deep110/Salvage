@@ -1,37 +1,34 @@
 ﻿using UnityEngine;
 
-/**
-* generate coins on platform based on coin positions.
-*/
+///<summary>
+/// generate coins on platform based on coin positions.
+///</summary>
 
 public class Platform : MonoBehaviour {
 
 	public Vector3[] coinPositions;
 
-	/**
-	* - unique index of platform
-	* - set by Platform Manager
-	*/
+	/// - unique index of platform
+	/// - set by Platform Manager
 	[HideInInspector]
 	public int platformIndex;
 
 	private Transform _transform;
-	private CollectibleManager collectibleManager;
+	private CoinManager coinManager;
 	private bool[] coinsData;
 
 	void Awake() {
 		_transform = GetComponent<Transform>();
-		collectibleManager = CollectibleManager.Instance;
+		coinManager = CoinManager.Instance;
 		platformIndex = -1;
 	}
 
 	void OnEnable() {
 		if (platformIndex != -1) {
-			coinsData = collectibleManager.GetCoinData(platformIndex);
+			coinsData = coinManager.GetCoinData(platformIndex);
 			for (int i = 0; i < coinPositions.Length; i++) {
 				if (coinsData[i]) {
-					GameObject coin = collectibleManager.GetCoin();
-					coin.transform.parent = _transform;
+					GameObject coin = coinManager.GetCoin();
 					SpawnCoin(coin, coinPositions[i]);
 					coin.GetComponent<Coin>().SetIndex(i);
 				}
@@ -41,7 +38,7 @@ public class Platform : MonoBehaviour {
 
 	void OnDisable() {
 		if (platformIndex != -1) {
-			collectibleManager.SaveCoinData(platformIndex, coinsData);
+			coinManager.SaveCoinData(platformIndex, coinsData);
 
 			// deactivate the coins attached on this platform.
 			// i.e from second child, since first is sprites
@@ -51,16 +48,14 @@ public class Platform : MonoBehaviour {
 		}
 	}
 
-	/**
-	* called by coin child to tell which has
-	* fallen. So we set its state false, to not
-	* show again.
-	*/
+	/// called by coin child to tell which has fallen.
+	/// So we set its state false, to not show again.
 	public void SetCoinState(int coinIndex) {
 		coinsData[coinIndex] = false;
 	}
 
 	private void SpawnCoin(GameObject coin, Vector3 localPosition) {
+		coin.transform.parent = _transform;
 		coin.transform.localPosition = localPosition;
 		coin.transform.rotation = Quaternion.identity;
 		coin.SetActive(true);

@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleManager : Singleton <CollectibleManager> {
+public class CoinManager : Singleton <CoinManager> {
 
     public GameObject coin;
-
-    public class PowerUps {
-        public GameObject shield;
-    }
 
     private ObjectPooler coinObjectPooler;
     private Dictionary <int, bool[]> coinHashMap;
 
-    void Start() {
+    protected override void Awake() {
+        base.Awake();
+
         coinObjectPooler = new ObjectPooler(coin, 30);
         coinHashMap = new Dictionary <int, bool[]>();
     }
