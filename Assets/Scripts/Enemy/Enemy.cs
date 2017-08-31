@@ -9,10 +9,10 @@ public abstract class Enemy : MonoBehaviour {
 		_rigidbody = GetComponent <Rigidbody2D>();
 	}
 
-	protected virtual void OnTriggerEnter2D(Collider2D other) {
-		if (other.CompareTag("PlayerOne") || other.CompareTag("PlayerTwo")) {
-			EventManager.GameOver();
-			gameObject.SetActive(false);
-		}
+	public virtual void Collided() {
+		// play enemy die animation
+		// play sound
+		
+		gameObject.SetActive(false);
 	}
 }

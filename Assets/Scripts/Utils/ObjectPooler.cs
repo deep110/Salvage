@@ -21,7 +21,6 @@ public class ObjectPooler {
 		if(pooledObjects == null) return null;
 
 		for(int i = 0; i < pooledObjects.Count; i++){
-
 			if(!pooledObjects[i].activeInHierarchy){
 				return pooledObjects[i];
 			}

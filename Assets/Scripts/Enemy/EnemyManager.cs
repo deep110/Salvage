@@ -12,7 +12,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 
 	public Enemies enemies;
 
-	private Player playerOneController;
+	private Character playerOneController;
 	private bool isGameOver;
 	private int platformNumber;
 

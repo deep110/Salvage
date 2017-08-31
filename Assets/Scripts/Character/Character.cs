@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public class Player : MonoBehaviour {
+public class Character : MonoBehaviour {
 
 	public bool isFirstPlayer = true;
 

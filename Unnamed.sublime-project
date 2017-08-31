@@ -3,17 +3,13 @@
     [
         {
             "follow_symlinks": true,
-            "path": ".",
+            "path": "Assets/Scripts",
             "file_exclude_patterns": [
                 "*.meta",
                 "*.csproj",
                 "*.booproj",
                 "*.unityproj",
                 "*.dll"
-            ],
-            "folder_include_patterns": [
-                "Assets",
-                "Assets/*"
             ]
         }
     ],

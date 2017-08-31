@@ -8,10 +8,10 @@ public class PlayerManager : Singleton <PlayerManager> {
     public Transform playerTwo;
 
     [HideInInspector]
-    public Player playerOneController;
+    public Character playerOneController;
 
     [HideInInspector]
-    public Player playerTwoController;
+    public Character playerTwoController;
 
     private InputManager inputManager;
     private bool pointerClicked;
@@ -22,8 +22,8 @@ public class PlayerManager : Singleton <PlayerManager> {
 
         inputManager = GetComponent<InputManager>();
 
-        playerOneController = playerOne.GetComponent<Player>();
-        playerTwoController = playerTwo.GetComponent<Player>();
+        playerOneController = playerOne.GetComponent<Character>();
+        playerTwoController = playerTwo.GetComponent<Character>();
     }
 
     void Update() {
