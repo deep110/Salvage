@@ -3,28 +3,30 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class PowerUp : MonoBehaviour {
 
-	public string name;
+	public string powerUpName;
 	public float duration;
 
 	public bool Active { get { return _active; } }
 
-	protected float fallSpeed = 2f;
+	protected float fallSpeed = 1.8f;
 	protected float timeSinceStart;
 	protected bool _active;
 
-	protected virtual void Awake() {
+	protected virtual void OnEnable() {
 		GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * fallSpeed);
 	}
 
 
 	/// powerup has been collected
 	public virtual void Collected() {
-		
+		GetComponent<SpriteRenderer>().enabled = false;
+		Started();
 	}
 
 	/// call to start powerup
 	public virtual void Started() {
 		timeSinceStart = 0;
+		_active = true;
 	}
 
 	/// called when powerup is running

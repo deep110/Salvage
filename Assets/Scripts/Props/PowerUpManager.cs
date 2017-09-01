@@ -7,9 +7,11 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 	[System.Serializable]
 	public class PowerUps {
 		public GameObject shield;
-		public GameObject verticalRailgun;
-		public GameObject horizontalRailgun;
+		public GameObject verticalBeam;
+		public GameObject horizontalBeam;
 	}
 
 	public PowerUps powerUps;
+
+	private List<PowerUp> activePowerUps;
 }

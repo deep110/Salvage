@@ -3,7 +3,6 @@
 ///<summary>
 /// generate coins on platform based on coin positions.
 ///</summary>
-
 public class Platform : MonoBehaviour {
 
 	public Vector3[] coinPositions;
@@ -29,7 +28,10 @@ public class Platform : MonoBehaviour {
 			for (int i = 0; i < coinPositions.Length; i++) {
 				if (coinsData[i]) {
 					GameObject coin = coinManager.GetCoin();
-					SpawnCoin(coin, coinPositions[i]);
+					coin.transform.parent = _transform;
+					coin.transform.localPosition = coinPositions[i];
+					coin.transform.rotation = Quaternion.identity;
+					coin.SetActive(true);
 					coin.GetComponent<Coin>().SetIndex(i);
 				}
 			}
@@ -41,9 +43,10 @@ public class Platform : MonoBehaviour {
 			coinManager.SaveCoinData(platformIndex, coinsData);
 
 			// deactivate the coins attached on this platform.
-			// i.e from second child, since first is sprites
-			for (int i = 1; i < _transform.childCount -1; i++) {
-				_transform.GetChild(i).gameObject.SetActive(false);
+			for (int i = 0; i < _transform.childCount; i++) {
+				if (_transform.GetChild(i).CompareTag("Coin")) {
+					_transform.GetChild(i).gameObject.SetActive(false);
+				}
 			}
 		}
 	}
@@ -52,12 +55,5 @@ public class Platform : MonoBehaviour {
 	/// So we set its state false, to not show again.
 	public void SetCoinState(int coinIndex) {
 		coinsData[coinIndex] = false;
-	}
-
-	private void SpawnCoin(GameObject coin, Vector3 localPosition) {
-		coin.transform.parent = _transform;
-		coin.transform.localPosition = localPosition;
-		coin.transform.rotation = Quaternion.identity;
-		coin.SetActive(true);
 	}
 }

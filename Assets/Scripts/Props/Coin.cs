@@ -19,7 +19,7 @@ public class Coin : MonoBehaviour {
 			if (index != -1) {
 				isFalling = true;
 				GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * fallSpeed);
-				GetComponent<Transform>().parent.GetComponent<Platform>().SetCoinState(index);
+				GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinState(index);
 				index = -1;
 			}
 		} else {
