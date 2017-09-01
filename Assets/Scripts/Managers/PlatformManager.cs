@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CoinManager))]
 public class PlatformManager : Singleton <PlatformManager> {
 
     public GameObject _platform;
