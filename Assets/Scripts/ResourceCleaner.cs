@@ -10,7 +10,9 @@ public class ResourceCleaner : MonoBehaviour {
         if (other.gameObject.CompareTag("Coin") || other.gameObject.CompareTag("Enemy")) {
             other.gameObject.SetActive(false);
         } else if (other.gameObject.CompareTag("PowerUp")) {
-        	Destroy(other.gameObject);
+        	if (!other.gameObject.GetComponent<PowerUp>().IsActive) {
+        		Destroy(other.gameObject);
+        	}
         }
     }
 }

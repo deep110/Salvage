@@ -8,18 +8,19 @@ public class CharacterCollider : MonoBehaviour {
 
 	// private GameObject shield;
 
-	// private Renderer _renderer;
+	private SpriteRenderer _spriteRenderer;
 
-	// void Awake() {
-	// 	_renderer = GetComponent<Renderer>();
-	// }
+	void Awake() {
+		_spriteRenderer = GetComponent<SpriteRenderer>();
+	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("Enemy")) {
-			EventManager.GameOver();
 			other.gameObject.GetComponent<Enemy>().Collided();
 		} else if (other.CompareTag("Coin")) {
 			other.gameObject.GetComponent<Coin>().Fall();
+		} else if (other.CompareTag("PowerUp")) {
+			PowerUpManager.Instance.AddActivePowerUp(other.gameObject.GetComponent<PowerUp>());
 		}
 	}
 
