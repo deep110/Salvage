@@ -14,21 +14,27 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 	public PowerUps powerUps;
 
 	private Transform _camera;
+
 	private List<PowerUp> activePowerUps;
 	private Dictionary<GameObject, int> powerUpWeights;
-
 	private bool isGameOver;
 
-	void Start() {
-		_camera = GameObject.FindWithTag("MainCamera").transform;
+
+	protected override void Awake() {
+        base.Awake();
+
+        _camera = GameObject.FindWithTag("MainCamera").transform;
 		powerUpWeights = new Dictionary<GameObject, int> {
             { powerUps.shield, 20 },
             { powerUps.verticalBeam, 10 },
             { powerUps.horizontalBeam, 10}
 		};
+
 		activePowerUps = new List<PowerUp>();
+    }
+
+	void Start() {
 		EventManager.GameOverEvent += gameOver;
-		isGameOver = false;
 
 		StartCoroutine(GeneratePowerUps());
 	}
@@ -47,11 +53,6 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 		}
 	}
 
-	void onDisable() {
-		EventManager.GameOverEvent -= gameOver;
-		StopAllCoroutines();
-	}
-
 	public void AddActivePowerUp(PowerUp powerUp) {
 		if (!powerUp.IsActive || !powerUp.IsFakeActive) {
 			for (int i = 0; i < activePowerUps.Count; i++) {
@@ -66,6 +67,22 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 			powerUp.Collected();
 			activePowerUps.Add(powerUp);
 		}
+	}
+
+	public void RemoveShieldPowerUp() {
+		foreach (PowerUp powerUp in activePowerUps) {
+			if (powerUp.powerUpName == "Shield") {
+				activePowerUps.Remove(powerUp);
+				powerUp.Ended();
+
+				break;
+			}
+		}
+	}
+
+	void onDisable() {
+		EventManager.GameOverEvent -= gameOver;
+		StopAllCoroutines();
 	}
 
 	private IEnumerator GeneratePowerUps() {

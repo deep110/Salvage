@@ -12,7 +12,6 @@ public abstract class Enemy : MonoBehaviour {
 	public virtual void Collided() {
 		// play enemy die animation
 		// play sound
-		EventManager.GameOver();
 		gameObject.SetActive(false);
 	}
 }

@@ -6,26 +6,42 @@ using UnityEngine;
 ///</summary>
 public class CharacterCollider : MonoBehaviour {
 
-	// private GameObject shield;
+	private GameObject shield;
 
-	private SpriteRenderer _spriteRenderer;
+	private bool isShieldActive;
 
 	void Awake() {
-		_spriteRenderer = GetComponent<SpriteRenderer>();
+		shield = transform.GetChild(0).gameObject;
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("Enemy")) {
 			other.gameObject.GetComponent<Enemy>().Collided();
+
+			if (isShieldActive) {
+				PowerUpManager.Instance.RemoveShieldPowerUp();
+			} else {
+				EventManager.GameOver();
+			}
+
 		} else if (other.CompareTag("Coin")) {
 			other.gameObject.GetComponent<Coin>().Fall();
+
 		} else if (other.CompareTag("PowerUp")) {
 			PowerUpManager.Instance.AddActivePowerUp(other.gameObject.GetComponent<PowerUp>());
 		}
 	}
 
-	// private void ActivateShield() {
-	// 	shield.SetActive(true);
-	// }
+	public void ActivateShield() {
+		isShieldActive = true;
+		shield.SetActive(true);
+	}
+
+	public void DeActivateShield() {
+		isShieldActive = false;
+		shield.SetActive(false);
+
+		//TODO: blink the shield
+	}
 
 }

@@ -5,15 +5,15 @@ public abstract class PowerUp : MonoBehaviour {
 
 	public string powerUpName;
 	public float duration;
+	public float fallSpeed = 1.6f;
 
 	public bool IsActive { get { return active; } }
 	public bool IsFakeActive { get; set;}
 
-	protected float fallSpeed = 1.8f;
 	protected float timeSinceStart;
 	protected bool active;
 
-	protected virtual void OnEnable() {
+	protected virtual void Start() {
 		GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * fallSpeed);
 	}
 
@@ -22,11 +22,6 @@ public abstract class PowerUp : MonoBehaviour {
 	public virtual void Collected() {
 		GetComponent<SpriteRenderer>().enabled = false;
 		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-		Started();
-	}
-
-	/// call to start powerup
-	public virtual void Started() {
 		timeSinceStart = 0;
 		active = true;
 	}
