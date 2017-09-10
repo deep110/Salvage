@@ -30,7 +30,7 @@ public abstract class PowerUp : MonoBehaviour {
 	/// by default it does nothing, override to do per frame manipulation
 	public virtual void Tick() {
 		timeSinceStart += Time.deltaTime;
-		if (timeSinceStart > duration) {
+		if (timeSinceStart >= duration) {
 			active = false;
             return;
         }

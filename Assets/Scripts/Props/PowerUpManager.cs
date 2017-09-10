@@ -69,17 +69,6 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 		}
 	}
 
-	public void RemoveShieldPowerUp() {
-		foreach (PowerUp powerUp in activePowerUps) {
-			if (powerUp.powerUpName == "Shield") {
-				activePowerUps.Remove(powerUp);
-				powerUp.Ended();
-
-				break;
-			}
-		}
-	}
-
 	void onDisable() {
 		EventManager.GameOverEvent -= gameOver;
 		StopAllCoroutines();

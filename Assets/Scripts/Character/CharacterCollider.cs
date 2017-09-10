@@ -6,8 +6,10 @@ using UnityEngine;
 ///</summary>
 public class CharacterCollider : MonoBehaviour {
 
-	private GameObject shield;
+	[HideInInspector]
+	public bool deActivateShield;
 
+	private GameObject shield;
 	private bool isShieldActive;
 
 	void Awake() {
@@ -19,11 +21,10 @@ public class CharacterCollider : MonoBehaviour {
 			other.gameObject.GetComponent<Enemy>().Collided();
 
 			if (isShieldActive) {
-				PowerUpManager.Instance.RemoveShieldPowerUp();
+				deActivateShield = true;
 			} else {
 				EventManager.GameOver();
 			}
-
 		} else if (other.CompareTag("Coin")) {
 			other.gameObject.GetComponent<Coin>().Fall();
 
@@ -39,6 +40,7 @@ public class CharacterCollider : MonoBehaviour {
 
 	public void DeActivateShield() {
 		isShieldActive = false;
+		deActivateShield = false;
 		shield.SetActive(false);
 
 		//TODO: blink the shield

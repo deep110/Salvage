@@ -19,6 +19,14 @@ public class Shield : PowerUp {
 		playerTwoCollider.ActivateShield();
     }
 
+    public override void Tick() {
+		base.Tick();
+
+		if (playerOneCollider.deActivateShield || playerTwoCollider.deActivateShield) {
+			timeSinceStart = duration;
+		}
+    }
+
 	public override void Ended() {
         playerOneCollider.DeActivateShield();
 		playerTwoCollider.DeActivateShield();
