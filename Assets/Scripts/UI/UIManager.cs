@@ -6,6 +6,9 @@ public class UIManager : Singleton <UIManager> {
 	public Transform scorePanel;
 	public GameObject menuPanel;
 
+	public GameObject hBeamButton;
+	public GameObject vBeamButton;
+
 	private Text scoreText;
 	private Text platformText;
 
