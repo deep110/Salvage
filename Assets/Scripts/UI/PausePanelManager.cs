@@ -13,8 +13,11 @@ public class PausePanelManager : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
+	///<TODO>
+	/// make a settings dialog and set Time Scale 1
+	/// when dialog is closed.
+	///</TODO>
 	public void OnSettingsClicked () {
-		// coming soon
 		gameObject.SetActive(false);
 		Time.timeScale = 1;
 	}

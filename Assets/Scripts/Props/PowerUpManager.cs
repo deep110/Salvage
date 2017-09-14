@@ -25,8 +25,8 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 
         _camera = GameObject.FindWithTag("MainCamera").transform;
 		powerUpWeights = new Dictionary<GameObject, int> {
-            { powerUps.shield, 20 },
-            { powerUps.verticalBeam, 10 },
+            { powerUps.shield, 2 },
+            { powerUps.verticalBeam, 1 },
             { powerUps.horizontalBeam, 10}
 		};
 

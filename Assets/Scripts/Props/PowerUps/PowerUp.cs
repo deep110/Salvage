@@ -38,7 +38,6 @@ public abstract class PowerUp : MonoBehaviour {
 
 	/// call to end powerup
 	public virtual void Ended() {
-		// clean up the resources
 		Destroy(gameObject);
 	}
 

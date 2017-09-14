@@ -13,6 +13,8 @@ public class PlayerManager : Singleton <PlayerManager> {
     [HideInInspector]
     public Character playerTwoController;
 
+    public bool IsBeamPowerUpActive {get; set;}
+
     private InputManager inputManager;
     private bool pointerClicked;
     private const float positionCorrection = -0.4f;

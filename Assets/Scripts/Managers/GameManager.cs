@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : PersistentSingleton <GameManager> {
 
 	private IEnumerator Start () {
-		LocalizationManager.Instance.LoadLocalizedText("en");
+		LocalizationManager.Instance.LoadLocalizedText("hi");
 
 		while (!LocalizationManager.Instance.IsReady()) {
             yield return null;
