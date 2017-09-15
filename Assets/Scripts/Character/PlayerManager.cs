@@ -13,7 +13,8 @@ public class PlayerManager : Singleton <PlayerManager> {
     [HideInInspector]
     public Character playerTwoController;
 
-    public bool IsBeamPowerUpActive {get; set;}
+    [HideInInspector]
+    public bool isBeamPowerUpActive;
 
     private InputManager inputManager;
     private bool pointerClicked;
@@ -36,7 +37,7 @@ public class PlayerManager : Singleton <PlayerManager> {
         playerOneController.Move(inputManager.pointerPos.x);
         playerTwoController.Move(inputManager.pointerPos.x);
 
-        if (pointerClicked) {
+        if (pointerClicked && !isBeamPowerUpActive) {
             handleJumpAndFall();
             pointerClicked = false;
         }

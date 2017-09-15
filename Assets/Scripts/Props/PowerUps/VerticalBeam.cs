@@ -2,34 +2,71 @@ using UnityEngine;
 
 public class VerticalBeam : PowerUp {
 
-    private UIManager uiManager;
-    private bool beamActive;
+    private enum BeamState {
+        START,
+        ONGOING,
+        FIRE,
+        NONE
+    }
+
+    private GameObject beamButton;
+    private BeamState beamState;
+
 
     protected override void Start() {
         base.Start();
-        uiManager = UIManager.Instance;
+        beamButton = UIManager.Instance.vBeamButton;
     }
 
     public override void Collected() {
         base.Collected();
-
-        uiManager.vBeamButton.SetActive(true);
+        beamButton.SetActive(true);
+        beamState = BeamState.START;
     }
 
     public override void Tick() {
-        if (uiManager.VerticalBeamButtonClicked) {
-            // beamActive = true;
-            uiManager.VerticalBeamButtonClicked = false;
-            timeSinceStart = duration;
-        }
-        if (!beamActive) {
-            base.Tick();
+        switch(beamState) {
+
+            case BeamState.START:
+                base.Tick();
+                if (beamButton.GetComponent<PointerListener>().Pressed) {
+                    beamState = BeamState.ONGOING;
+                    PlayerManager.Instance.isBeamPowerUpActive = true;
+                }
+                break;
+
+            case BeamState.ONGOING:
+                handleButtonDrag();
+                if (!beamButton.GetComponent<PointerListener>().Pressed) {
+                    beamState = BeamState.FIRE;
+                }
+                break;
+
+            case BeamState.FIRE:
+                PlayerManager.Instance.isBeamPowerUpActive = false;
+                fireBeam();
+                beamState = BeamState.NONE;
+                break;
+
+            case BeamState.NONE:
+                timeSinceStart = duration;
+                base.Tick();
+                break;
         }
     }
 
     public override void Ended() {
-        uiManager.HideBeamButton(uiManager.vBeamButton);
-
+        UIManager.HideBeamButton(beamButton);
         base.Ended();
+    }
+
+    private void fireBeam() {
+        Debug.Log("Vertical Beam Fired");
+    }
+
+    private void handleButtonDrag() {
+  //    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // pointerPos.x = mousePos.x;
+        // pointerPos.y = mousePos.y;
     }
 }

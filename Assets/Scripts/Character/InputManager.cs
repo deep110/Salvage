@@ -13,13 +13,13 @@ public class InputManager : MonoBehaviour {
 	
 	void Update() {
 		if (Application.isMobilePlatform) {
-			MapMobileInput ();
+			mapMobileInput ();
 		} else {
-			MapKeyBoardInput ();
+			mapKeyBoardInput ();
 		}
 	}
 
-	private void MapMobileInput() {
+	private void mapMobileInput() {
 		// check touch count and touch is not UI click
 		if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null) {
 			Touch touch = Input.GetTouch(0);
@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
-	private void MapKeyBoardInput() {
+	private void mapKeyBoardInput() {
 		// check first if its not UI click
 		if (!EventSystem.current.IsPointerOverGameObject()) {
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
