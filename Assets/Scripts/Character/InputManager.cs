@@ -28,12 +28,13 @@ public class InputManager : MonoBehaviour {
 		        pointerClick = true;
 		        dragging = false;
 		    } else if (touch.phase == TouchPhase.Moved) {
-				pointerPos.x = Camera.main.ScreenToWorldPoint(touch.position).x;
+				pointerPos.x = touch.deltaPosition.x;
 				dragging = true;
 		    }
 		} else {
 			pointerClick = false;
 			dragging = false;
+			pointerPos.x = 0;
 		}
 	}
 
