@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class HorizontalBeam : PowerUp {
 
+	public GameObject dragableSprite;
+
 	private enum BeamState {
 		START,
 		ONGOING,
@@ -33,11 +35,12 @@ public class HorizontalBeam : PowerUp {
                 if (beamButton.GetComponent<PointerListener>().Pressed) {
                     beamState = BeamState.ONGOING;
                     PlayerManager.Instance.isBeamPowerUpActive = true;
+                    dragableSprite = Instantiate(dragableSprite, getTouchPosition(), Quaternion.identity);
                 }
                 break;
 
             case BeamState.ONGOING:
-                handleButtonDrag();
+                dragableSprite.transform.position = getTouchPosition();
                 if (!beamButton.GetComponent<PointerListener>().Pressed) {
                     beamState = BeamState.FIRE;
                 }
@@ -45,8 +48,10 @@ public class HorizontalBeam : PowerUp {
 
             case BeamState.FIRE:
                 PlayerManager.Instance.isBeamPowerUpActive = false;
-                fireBeam();
+                Destroy(dragableSprite);
                 beamState = BeamState.NONE;
+
+                fireBeam();
                 break;
 
             case BeamState.NONE:
@@ -65,9 +70,12 @@ public class HorizontalBeam : PowerUp {
 		Debug.Log("Horizontal Beam Fired");
     }
 
-    private void handleButtonDrag() {
-  //   	Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		// pointerPos.x = mousePos.x;
-		// pointerPos.y = mousePos.y;
+    private Vector3 getTouchPosition() {
+    	Vector3 position = (Application.isMobilePlatform)
+    			? Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)
+    			: Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+     	position.z = 0;
+     	return position;
     }
 }

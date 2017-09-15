@@ -27,7 +27,7 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 		powerUpWeights = new Dictionary<GameObject, int> {
             { powerUps.shield, 2 },
             { powerUps.verticalBeam, 10 },
-            { powerUps.horizontalBeam, 10}
+            { powerUps.horizontalBeam, 10 }
 		};
 
 		activePowerUps = new List<PowerUp>();
