@@ -48,10 +48,10 @@ public class HorizontalBeam : PowerUp {
 
             case BeamState.FIRE:
                 PlayerManager.Instance.isBeamPowerUpActive = false;
+                Vector3 finalPosition = dragableSprite.transform.position;
                 Destroy(dragableSprite);
-                beamState = BeamState.NONE;
 
-                fireBeam();
+                fireBeam(finalPosition);
                 break;
 
             case BeamState.NONE:
@@ -66,8 +66,8 @@ public class HorizontalBeam : PowerUp {
         base.Ended();
     }
 
-    private void fireBeam() {
-		Debug.Log("Horizontal Beam Fired");
+    private void fireBeam(Vector3 beamPosition) {
+		beamState = BeamState.NONE;
     }
 
     private Vector3 getTouchPosition() {
