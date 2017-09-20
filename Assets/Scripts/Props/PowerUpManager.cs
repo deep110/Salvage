@@ -23,9 +23,9 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 	protected override void Awake() {
         base.Awake();
 
-        _camera = GameObject.FindWithTag("MainCamera").transform;
+        _camera = Camera.main.transform;
 		powerUpWeights = new Dictionary<GameObject, int> {
-            { powerUps.shield, 2 },
+            { powerUps.shield, 10 },
             { powerUps.verticalBeam, 10 },
             { powerUps.horizontalBeam, 10 }
 		};

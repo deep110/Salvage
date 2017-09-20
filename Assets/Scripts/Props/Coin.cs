@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour {
 
 	private int index = -1;
 	private bool isFalling;
+	private float timePassed;
 
 	/// called by Platform to set Index
 	/// so that we can keep track of coins.
@@ -21,12 +22,17 @@ public class Coin : MonoBehaviour {
 				GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * fallSpeed);
 				GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinState(index);
 				index = -1;
+				timePassed = Time.timeSinceLevelLoad;
 			}
-		} else {
-			EventManager.CoinCollected();
-			gameObject.SetActive(false);
-			isFalling = false;
+		} else if (Time.timeSinceLevelLoad - timePassed > 0.1f) {
+			Collect();
 		}
+	}
+
+	public void Collect() {
+		EventManager.CoinCollected();
+		gameObject.SetActive(false);
+		isFalling = false;
 	}
 
 }

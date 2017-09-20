@@ -124,14 +124,18 @@ public class Character : MonoBehaviour {
 
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if (other.transform.CompareTag ("Platform")) {
+		Transform colliderTransform = other.transform;
+
+		if (colliderTransform.CompareTag ("Platform")) {
 			canFall = true;
-			lastStablePosition.y = other.transform.position.y;
 			if (isFirstPlayer) {
+				lastStablePosition.y = colliderTransform.position.y;
 				updatePlatformsClimbed(other.gameObject.GetComponent<Platform>().platformIndex);
 			}
-		} else if (other.transform.CompareTag ("Ground")) {
-			lastStablePosition.y = other.transform.position.y + 1.21f;
+		} else if (colliderTransform.CompareTag ("Ground")) {
+			if (isFirstPlayer) {
+				lastStablePosition.y = colliderTransform.position.y;
+			}
 			canFall = false;
 		}
 	}
