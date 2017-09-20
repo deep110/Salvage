@@ -130,7 +130,7 @@ public class Character : MonoBehaviour {
 			canFall = true;
 			if (isFirstPlayer) {
 				lastStablePosition.y = colliderTransform.position.y;
-				updatePlatformsClimbed(other.gameObject.GetComponent<Platform>().platformIndex);
+				updatePlatformsClimbed(colliderTransform.GetComponent<Platform>().platformIndex);
 			}
 		} else if (colliderTransform.CompareTag ("Ground")) {
 			if (isFirstPlayer) {

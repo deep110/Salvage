@@ -13,25 +13,22 @@ public class PlatformManager : Singleton <PlatformManager> {
 
     private int minPlatformIndex = -2;
     private int maxPlatformIndex;
-    private int currentPlatformIndex;
 
-    private Dictionary <int, GameObject> hashMap;
+    private Dictionary <int, GameObject> platformHashMap;
 
     void Start() {
         objectPooler = new ObjectPooler(_platform, 10);
-        hashMap = new Dictionary <int, GameObject>();
+        platformHashMap = new Dictionary <int, GameObject>();
         initPlatforms();
     }
 
     public void AddPlatform(bool up) {
         if (up) { 
-            currentPlatformIndex = maxPlatformIndex;
-            generatePlatform(currentPlatformIndex);
+            generatePlatform(maxPlatformIndex);
             maxPlatformIndex++;
         } else {
-            currentPlatformIndex = minPlatformIndex;
-            if (currentPlatformIndex >= 0) {   
-                generatePlatform(currentPlatformIndex);
+            if (minPlatformIndex >= 0) {
+                generatePlatform(minPlatformIndex);
                 minPlatformIndex--;
             } else {
                 minPlatformIndex = -2;
@@ -40,18 +37,19 @@ public class PlatformManager : Singleton <PlatformManager> {
     }
 
     public void RemovePlatform(bool up) {
+        int platformIndex;
         if (up) {
             maxPlatformIndex--;
-            currentPlatformIndex = maxPlatformIndex;
+            platformIndex = maxPlatformIndex;
         } else {
             minPlatformIndex++;
-            currentPlatformIndex = minPlatformIndex;
+            platformIndex = minPlatformIndex;
         }
         GameObject outPlatform;
-        hashMap.TryGetValue(currentPlatformIndex, out outPlatform);
+        platformHashMap.TryGetValue(platformIndex, out outPlatform);
         if (outPlatform != null) {
             outPlatform.SetActive(false);
-            hashMap.Remove(currentPlatformIndex);
+            platformHashMap.Remove(platformIndex);
         }
     }
 
@@ -63,7 +61,7 @@ public class PlatformManager : Singleton <PlatformManager> {
         platform.GetComponent<Platform>().platformIndex = platformIndex;
         platform.SetActive(true);
 
-        hashMap.Add(platformIndex, platform);
+        platformHashMap.Add(platformIndex, platform);
     }
 
     private void initPlatforms () {

@@ -2,7 +2,7 @@
 
 public class Coin : MonoBehaviour {
 
-	public float fallSpeed = 3f;
+	public Vector2 fallVelocity = new Vector2(0, -3);
 
 	private int index = -1;
 	private bool isFalling;
@@ -19,7 +19,7 @@ public class Coin : MonoBehaviour {
 		if (!isFalling) {
 			if (index != -1) {
 				isFalling = true;
-				GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * fallSpeed);
+				GetComponent<Rigidbody2D>().velocity = fallVelocity;
 				GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinState(index);
 				index = -1;
 				timePassed = Time.timeSinceLevelLoad;

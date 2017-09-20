@@ -35,7 +35,6 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 
 	void Start() {
 		EventManager.GameOverEvent += gameOver;
-
 		StartCoroutine(GeneratePowerUps());
 	}
 
