@@ -25,9 +25,9 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 
         _camera = Camera.main.transform;
 		powerUpWeights = new Dictionary<GameObject, int> {
-            { powerUps.shield, 10 },
-            { powerUps.verticalBeam, 10 },
-            { powerUps.horizontalBeam, 10 }
+            { powerUps.shield, 1 },
+            { powerUps.verticalBeam, 1 },
+            { powerUps.horizontalBeam, 100 }
 		};
 
 		activePowerUps = new List<PowerUp>();

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HorizontalBeam : PowerUp {
@@ -12,11 +13,15 @@ public class HorizontalBeam : PowerUp {
 	}
 
 	private GameObject beamButton;
+    private GameObject beam;
 	private BeamState beamState;
+
+    protected const int _layerMask = 1 << 0;
 
 
 	protected override void Start() {
         base.Start();
+        beam = transform.GetChild(0).gameObject;
         beamButton = UIManager.Instance.hBeamButton;
     }
 
@@ -43,15 +48,12 @@ public class HorizontalBeam : PowerUp {
                 dragableSprite.transform.position = getTouchPosition();
                 if (!beamButton.GetComponent<PointerListener>().Pressed) {
                     beamState = BeamState.FIRE;
+                    PlayerManager.Instance.isBeamPowerUpActive = false;
+                    Vector3 finalPosition = dragableSprite.transform.position;
+                    Destroy(dragableSprite);
+
+                    StartCoroutine(fireBeam(finalPosition.y));
                 }
-                break;
-
-            case BeamState.FIRE:
-                PlayerManager.Instance.isBeamPowerUpActive = false;
-                Vector3 finalPosition = dragableSprite.transform.position;
-                Destroy(dragableSprite);
-
-                fireBeam(finalPosition);
                 break;
 
             case BeamState.NONE:
@@ -66,7 +68,13 @@ public class HorizontalBeam : PowerUp {
         base.Ended();
     }
 
-    private void fireBeam(Vector3 beamPosition) {
+    private IEnumerator fireBeam(float beamPositionY) {
+        beam.transform.position = new Vector3(0, beamPositionY, 0);
+        beam.SetActive(true);
+
+        yield return new WaitForSeconds(0.8f); // time for which beam is active
+
+        beam.SetActive(false);
 		beamState = BeamState.NONE;
     }
 
