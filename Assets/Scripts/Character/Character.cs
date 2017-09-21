@@ -65,11 +65,7 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Move(float inputX) {
-		if (Mathf.Abs(inputX - _transform.position.x) > 0.1f) {
-			velocity.x = Math.Sign(inputX - _transform.position.x) * maxSpeed;
-		} else {
-			velocity.x = 0;
-		}
+		velocity.x = Math.Sign(inputX) * maxSpeed;
 
 		_animator.SetFloat("Speed", Mathf.Abs(velocity.x));
 	}

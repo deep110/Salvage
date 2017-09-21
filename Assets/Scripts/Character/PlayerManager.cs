@@ -35,7 +35,12 @@ public class PlayerManager : Singleton <PlayerManager> {
 
     void FixedUpdate() {
         playerOneController.Move(inputManager.pointerPos.x);
-        playerTwoController.Move(inputManager.pointerPos.x);
+
+        if (Mathf.Abs(playerOne.position.x - playerTwo.position.x) > 0.1f) {
+            playerTwoController.Move(playerOne.position.x - playerTwo.position.x);
+        } else {
+            playerTwoController.Move(0);
+        }
 
         if (pointerClicked && !isBeamPowerUpActive) {
             handleJumpAndFall();
