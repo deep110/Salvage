@@ -14,10 +14,10 @@ public class Bee : Enemy {
 		var localPosition = new Vector3();
 		if (right) {
 			_velocity.Set(0.7f, 0);
-			localPosition.Set(-3f, 0.5f, 0);
+			localPosition.Set(-3f, 0.6f, 0);
 		} else {
 			_velocity.Set(-0.7f, 0);
-			localPosition.Set(3f, 0.5f, 0);
+			localPosition.Set(3f, 0.6f, 0);
 		}
 
 		GetComponent<Transform>().position += localPosition;

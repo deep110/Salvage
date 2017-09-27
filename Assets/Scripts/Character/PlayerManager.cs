@@ -18,7 +18,7 @@ public class PlayerManager : Singleton <PlayerManager> {
 
     private InputManager inputManager;
     private bool pointerClicked;
-    private const float positionCorrection = -0.4f;
+    private const float positionCorrection = -0.643f;
 
     protected override void Awake() {
         base.Awake();

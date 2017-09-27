@@ -13,11 +13,11 @@ public class Ball : Enemy {
 	public void Roll(bool right) {
 		var localPosition = new Vector3();
 		if (right) {
-			_velocity.Set(1.2f, 0);
-			localPosition.Set(-3f, 1f, 0);
+			_velocity.Set(1.3f, 0);
+			localPosition.Set(-3f, 1.3f, 0);
 		} else {
-			_velocity.Set(-1.2f, 0);
-			localPosition.Set(3f, 1f, 0);
+			_velocity.Set(-1.3f, 0);
+			localPosition.Set(3f, 1.3f, 0);
 		}
 
 		GetComponent<Transform>().position += localPosition;
