@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class VerticalBeam : PowerUp {
@@ -42,15 +43,11 @@ public class VerticalBeam : PowerUp {
                 dragableSprite.transform.position = getTouchPosition();
                 if (!beamButton.GetComponent<PointerListener>().Pressed) {
                     beamState = BeamState.FIRE;
+                    PlayerManager.Instance.isBeamPowerUpActive = false;
+
+                    StartCoroutine(fireBeam(dragableSprite.transform.position.x));
+                    Destroy(dragableSprite);
                 }
-                break;
-
-            case BeamState.FIRE:
-                PlayerManager.Instance.isBeamPowerUpActive = false;
-                Destroy(dragableSprite);
-                beamState = BeamState.NONE;
-
-                fireBeam();
                 break;
 
             case BeamState.NONE:
@@ -61,12 +58,13 @@ public class VerticalBeam : PowerUp {
     }
 
     public override void Ended() {
-        UIManager.HideBeamButton(beamButton);
+        beamButton.SetActive(false);
         base.Ended();
     }
 
-    private void fireBeam() {
+    private IEnumerator fireBeam(float beamPositionX) {
         Debug.Log("Vertical Beam Fired");
+        yield return new WaitForSeconds(0.8f);
     }
 
     private Vector3 getTouchPosition() {

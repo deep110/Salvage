@@ -31,10 +31,4 @@ public class UIManager : Singleton <UIManager> {
 	public void UpdatePlatformsClimbed(int platformsClimbed) {
 		platformText.text = platformsClimbed.ToString();
 	}
-
-	/// Also called when poweUp time is over
-	public static void HideBeamButton(GameObject beamButton) {
-		// TODO: make it blink and disapper, or use any Particle effect
-		beamButton.SetActive(false);
-	}
 }

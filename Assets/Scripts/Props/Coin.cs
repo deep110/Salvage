@@ -35,4 +35,9 @@ public class Coin : MonoBehaviour {
 		isFalling = false;
 	}
 
+	public void Teleport() {
+		Collect();
+		GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinState(index);
+	}
+
 }

@@ -8,7 +8,6 @@ public abstract class PowerUp : MonoBehaviour {
 	public float fallSpeed = 1.6f;
 
 	public bool IsActive { get { return active; } }
-	public bool IsFakeActive { get; set;}
 
 	protected float timeSinceStart;
 	protected bool active;
@@ -43,10 +42,5 @@ public abstract class PowerUp : MonoBehaviour {
 
 	public void ResetTime() {
 		timeSinceStart = 0;
-	}
-
-	public void MakeFakeActive() {
-		IsFakeActive = true;
-		GetComponent<SpriteRenderer>().enabled = false;
 	}
 }

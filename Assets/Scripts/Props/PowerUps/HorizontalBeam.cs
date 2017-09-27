@@ -16,7 +16,7 @@ public class HorizontalBeam : PowerUp {
     private GameObject beam;
 	private BeamState beamState;
 
-    protected const int _layerMask = 1 << 0;
+    protected const int K_layerMask = 1 << 0;
 
 
 	protected override void Start() {
@@ -49,10 +49,9 @@ public class HorizontalBeam : PowerUp {
                 if (!beamButton.GetComponent<PointerListener>().Pressed) {
                     beamState = BeamState.FIRE;
                     PlayerManager.Instance.isBeamPowerUpActive = false;
-                    Vector3 finalPosition = dragableSprite.transform.position;
-                    Destroy(dragableSprite);
 
-                    StartCoroutine(fireBeam(finalPosition.y));
+                    StartCoroutine(fireBeam(dragableSprite.transform.position.y));
+                    Destroy(dragableSprite);
                 }
                 break;
 
@@ -64,7 +63,7 @@ public class HorizontalBeam : PowerUp {
     }
 
 	public override void Ended() {
-        UIManager.HideBeamButton(beamButton);
+        beamButton.SetActive(false);
         base.Ended();
     }
 
@@ -72,7 +71,16 @@ public class HorizontalBeam : PowerUp {
         beam.transform.position = new Vector3(0, beamPositionY, 0);
         beam.SetActive(true);
 
-        yield return new WaitForSeconds(0.8f); // time for which beam is active
+        yield return new WaitForSeconds(0.6f); // time for which beam is active
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(0, beamPositionY),
+                                    new Vector2(4f, 0.63f), 0, K_layerMask);
+
+        for (int i = 0; i < colliders.Length; i++) {
+            if (colliders[i].CompareTag("Coin")) {
+                colliders[i].GetComponent<Coin>().Teleport();
+            }
+        }
 
         beam.SetActive(false);
 		beamState = BeamState.NONE;

@@ -53,13 +53,11 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 	}
 
 	public void AddActivePowerUp(PowerUp powerUp) {
-		if (!powerUp.IsActive || !powerUp.IsFakeActive) {
+		if (!powerUp.IsActive) {
 			for (int i = 0; i < activePowerUps.Count; i++) {
 				if (activePowerUps[i].powerUpName == powerUp.powerUpName) {
 					activePowerUps[i].ResetTime();
-
-					// make this powerup fake active
-					powerUp.MakeFakeActive();
+					Destroy(powerUp.gameObject); // now remove this powerup
 					return;
 				}
 			}
