@@ -21,7 +21,6 @@ public class Coin : MonoBehaviour {
 				isFalling = true;
 				GetComponent<Rigidbody2D>().velocity = fallVelocity;
 				GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinState(index);
-				index = -1;
 				timePassed = Time.timeSinceLevelLoad;
 			}
 		} else if (Time.timeSinceLevelLoad - timePassed > 0.1f) {
@@ -33,11 +32,12 @@ public class Coin : MonoBehaviour {
 		EventManager.CoinCollected();
 		gameObject.SetActive(false);
 		isFalling = false;
+		index = -1;
 	}
 
 	public void Teleport() {
-		Collect();
 		GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinState(index);
+		Collect();
 	}
 
 }

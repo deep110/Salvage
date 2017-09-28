@@ -13,16 +13,21 @@ public class VerticalBeam : PowerUp {
     }
 
     private GameObject beamButton;
+    private GameObject beam;
     private BeamState beamState;
+
+    protected const int K_layerMask = 1 << 0;
 
 
     protected override void Start() {
         base.Start();
+        beam = transform.GetChild(0).gameObject;
         beamButton = UIManager.Instance.vBeamButton;
     }
 
     public override void Collected() {
         base.Collected();
+
         beamButton.SetActive(true);
         beamState = BeamState.START;
     }
@@ -62,11 +67,6 @@ public class VerticalBeam : PowerUp {
         base.Ended();
     }
 
-    private IEnumerator fireBeam(float beamPositionX) {
-        Debug.Log("Vertical Beam Fired");
-        yield return new WaitForSeconds(0.8f);
-    }
-
     private Vector3 getTouchPosition() {
         Vector3 position = (Application.isMobilePlatform)
                 ? Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)
@@ -74,5 +74,25 @@ public class VerticalBeam : PowerUp {
 
         position.z = 0;
         return position;
+    }
+
+    private IEnumerator fireBeam(float beamPositionX) {
+        float midPosition = Camera.main.transform.position.y;
+        beam.transform.position = new Vector3(beamPositionX, midPosition, 0);
+        beam.SetActive(true);
+
+        yield return new WaitForSeconds(0.6f);
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(beamPositionX, midPosition),
+                                    new Vector2(0.63f, 9f), 0, K_layerMask);
+
+        for (int i = 0; i < colliders.Length; i++) {
+            if (colliders[i].CompareTag("Coin")) {
+                colliders[i].GetComponent<Coin>().Teleport();
+            }
+        }
+
+        beam.SetActive(false);
+        beamState = BeamState.NONE;
     }
 }
