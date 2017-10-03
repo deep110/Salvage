@@ -68,8 +68,8 @@ public class EnemyManager : Singleton <EnemyManager> {
 		while (!isGameOver) {
 			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
 
-			bookPooler.Spawn(new Vector3(lastStablePos.x, lastStablePos.y + 6f, 0));
-			yield return new WaitForSeconds(Random.Range(5f, 9f));
+			bookPooler.Spawn(new Vector3(lastStablePos.x, lastStablePos.y + 8f, 0));
+			yield return new WaitForSeconds(Random.Range(4.5f, 7f));
         }
 	}
 

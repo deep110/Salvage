@@ -20,10 +20,11 @@ public class Coin : MonoBehaviour {
 			if (index != -1) {
 				isFalling = true;
 				GetComponent<Rigidbody2D>().velocity = fallVelocity;
-				GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinState(index);
 				timePassed = Time.timeSinceLevelLoad;
 			}
-		} else if (Time.timeSinceLevelLoad - timePassed > 0.1f) {
+		}
+		else if (Time.timeSinceLevelLoad - timePassed > 0.1f) {
+			GetComponent<Transform> ().GetComponentInParent<Platform> ().SetCoinState (index);
 			Collect();
 		}
 	}

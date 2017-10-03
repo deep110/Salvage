@@ -21,12 +21,14 @@ public class GamePlayManager : Singleton <GamePlayManager> {
 		EventManager.CoinCollectEvent += onCoinCollected;
 		EventManager.PlatformClimbEvent += onPlatformClimbed;
 		EventManager.GameOverEvent += onGameOver;
+		EventManager.PlatformClearEvent += onPlatformClear;
 	}
 
 	void OnDisable() {
 		EventManager.CoinCollectEvent -= onCoinCollected;
 		EventManager.PlatformClimbEvent -= onPlatformClimbed;
 		EventManager.GameOverEvent -= onGameOver;
+		EventManager.PlatformClearEvent -= onPlatformClear;
 	}
 
 	private void onCoinCollected() {
@@ -45,5 +47,14 @@ public class GamePlayManager : Singleton <GamePlayManager> {
 
 		// show the gameOver dialog
 		gameOverDialog.SetActive(true);
+	}
+
+	private void onPlatformClear() {
+		//increase the score by 5
+		score += 5;
+		//display the platform clear panel
+		uiManager.ShowPlatformClear();
+		//update the ui score
+		uiManager.UpdateScoreText(score);
 	}
 }

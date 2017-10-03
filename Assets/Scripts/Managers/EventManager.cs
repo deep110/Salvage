@@ -27,4 +27,12 @@ public static class EventManager {
 		if(PlatformClimbEvent != null)
 	        PlatformClimbEvent(platformNumber);
 	}
+
+	// platform clear event
+	public static event Call PlatformClearEvent;
+
+	public static void PlatformClear() {
+		if (PlatformClearEvent != null)
+			PlatformClearEvent ();
+	}
 }

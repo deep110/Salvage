@@ -26,21 +26,18 @@ public class Platform : MonoBehaviour {
 		if (platformIndex != -1) {
 			coinsData = coinManager.GetCoinData(platformIndex);
 			for (int i = 0; i < coinPositions.Length; i++) {
-				if (coinsData[i]) {
-					GameObject coin = coinManager.GetCoin();
-					coin.transform.parent = _transform;
-					coin.transform.localPosition = coinPositions[i];
-					coin.transform.rotation = Quaternion.identity;
-					coin.SetActive(true);
-					coin.GetComponent<Coin>().SetIndex(i);
-				}
+				GameObject coin = coinManager.GetCoin();
+				coin.transform.parent = _transform;
+				coin.transform.localPosition = coinPositions[i];
+				coin.transform.rotation = Quaternion.identity;
+				coin.SetActive(true);
+				coin.GetComponent<Coin>().SetIndex(i);
 			}
 		}
 	}
 
 	void OnDisable() {
 		if (platformIndex != -1) {
-			coinManager.SaveCoinData(platformIndex, coinsData);
 
 			// deactivate the coins attached on this platform.
 			for (int i = 0; i < _transform.childCount; i++) {
@@ -55,5 +52,18 @@ public class Platform : MonoBehaviour {
 	/// So we set its state false, to not show again.
 	public void SetCoinState(int coinIndex) {
 		coinsData[coinIndex] = false;
+		coinManager.SaveCoinData (platformIndex, coinsData);
+
+		// Check if all platform coins are collected by the player
+		bool clear = true;
+		for (int i = 0; i < coinsData.Length; i++) {
+			if (coinsData [i] == true) {
+				clear = false;
+				break;
+			}
+		}
+		if (clear) {
+			EventManager.PlatformClear ();
+		}
 	}
 }

@@ -23,7 +23,7 @@ public class PlatformManager : Singleton <PlatformManager> {
     }
 
     public void AddPlatform(bool up) {
-        if (up) { 
+        if (up) {
             generatePlatform(maxPlatformIndex);
             maxPlatformIndex++;
         } else {

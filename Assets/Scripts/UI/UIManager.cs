@@ -8,6 +8,7 @@ public class UIManager : Singleton <UIManager> {
 
 	public GameObject hBeamButton;
 	public GameObject vBeamButton;
+	public GameObject platformClearPanel;
 
 	private Text scoreText;
 	private Text platformText;
@@ -30,5 +31,14 @@ public class UIManager : Singleton <UIManager> {
 
 	public void UpdatePlatformsClimbed(int platformsClimbed) {
 		platformText.text = platformsClimbed.ToString();
+	}
+
+	public void ShowPlatformClear() {
+		platformClearPanel.SetActive (true);
+		Invoke ("HidePlatformClear", 2f);
+	}
+
+	private void HidePlatformClear() {
+		platformClearPanel.SetActive (false);
 	}
 }
