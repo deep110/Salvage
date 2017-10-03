@@ -38,5 +38,8 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-#SublimeText
+# SublimeText
 *.sublime-workspace
+
+# Android
+*.keystore
