@@ -22,8 +22,7 @@ public class Coin : MonoBehaviour {
 				GetComponent<Rigidbody2D>().velocity = fallVelocity;
 				timePassed = Time.timeSinceLevelLoad;
 			}
-		}
-		else if (Time.timeSinceLevelLoad - timePassed > 0.1f) {
+		} else if (Time.timeSinceLevelLoad - timePassed > 0.1f) {
 			GetComponent<Transform> ().GetComponentInParent<Platform> ().SetCoinState (index);
 			Collect();
 		}

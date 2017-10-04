@@ -19,7 +19,7 @@ public class CharacterCollider : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("Enemy")) {
 			other.gameObject.GetComponent<Enemy>().Collided();
-			print ("Collided");
+
 			if (isShieldActive) {
 				deActivateShield = true;
 			} else {

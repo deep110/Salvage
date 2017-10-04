@@ -47,14 +47,13 @@ public class PlayerManager : Singleton <PlayerManager> {
         double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 1);
         double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 1);
 
-		if(inputManager.pointerPos.y >= playerOnePosY && inputManager.pointerPos.y >= playerTwoPosY){
+		if (inputManager.pointerPos.y >= playerOnePosY && inputManager.pointerPos.y >= playerTwoPosY) {
             if (playerOnePosY > playerTwoPosY) {
                 playerTwoController.Jump();
             } else {
                 playerOneController.Jump();
             }
 		} else {
-			print ("player one y " + playerOnePosY + " player two y " + playerTwoPosY + " input Y " + inputManager.pointerPos.y);
             if (playerOnePosY > playerTwoPosY) {
                 playerOneController.Fall();
 			} else if(playerOnePosY < playerTwoPosY){

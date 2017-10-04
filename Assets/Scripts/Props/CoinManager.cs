@@ -25,7 +25,6 @@ public class CoinManager : Singleton <CoinManager> {
 
         if (coinData == null)
             coinData = new [] { true, true, true, true };
-
         return coinData;
     }
 
