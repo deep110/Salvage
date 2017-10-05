@@ -30,22 +30,34 @@ public class PlayerManager : Singleton <PlayerManager> {
     }
 
     void Update() {
-        pointerClicked |= inputManager.pointerClick;
-    }
 
-    void FixedUpdate() {
-        playerOneController.Move(inputManager.pointerPos.x);
+		double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 1);
+		double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 1);
 
-        if (Mathf.Abs(playerOne.position.x - playerTwo.position.x) > 0.1f) {
-            playerTwoController.Move(playerOne.position.x - playerTwo.position.x);
-        } else {
-            playerTwoController.Move(0);
-        }
+		switch (inputManager.getCurrentState ()) {
+		case InputManager.InputState.JUMP:
+			if (playerTwoPosY < playerOnePosY) {
+				playerTwoController.Jump ();
+			} else {
+				playerOneController.Jump ();
+			}
+			break;
 
-        if (pointerClicked && !isBeamPowerUpActive) {
-            handleJumpAndFall();
-            pointerClicked = false;
-        }
+		case InputManager.InputState.LEFT:
+			playerOneController.Move (-1);
+			playerTwoController.Move (-1);
+			break;
+
+		case InputManager.InputState.RIGHT:
+			playerOneController.Move (1);
+			playerTwoController.Move (1);
+			break;
+
+		case InputManager.InputState.NONE:
+			playerOneController.Move (0);
+			playerTwoController.Move (0);
+			break;
+		}
     }
 
     private void handleJumpAndFall() {
