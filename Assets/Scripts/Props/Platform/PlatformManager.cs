@@ -8,44 +8,33 @@ public class PlatformManager : Singleton <PlatformManager> {
     public float _platformGap = 1.4f;
     public float _initialPlatformPos = -1.25f;
 
-    private ObjectPooler objectPooler;
+    private ObjectPooler platformPooler;
     private Vector3 platformPosition;
 
-    private int minPlatformIndex = -2;
     private int maxPlatformIndex;
 
-    private Dictionary <int, GameObject> platformHashMap;
+    private Queue<GameObject> activePlatforms;
 
     void Start() {
-        objectPooler = new ObjectPooler(_platform, 10);
-        platformHashMap = new Dictionary <int, GameObject>();
+        platformPooler = new ObjectPooler(_platform, 8);
+        activePlatforms = new Queue<GameObject>();
         initPlatforms();
     }
 
     public void AddPlatform() {
-        generatePlatform(maxPlatformIndex);
+        platformPosition.Set(0, _initialPlatformPos + maxPlatformIndex * _platformGap, 0);
+
+        GameObject platform = platformPooler.SpawnInActive(platformPosition);
         maxPlatformIndex++;
+
+        platform.GetComponent<Platform>().platformIndex = maxPlatformIndex;
+        platform.SetActive(true);
+        activePlatforms.Enqueue(platform);
     }
 
     public void RemovePlatform() {
-        minPlatformIndex++;
-        GameObject outPlatform;
-        platformHashMap.TryGetValue(minPlatformIndex, out outPlatform);
-        if (outPlatform != null) {
-            outPlatform.SetActive(false);
-            platformHashMap.Remove(minPlatformIndex);
-        }
-    }
-
-    private void generatePlatform(int platformIndex) {
-        float currentPlatformPos = _initialPlatformPos + platformIndex * _platformGap;
-        platformPosition.Set(0, currentPlatformPos, 0);
-
-        GameObject platform = objectPooler.SpawnInActive(platformPosition);
-        platform.GetComponent<Platform>().platformIndex = platformIndex;
-        platform.SetActive(true);
-
-        platformHashMap.Add(platformIndex, platform);
+        GameObject removedPlatform = activePlatforms.Dequeue();
+        removedPlatform.SetActive(false);
     }
 
     private void initPlatforms () {

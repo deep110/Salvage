@@ -146,8 +146,8 @@ public class Character : MonoBehaviour {
 	}
 
 	private void updatePlatformsClimbed(int platformIndex) {
-		if (platformIndex + 1 > platformsClimbed) {
-			platformsClimbed = platformIndex + 1;
+		if (platformIndex > platformsClimbed) {
+			platformsClimbed = platformIndex;
 			EventManager.PlatformClimbed(platformsClimbed);
 		}
 	}
