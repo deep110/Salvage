@@ -23,21 +23,16 @@ public class Coin : MonoBehaviour {
 				timePassed = Time.timeSinceLevelLoad;
 			}
 		} else if (Time.timeSinceLevelLoad - timePassed > 0.1f) {
-			GetComponent<Transform> ().GetComponentInParent<Platform> ().SetCoinState (index);
 			Collect();
 		}
 	}
 
 	public void Collect() {
+		GetComponent<Transform> ().GetComponentInParent<Platform> ().SetCoinState (index);
 		EventManager.CoinCollected();
 		gameObject.SetActive(false);
 		isFalling = false;
 		index = -1;
-	}
-
-	public void Teleport() {
-		GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinState(index);
-		Collect();
 	}
 
 }

@@ -87,7 +87,7 @@ public class HorizontalBeam : PowerUp {
 
         for (int i = 0; i < colliders.Length; i++) {
             if (colliders[i].CompareTag("Coin")) {
-                colliders[i].GetComponent<Coin>().Teleport();
+                colliders[i].GetComponent<Coin>().Collect();
             }
         }
 

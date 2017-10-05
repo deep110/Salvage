@@ -24,7 +24,7 @@ public class Platform : MonoBehaviour {
 
 	void OnEnable() {
 		if (platformIndex != -1) {
-			coinsData = coinManager.GetCoinData(platformIndex);
+			coinsData = new [] { true, true, true, true };
 			for (int i = 0; i < coinPositions.Length; i++) {
 				GameObject coin = coinManager.GetCoin();
 				coin.transform.parent = _transform;
@@ -48,22 +48,21 @@ public class Platform : MonoBehaviour {
 		}
 	}
 
-	/// called by coin child to tell which has fallen.
-	/// So we set its state false, to not show again.
+	/// called by coin child to tell that it has been collected.
+	/// It also checks if all coins on platform have been collected or not
 	public void SetCoinState(int coinIndex) {
 		coinsData[coinIndex] = false;
-		coinManager.SaveCoinData (platformIndex, coinsData);
 
 		// Check if all platform coins are collected by the player
 		bool clear = true;
 		for (int i = 0; i < coinsData.Length; i++) {
-			if (coinsData [i] == true) {
+			if (coinsData [i]) {
 				clear = false;
 				break;
 			}
 		}
 		if (clear) {
-			EventManager.PlatformClear ();
+			EventManager.PlatformClear();
 		}
 	}
 }
