@@ -22,34 +22,18 @@ public class PlatformManager : Singleton <PlatformManager> {
         initPlatforms();
     }
 
-    public void AddPlatform(bool up) {
-        if (up) {
-            generatePlatform(maxPlatformIndex);
-            maxPlatformIndex++;
-        } else {
-            if (minPlatformIndex >= 0) {
-                generatePlatform(minPlatformIndex);
-                minPlatformIndex--;
-            } else {
-                minPlatformIndex = -2;
-            }
-        }
+    public void AddPlatform() {
+        generatePlatform(maxPlatformIndex);
+        maxPlatformIndex++;
     }
 
-    public void RemovePlatform(bool up) {
-        int platformIndex;
-        if (up) {
-            maxPlatformIndex--;
-            platformIndex = maxPlatformIndex;
-        } else {
-            minPlatformIndex++;
-            platformIndex = minPlatformIndex;
-        }
+    public void RemovePlatform() {
+        minPlatformIndex++;
         GameObject outPlatform;
-        platformHashMap.TryGetValue(platformIndex, out outPlatform);
+        platformHashMap.TryGetValue(minPlatformIndex, out outPlatform);
         if (outPlatform != null) {
             outPlatform.SetActive(false);
-            platformHashMap.Remove(platformIndex);
+            platformHashMap.Remove(minPlatformIndex);
         }
     }
 
@@ -65,8 +49,8 @@ public class PlatformManager : Singleton <PlatformManager> {
     }
 
     private void initPlatforms () {
-        for (int i = 0; i < 6; i++) {
-            AddPlatform(true);
+        for (int i = 0; i < 5; i++) {
+            AddPlatform();
         }
     }
 }

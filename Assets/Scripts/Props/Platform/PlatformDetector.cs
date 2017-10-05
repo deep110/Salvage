@@ -19,15 +19,9 @@ public class PlatformDetector : MonoBehaviour {
         if (other.gameObject.CompareTag("Platform")) {
         	if (_transform.position.y > lastPosition) {
                 if (isTopEdge) {
-		            platformManager.AddPlatform(true);
+		            platformManager.AddPlatform();
                 } else {
-                    platformManager.RemovePlatform(false);
-                }
-        	} else {
-                if (isTopEdge) {
-                    platformManager.RemovePlatform(true);
-                } else {
-                    platformManager.AddPlatform(false);
+                    platformManager.RemovePlatform();
                 }
         	}
 
