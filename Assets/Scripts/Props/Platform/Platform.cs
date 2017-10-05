@@ -13,19 +13,19 @@ public class Platform : MonoBehaviour {
 	public int platformIndex;
 
 	private Transform _transform;
-	private CoinManager coinManager;
+	private PlatformManager platformManager;
 	private int numberCoinsFallen;
 
 	void Awake() {
 		_transform = GetComponent<Transform>();
-		coinManager = CoinManager.Instance;
+		platformManager = PlatformManager.Instance;
 		platformIndex = -1;
 	}
 
 	void OnEnable() {
 		if (platformIndex != -1) {
 			for (int i = 0; i < coinPositions.Length; i++) {
-				GameObject coin = coinManager.GetCoin();
+				GameObject coin = platformManager.GetCoin();
 				coin.transform.parent = _transform;
 				coin.transform.localPosition = coinPositions[i];
 				coin.transform.rotation = Quaternion.identity;
