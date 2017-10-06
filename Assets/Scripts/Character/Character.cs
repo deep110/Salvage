@@ -31,6 +31,8 @@ public class Character : MonoBehaviour {
 	private int platformLayer;
 
 	private int platformsClimbed;
+
+	private bool hasEnteredPlatform = true;
 	
 	void Awake() {
 		// get a reference to the components we are going to be changing and store
@@ -41,7 +43,6 @@ public class Character : MonoBehaviour {
 
 		playerLayer = gameObject.layer;
 		platformLayer = LayerMask.NameToLayer("Platform");
-		Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
 
 		lastStablePosition = new Vector2(_transform.position.x, _transform.position.y);
 	}
@@ -52,16 +53,6 @@ public class Character : MonoBehaviour {
 
 		// Change the actual velocity on the rigidbody
 		_rigidbody.velocity = velocity;
-
-		if (isJumping && velocity.y < 0) {
-			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
-			isJumping = false;
-		}
-
-		if (isFalling && velocity.y < -6) {
-			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
-			isFalling = false;
-		}
 	}
 
 	public void Move(float inputX) {
@@ -71,11 +62,12 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Jump() {
-		if(!isJumping){
+		if(!isJumping && !isFalling){
 			isJumping = true;
+			isFalling = false;
 			_animator.SetTrigger("Jump");
 
-			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer);
+			GetComponent<CapsuleCollider2D> ().isTrigger = true;
 			// reset current vertical motion to 0 prior to jump
 			velocity.y = 0f;
 			// add a force in the up direction
@@ -85,11 +77,14 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Fall() {
-		if (canFall && !isFalling) {
+		if (canFall && !isFalling && !isJumping) {
 			isFalling = true;
+			isJumping = false;
 			_animator.SetTrigger("Jump");
 
-			Physics2D.IgnoreLayerCollision(playerLayer, platformLayer);
+			print ("Fall called");
+			GetComponent<CapsuleCollider2D> ().isTrigger = true;
+
 			// reset current vertical motion to 0 prior to jump
 			velocity.y = 0f;
 			// add a force in the down direction
@@ -118,12 +113,34 @@ public class Character : MonoBehaviour {
 		_transform.localScale = localScale;
 	}
 
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.CompareTag ("Platform")) {
+			if (isJumping) {
+				hasEnteredPlatform = true;
+			}
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.gameObject.CompareTag ("Platform")) {
+			if (isJumping) {
+				if (hasEnteredPlatform) {
+					GetComponent<CapsuleCollider2D> ().isTrigger = false;
+					hasEnteredPlatform = false;
+				}
+			} else if (isFalling) {
+				GetComponent<CapsuleCollider2D> ().isTrigger = false;
+			}
+		}
+	}
 
 	void OnCollisionEnter2D(Collision2D other) {
 		Transform colliderTransform = other.transform;
 
 		if (colliderTransform.CompareTag ("Platform")) {
 			canFall = true;
+			isJumping = false;
+			isFalling = false;
 			if (isFirstPlayer) {
 				lastStablePosition.y = colliderTransform.position.y;
 				updatePlatformsClimbed(colliderTransform.GetComponent<Platform>().platformIndex);
@@ -132,6 +149,8 @@ public class Character : MonoBehaviour {
 			if (isFirstPlayer) {
 				lastStablePosition.y = colliderTransform.position.y;
 			}
+			isJumping = false;
+			isFalling = false;
 			canFall = false;
 		}
 	}

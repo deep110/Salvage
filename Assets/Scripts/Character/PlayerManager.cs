@@ -44,13 +44,29 @@ public class PlayerManager : Singleton <PlayerManager> {
 			break;
 
 		case InputManager.InputState.LEFT:
-			playerOneController.Move (-1);
+			if (playerTwo.position.x - playerOne.position.x < 0.1f) {
+				playerOneController.Move (-1);
+			} else {
+				playerOneController.Move (0);
+			}
 			playerTwoController.Move (-1);
 			break;
 
 		case InputManager.InputState.RIGHT:
-			playerOneController.Move (1);
+			if (playerOne.position.x - playerTwo.position.x < 0.1f) {
+				playerOneController.Move (1);
+			} else {
+				playerOneController.Move (0);
+			}
 			playerTwoController.Move (1);
+			break;
+
+		case InputManager.InputState.FALL:
+			if (playerOnePosY > playerTwoPosY) {
+				playerOneController.Fall ();
+			} else if (playerTwoPosY > playerOnePosY) {
+				playerTwoController.Fall ();
+			}
 			break;
 
 		case InputManager.InputState.NONE:
@@ -60,23 +76,4 @@ public class PlayerManager : Singleton <PlayerManager> {
 		}
     }
 
-    private void handleJumpAndFall() {
-        double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 1);
-        double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 1);
-
-		if (inputManager.pointerPos.y >= playerOnePosY && inputManager.pointerPos.y >= playerTwoPosY) {
-            if (playerOnePosY > playerTwoPosY) {
-                playerTwoController.Jump();
-            } else {
-                playerOneController.Jump();
-            }
-		} else {
-            if (playerOnePosY > playerTwoPosY) {
-                playerOneController.Fall();
-			} else if(playerOnePosY < playerTwoPosY){
-                playerTwoController.Fall();
-            }
-        }   
-    }
 }
-

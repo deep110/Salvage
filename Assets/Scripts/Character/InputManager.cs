@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class InputManager : MonoBehaviour {
 
 	public enum InputState {
-		NONE, LEFT, RIGHT, JUMP
+		NONE, LEFT, RIGHT, JUMP, FALL
 	};
 
 	private InputState current;
@@ -60,10 +60,16 @@ public class InputManager : MonoBehaviour {
 				if (touch.phase == TouchPhase.Ended) {
 					current = InputState.JUMP;
 				} else if (touch.phase == TouchPhase.Moved) {
-					if (touch.deltaPosition.x > 0) {
-						current = InputState.RIGHT;
+					if (Mathf.Abs (touch.deltaPosition.x) >= Mathf.Abs (touch.deltaPosition.y)) {
+						if (touch.deltaPosition.x > 0) {
+							current = InputState.RIGHT;
+						} else {
+							current = InputState.LEFT;
+						}
 					} else {
-						current = InputState.LEFT;
+						if (touch.deltaPosition.y < 0) {
+							current = InputState.FALL;
+						}
 					}
 				}
 				break;
@@ -86,6 +92,12 @@ public class InputManager : MonoBehaviour {
 					if (touch.deltaPosition.x < 0) {
 						current = InputState.LEFT;
 					}
+				}
+				break;
+			
+			case InputState.FALL:
+				if (touch.phase == TouchPhase.Ended) {
+					current = InputState.NONE;
 				}
 				break;
 			}
@@ -118,11 +130,17 @@ public class InputManager : MonoBehaviour {
 		case InputState.NONE:
 			if (Input.GetMouseButtonUp (0)) {
 				current = InputState.JUMP;
-			} else if (Input.GetMouseButton (0) && deltaX != 0) {
-				if (deltaX > 0) {
-					current = InputState.RIGHT;
+			} else if (Input.GetMouseButton (0) && !(deltaX == 0 && deltaY == 0)) {
+				if (Mathf.Abs (deltaX) >= Mathf.Abs (deltaY)) {
+					if (deltaX > 0) {
+						current = InputState.RIGHT;
+					} else {
+						current = InputState.LEFT;
+					}
 				} else {
-					current = InputState.LEFT;
+					if (deltaY < 0) {
+						current = InputState.FALL;
+					}
 				}
 			}
 			break;
@@ -145,6 +163,11 @@ public class InputManager : MonoBehaviour {
 				if (deltaX < 0) {
 					current = InputState.LEFT;
 				}
+			}
+			break;
+		case InputState.FALL:
+			if (Input.GetMouseButtonUp (0)) {
+				current = InputState.NONE;
 			}
 			break;
 		}
