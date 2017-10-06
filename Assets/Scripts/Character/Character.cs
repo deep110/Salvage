@@ -66,7 +66,6 @@ public class Character : MonoBehaviour {
 			isJumping = true;
 			isFalling = false;
 			_animator.SetTrigger("Jump");
-
 			GetComponent<CapsuleCollider2D> ().isTrigger = true;
 			// reset current vertical motion to 0 prior to jump
 			velocity.y = 0f;
