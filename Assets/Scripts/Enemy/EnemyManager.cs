@@ -42,7 +42,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 		// var beePooler = new ObjectPooler(enemies.bee, 2);
 
 		// wait for some time to spawn enemies
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
 
         // spawn enemies till game is not over
         while (!isGameOver) {
@@ -56,7 +56,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 			}
 			ball.SetActive(true);
 
-			yield return new WaitForSeconds(3.5f);
+			yield return new WaitForSeconds(Random.Range(10f, 20f));
         }
 	}
 
@@ -90,7 +90,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 			}
 			bee.SetActive(true);
 
-			yield return new WaitForSeconds(8f);
+			yield return new WaitForSeconds(Random.Range(8f, 15f));
         }
 	}
 

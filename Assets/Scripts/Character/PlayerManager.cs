@@ -36,28 +36,17 @@ public class PlayerManager : Singleton <PlayerManager> {
 
 		switch (inputManager.getCurrentState ()) {
 		case InputManager.InputState.JUMP:
-			if (playerTwoPosY < playerOnePosY) {
-				playerTwoController.Jump ();
-			} else {
-				playerOneController.Jump ();
-			}
+			Invoke ("JumpPlayerTwo", 0.2f);
+			playerOneController.Jump ();
 			break;
 
 		case InputManager.InputState.LEFT:
-			if (playerTwo.position.x - playerOne.position.x < 0.1f) {
-				playerOneController.Move (-1);
-			} else {
-				playerOneController.Move (0);
-			}
+			playerOneController.Move (-1);
 			playerTwoController.Move (-1);
 			break;
 
 		case InputManager.InputState.RIGHT:
-			if (playerOne.position.x - playerTwo.position.x < 0.1f) {
-				playerOneController.Move (1);
-			} else {
-				playerOneController.Move (0);
-			}
+			playerOneController.Move (1);
 			playerTwoController.Move (1);
 			break;
 
@@ -71,9 +60,31 @@ public class PlayerManager : Singleton <PlayerManager> {
 
 		case InputManager.InputState.NONE:
 			playerOneController.Move (0);
-			playerTwoController.Move (0);
+			if (playerOne.position.x - playerTwo.position.x > 0.1f) {
+				playerTwoController.Move (1);
+			} else if (playerTwo.position.x - playerOne.position.x > 0.1f) {
+				playerTwoController.Move (-1);
+			} else {
+				playerTwoController.Move (0);
+			}
+			break;
+
+		case InputManager.InputState.STILL:
+			playerOneController.Move (0);
+			if (playerOne.position.x - playerTwo.position.x > 0.1f) {
+				playerTwoController.Move (1);
+			} else if (playerTwo.position.x - playerOne.position.x > 0.1f) {
+				playerTwoController.Move (-1);
+			} else {
+				playerTwoController.Move (0);
+			}
 			break;
 		}
+			 
     }
+
+	void JumpPlayerTwo() {
+		playerTwoController.Jump ();
+	}
 
 }

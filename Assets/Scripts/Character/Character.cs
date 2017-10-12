@@ -6,8 +6,9 @@ public class Character : MonoBehaviour {
 	public bool isFirstPlayer = true;
 
 	// player controls
-	public float maxSpeed = 1.7f;
-	public float jumpForce = 27f;
+	public float drag = 20f;
+	public float horiForce = 2f;
+	public float jumpForce = 54f;
 
 	// private variables
 	private Transform _transform;
@@ -32,7 +33,7 @@ public class Character : MonoBehaviour {
 
 	private int platformsClimbed;
 
-	private bool hasEnteredPlatform = true;
+	private bool hasEnteredPlatform = false;
 	
 	void Awake() {
 		// get a reference to the components we are going to be changing and store
@@ -45,20 +46,32 @@ public class Character : MonoBehaviour {
 		platformLayer = LayerMask.NameToLayer("Platform");
 
 		lastStablePosition = new Vector2(_transform.position.x, _transform.position.y);
+
+		if (isFirstPlayer) {
+			Vector3 position = _transform.position;
+			position.y += 1.8f;
+			_transform.position = position;
+		}
 	}
 		
 	void Update() {
 		
-		velocity.y = _rigidbody.velocity.y;
+//		velocity.y = _rigidbody.velocity.y;
 
 		// Change the actual velocity on the rigidbody
-		_rigidbody.velocity = velocity;
+//		_rigidbody.velocity = velocity;
 	}
 
 	public void Move(float inputX) {
-		velocity.x = Math.Sign(inputX) * maxSpeed;
+//		velocity.x = Math.Sign(inputX) * maxSpeed;
 
-		_animator.SetFloat("Speed", Mathf.Abs(velocity.x));
+		_rigidbody.AddForce (new Vector2 (Math.Sign (inputX) * horiForce, 0));
+		_rigidbody.AddForce (new Vector2 (-drag * _rigidbody.velocity.x, 0));
+		if (Mathf.Abs(_rigidbody.velocity.x) >= 0.01f)
+			_animator.SetFloat ("Speed", Mathf.Abs (_rigidbody.velocity.x));
+		else {
+			_animator.SetFloat ("Speed", 0);
+		}
 	}
 
 	public void Jump() {

@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class InputManager : MonoBehaviour {
 
 	public enum InputState {
-		NONE, LEFT, RIGHT, JUMP, FALL
+		NONE, STILL, LEFT, RIGHT, JUMP, FALL
 	};
 
 	private InputState current;
@@ -14,6 +14,8 @@ public class InputManager : MonoBehaviour {
 
 	[HideInInspector]
 	public bool pointerClick;
+
+	public float thresholdMove = 0.1f;
 
 	float prevX = 0, prevY = 0;
 
@@ -45,16 +47,27 @@ public class InputManager : MonoBehaviour {
 					current = InputState.JUMP;
 				} else if (touch.phase == TouchPhase.Moved) {
 					if (Mathf.Abs (touch.deltaPosition.x) >= Mathf.Abs (touch.deltaPosition.y)) {
-						if (touch.deltaPosition.x > 0) {
+						if (touch.deltaPosition.x / Time.deltaTime > thresholdMove) {
 							current = InputState.RIGHT;
 						} else {
 							current = InputState.LEFT;
 						}
-					} else {
-						if (touch.deltaPosition.y < 0) {
-							current = InputState.FALL;
-						}
 					}
+				}
+				break;
+			case InputState.STILL:
+				if (touch.phase == TouchPhase.Ended) {
+					current = InputState.NONE;
+				} else if (touch.phase == TouchPhase.Moved) {
+					if (touch.deltaPosition.x / Time.deltaTime > thresholdMove) {
+						current = InputState.RIGHT;
+					} else if (touch.deltaPosition.x / Time.deltaTime < -thresholdMove) {
+						current = InputState.LEFT;
+					} else {
+						current = InputState.STILL;
+					}
+				} else if (touch.phase == TouchPhase.Stationary) {
+					current = InputState.STILL;
 				}
 				break;
 			case InputState.JUMP:
@@ -64,18 +77,30 @@ public class InputManager : MonoBehaviour {
 				if (touch.phase == TouchPhase.Ended) {
 					current = InputState.NONE;
 				} else if (touch.phase == TouchPhase.Moved) {
-					if (touch.deltaPosition.x > 0) {
+					if (touch.deltaPosition.x / Time.deltaTime > thresholdMove) {
 						current = InputState.RIGHT;
+					} else if (touch.deltaPosition.x / Time.deltaTime < -thresholdMove) {
+						current = InputState.LEFT;
+					} else {
+						current = InputState.STILL;
 					}
+				} else if (touch.phase == TouchPhase.Stationary) {
+					current = InputState.STILL;
 				}
 				break;
 			case InputState.RIGHT:
 				if (touch.phase == TouchPhase.Ended) {
 					current = InputState.NONE;
 				} else if (touch.phase == TouchPhase.Moved) {
-					if (touch.deltaPosition.x < 0) {
+					if (touch.deltaPosition.x / Time.deltaTime > thresholdMove) {
+						current = InputState.RIGHT;
+					} else if (touch.deltaPosition.x / Time.deltaTime < -thresholdMove) {
 						current = InputState.LEFT;
+					} else {
+						current = InputState.STILL;
 					}
+				} else if (touch.phase == TouchPhase.Stationary) {
+					current = InputState.STILL;
 				}
 				break;
 			
@@ -102,22 +127,34 @@ public class InputManager : MonoBehaviour {
 		prevX = Input.mousePosition.x;
 		prevY = Input.mousePosition.y;
 
+
 		switch (current) {
 		case InputState.NONE:
 			if (Input.GetMouseButtonUp (0)) {
 				current = InputState.JUMP;
 			} else if (Input.GetMouseButton (0) && !(deltaX == 0 && deltaY == 0)) {
 				if (Mathf.Abs (deltaX) >= Mathf.Abs (deltaY)) {
-					if (deltaX > 0) {
+					if (deltaX / Time.deltaTime > thresholdMove) {
 						current = InputState.RIGHT;
-					} else {
+					} else if (deltaX / Time.deltaTime < -thresholdMove) {
 						current = InputState.LEFT;
 					}
-				} else {
-					if (deltaY < 0) {
-						current = InputState.FALL;
-					}
 				}
+			}
+			break;
+		case InputState.STILL:
+			if (Input.GetMouseButtonUp (0)) {
+				current = InputState.NONE;
+			} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
+				if (deltaX / Time.deltaTime > thresholdMove) {
+					current = InputState.RIGHT;
+				} else if (deltaX / Time.deltaTime < -thresholdMove) {
+					current = InputState.LEFT;
+				} else {
+					current = InputState.STILL;
+				}
+			} else {
+				current = InputState.STILL;
 			}
 			break;
 		case InputState.JUMP:
@@ -127,18 +164,30 @@ public class InputManager : MonoBehaviour {
 			if (Input.GetMouseButtonUp (0)) {
 				current = InputState.NONE;
 			} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
-				if (deltaX > 0) {
+				if (deltaX / Time.deltaTime > thresholdMove) {
 					current = InputState.RIGHT;
+				} else if (deltaX / Time.deltaTime < -thresholdMove) {
+					current = InputState.LEFT;
+				} else {
+					current = InputState.STILL;
 				}
+			} else {
+				current = InputState.STILL;
 			}
 			break;
 		case InputState.RIGHT:
 			if (Input.GetMouseButtonUp (0)) {
 				current = InputState.NONE;
 			} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
-				if (deltaX < 0) {
+				if (deltaX / Time.deltaTime < -thresholdMove) {
 					current = InputState.LEFT;
+				} else if (deltaX / Time.deltaTime > thresholdMove) {
+					current = InputState.RIGHT;
+				} else {
+					current = InputState.STILL;
 				}
+			} else {
+				current = InputState.STILL;
 			}
 			break;
 		case InputState.FALL:
