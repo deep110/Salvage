@@ -7,7 +7,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 	public class Enemies {
 		public GameObject ball;
 		public GameObject book;
-		public GameObject bee;
+		public GameObject tank;
 	}
 
 	public Enemies enemies;
@@ -24,9 +24,9 @@ public class EnemyManager : Singleton <EnemyManager> {
 		playerOneController = PlayerManager.Instance.playerOneController;
 
 		// start the coroutines
-		StartCoroutine(ManageBallAndBee());
+		StartCoroutine(ManageBall());
 		StartCoroutine(ManageBook());
-		StartCoroutine(ManageBee());
+		StartCoroutine(ManageTank());
 	}
 
 	void OnDisable() {
@@ -37,9 +37,8 @@ public class EnemyManager : Singleton <EnemyManager> {
 		StopAllCoroutines();
 	}
 
-	private IEnumerator ManageBallAndBee() {
+	private IEnumerator ManageBall() {
 		var ballPooler = new ObjectPooler(enemies.ball, 3);
-		// var beePooler = new ObjectPooler(enemies.bee, 2);
 
 		// wait for some time to spawn enemies
         yield return new WaitForSeconds(10f);
@@ -73,8 +72,8 @@ public class EnemyManager : Singleton <EnemyManager> {
         }
 	}
 
-	private IEnumerator ManageBee() {
-		var beePooler = new ObjectPooler(enemies.bee, 2);
+	private IEnumerator ManageTank() {
+		var tankPooler = new ObjectPooler(enemies.tank, 1);
 
         yield return new WaitWhile(() => platformNumber <= 8);
 
@@ -82,15 +81,15 @@ public class EnemyManager : Singleton <EnemyManager> {
         while (!isGameOver) {
 			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
 
-			GameObject bee = beePooler.SpawnInActive(new Vector3(0, lastStablePos.y, 0));
+			GameObject tank = tankPooler.SpawnInActive(new Vector3(0, lastStablePos.y, 0));
 			if (lastStablePos.x > 0) {
-				bee.GetComponent<Bee>().Fly(true);
+				tank.GetComponent<Tank>().Move(true);
 			} else {
-				bee.GetComponent<Bee>().Fly(false);
+				tank.GetComponent<Tank>().Move(false);
 			}
-			bee.SetActive(true);
+			tank.SetActive(true);
 
-			yield return new WaitForSeconds(Random.Range(8f, 15f));
+			yield return new WaitForSeconds(Random.Range(10f, 16f));
         }
 	}
 
