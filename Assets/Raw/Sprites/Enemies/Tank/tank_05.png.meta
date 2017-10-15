@@ -124,7 +124,7 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape: []
-  spritePackingTag: enemy_tank
+  spritePackingTag: enemy
   userData: 
   assetBundleName: 
   assetBundleVariant: 
