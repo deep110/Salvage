@@ -76,11 +76,11 @@ public class PowerUpManager : Singleton <PowerUpManager> {
 			yield return new WaitForSeconds(10f);
 
 			GameObject selected = WeightedRandomizer<GameObject>.From(powerUpWeights).TakeOne();
-			selected.transform.localPosition = new Vector3(
+			var powerUpPosition = new Vector3(
 				Random.Range(-2.5f, 2.5f),
 				_camera.position.y + 6f,
 				0);
-			Instantiate(selected);
+			Instantiate(selected, powerUpPosition, Quaternion.identity);
 		}
 	}
 
