@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 
 [RequireComponent(typeof(InputManager))]
 public class PlayerManager : Singleton <PlayerManager> {
@@ -30,9 +29,6 @@ public class PlayerManager : Singleton <PlayerManager> {
 
     void Update() {
 
-		double playerOnePosY = Math.Round(playerOne.position.y + positionCorrection, 1);
-		double playerTwoPosY = Math.Round(playerTwo.position.y + positionCorrection, 1);
-
 		switch (inputManager.GetCurrentState ()) {
 			case InputManager.InputState.JUMP:
 				Invoke ("JumpPlayerTwo", 0.2f);
@@ -47,14 +43,6 @@ public class PlayerManager : Singleton <PlayerManager> {
 			case InputManager.InputState.RIGHT:
 				playerOneController.Move(1);
 				playerTwoController.Move(1);
-				break;
-
-			case InputManager.InputState.FALL:
-				if (playerOnePosY > playerTwoPosY) {
-					playerOneController.Fall();
-				} else if (playerTwoPosY > playerOnePosY) {
-					playerTwoController.Fall();
-				}
 				break;
 
 			case InputManager.InputState.NONE:

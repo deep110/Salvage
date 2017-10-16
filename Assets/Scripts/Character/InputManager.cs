@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class InputManager : MonoBehaviour {
 
 	public enum InputState {
-		NONE, STILL, LEFT, RIGHT, JUMP, FALL
+		NONE, STILL, LEFT, RIGHT, JUMP
 	};
 
 	private InputState current;
@@ -40,7 +40,6 @@ public class InputManager : MonoBehaviour {
 	private void mapMobileInput() {
 		if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null) {
 			Touch touch = Input.GetTouch (0);
-			print ("touch phase : " + touch.phase.ToString());
 			switch (current) {
 			case InputState.NONE:
 				if (touch.phase == TouchPhase.Ended) {
@@ -103,16 +102,9 @@ public class InputManager : MonoBehaviour {
 					current = InputState.STILL;
 				}
 				break;
-
-			case InputState.FALL:
-				if (touch.phase == TouchPhase.Ended) {
-					current = InputState.NONE;
-				}
-				break;
 			}
 		} else {
 			current = InputState.NONE;
-			print ("Not touching");
 		}
 	}
 
@@ -188,11 +180,6 @@ public class InputManager : MonoBehaviour {
 					}
 				} else {
 					current = InputState.STILL;
-				}
-				break;
-			case InputState.FALL:
-				if (Input.GetMouseButtonUp(0)) {
-					current = InputState.NONE;
 				}
 				break;
 		}
