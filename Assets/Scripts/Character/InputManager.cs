@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour {
 
 	public float thresholdMove = 0.1f;
 
-	float prevX = 0, prevY = 0;
+	float prevX, prevY;
 
 	bool firstTouch = true;
 
@@ -103,7 +103,7 @@ public class InputManager : MonoBehaviour {
 					current = InputState.STILL;
 				}
 				break;
-			
+
 			case InputState.FALL:
 				if (touch.phase == TouchPhase.Ended) {
 					current = InputState.NONE;
@@ -129,76 +129,76 @@ public class InputManager : MonoBehaviour {
 
 
 		switch (current) {
-		case InputState.NONE:
-			if (Input.GetMouseButtonUp (0)) {
-				current = InputState.JUMP;
-			} else if (Input.GetMouseButton (0) && !(deltaX == 0 && deltaY == 0)) {
-				if (Mathf.Abs (deltaX) >= Mathf.Abs (deltaY)) {
+			case InputState.NONE:
+				if (Input.GetMouseButtonUp (0)) {
+					current = InputState.JUMP;
+				} else if (Input.GetMouseButton (0) && !(deltaX == 0 && deltaY == 0)) {
+					if (Mathf.Abs (deltaX) >= Mathf.Abs (deltaY)) {
+						if (deltaX / Time.deltaTime > thresholdMove) {
+							current = InputState.RIGHT;
+						} else if (deltaX / Time.deltaTime < -thresholdMove) {
+							current = InputState.LEFT;
+						}
+					}
+				}
+				break;
+			case InputState.STILL:
+				if (Input.GetMouseButtonUp (0)) {
+					current = InputState.NONE;
+				} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
 					if (deltaX / Time.deltaTime > thresholdMove) {
 						current = InputState.RIGHT;
 					} else if (deltaX / Time.deltaTime < -thresholdMove) {
 						current = InputState.LEFT;
+					} else {
+						current = InputState.STILL;
 					}
-				}
-			}
-			break;
-		case InputState.STILL:
-			if (Input.GetMouseButtonUp (0)) {
-				current = InputState.NONE;
-			} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
-				if (deltaX / Time.deltaTime > thresholdMove) {
-					current = InputState.RIGHT;
-				} else if (deltaX / Time.deltaTime < -thresholdMove) {
-					current = InputState.LEFT;
 				} else {
 					current = InputState.STILL;
 				}
-			} else {
-				current = InputState.STILL;
-			}
-			break;
-		case InputState.JUMP:
-			current = InputState.NONE;
-			break;
-		case InputState.LEFT:
-			if (Input.GetMouseButtonUp (0)) {
+				break;
+			case InputState.JUMP:
 				current = InputState.NONE;
-			} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
-				if (deltaX / Time.deltaTime > thresholdMove) {
-					current = InputState.RIGHT;
-				} else if (deltaX / Time.deltaTime < -thresholdMove) {
-					current = InputState.LEFT;
+				break;
+			case InputState.LEFT:
+				if (Input.GetMouseButtonUp (0)) {
+					current = InputState.NONE;
+				} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
+					if (deltaX / Time.deltaTime > thresholdMove) {
+						current = InputState.RIGHT;
+					} else if (deltaX / Time.deltaTime < -thresholdMove) {
+						current = InputState.LEFT;
+					} else {
+						current = InputState.STILL;
+					}
 				} else {
 					current = InputState.STILL;
 				}
-			} else {
-				current = InputState.STILL;
-			}
-			break;
-		case InputState.RIGHT:
-			if (Input.GetMouseButtonUp (0)) {
-				current = InputState.NONE;
-			} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
-				if (deltaX / Time.deltaTime < -thresholdMove) {
-					current = InputState.LEFT;
-				} else if (deltaX / Time.deltaTime > thresholdMove) {
-					current = InputState.RIGHT;
+				break;
+			case InputState.RIGHT:
+				if (Input.GetMouseButtonUp (0)) {
+					current = InputState.NONE;
+				} else if (!Input.GetMouseButtonUp (0) && Input.GetMouseButton (0) && deltaX != 0) {
+					if (deltaX / Time.deltaTime < -thresholdMove) {
+						current = InputState.LEFT;
+					} else if (deltaX / Time.deltaTime > thresholdMove) {
+						current = InputState.RIGHT;
+					} else {
+						current = InputState.STILL;
+					}
 				} else {
 					current = InputState.STILL;
 				}
-			} else {
-				current = InputState.STILL;
-			}
-			break;
-		case InputState.FALL:
-			if (Input.GetMouseButtonUp (0)) {
-				current = InputState.NONE;
-			}
-			break;
+				break;
+			case InputState.FALL:
+				if (Input.GetMouseButtonUp(0)) {
+					current = InputState.NONE;
+				}
+				break;
 		}
 	}
 
-	public InputState getCurrentState() {
+	public InputState GetCurrentState() {
 		return current;
 	}
 }
