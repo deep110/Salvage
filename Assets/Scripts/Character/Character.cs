@@ -14,6 +14,7 @@ public class Character : MonoBehaviour {
 	private Transform _transform;
 	private Rigidbody2D _rigidbody;
 	private Animator _animator;
+	private CapsuleCollider2D _collider;
 	private Vector2 lastStablePosition;
 
 	// hold player motion in this timestep
@@ -25,15 +26,9 @@ public class Character : MonoBehaviour {
 	private bool isFalling;
 	private bool canFall;
 
-	// store the layer the player is on (setup in Awake)
-	private int playerLayer;
-
-	// layer of platform (setup in Awake)
-	private int platformLayer;
-
 	private int platformsClimbed;
 
-	private bool hasEnteredPlatform = false;
+	private bool hasEnteredPlatform;
 	
 	void Awake() {
 		// get a reference to the components we are going to be changing and store
@@ -41,9 +36,7 @@ public class Character : MonoBehaviour {
 		_transform = GetComponent<Transform> ();
 		_rigidbody = GetComponent<Rigidbody2D> ();
 		_animator = GetComponent<Animator> ();
-
-		playerLayer = gameObject.layer;
-		platformLayer = LayerMask.NameToLayer("Platform");
+		_collider = GetComponent<CapsuleCollider2D>();
 
 		lastStablePosition = new Vector2(_transform.position.x, _transform.position.y);
 
@@ -53,18 +46,8 @@ public class Character : MonoBehaviour {
 			_transform.position = position;
 		}
 	}
-		
-	void Update() {
-		
-//		velocity.y = _rigidbody.velocity.y;
-
-		// Change the actual velocity on the rigidbody
-//		_rigidbody.velocity = velocity;
-	}
 
 	public void Move(float inputX) {
-//		velocity.x = Math.Sign(inputX) * maxSpeed;
-
 		_rigidbody.AddForce (new Vector2 (Math.Sign (inputX) * horiForce, 0));
 		_rigidbody.AddForce (new Vector2 (-drag * _rigidbody.velocity.x, 0));
 		if (Mathf.Abs(_rigidbody.velocity.x) >= 0.01f)
@@ -79,7 +62,7 @@ public class Character : MonoBehaviour {
 			isJumping = true;
 			isFalling = false;
 			_animator.SetTrigger("Jump");
-			GetComponent<CapsuleCollider2D> ().isTrigger = true;
+			_collider.isTrigger = true;
 			// reset current vertical motion to 0 prior to jump
 			velocity.y = 0f;
 			// add a force in the up direction
@@ -95,7 +78,7 @@ public class Character : MonoBehaviour {
 			_animator.SetTrigger("Jump");
 
 			print ("Fall called");
-			GetComponent<CapsuleCollider2D> ().isTrigger = true;
+			_collider.isTrigger = true;
 
 			// reset current vertical motion to 0 prior to jump
 			velocity.y = 0f;
@@ -126,10 +109,8 @@ public class Character : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.CompareTag ("Platform")) {
-			if (isJumping) {
-				hasEnteredPlatform = true;
-			}
+		if (other.gameObject.CompareTag ("Platform") && isJumping) {
+			hasEnteredPlatform = true;
 		}
 	}
 
@@ -137,11 +118,11 @@ public class Character : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Platform")) {
 			if (isJumping) {
 				if (hasEnteredPlatform) {
-					GetComponent<CapsuleCollider2D> ().isTrigger = false;
+					_collider.isTrigger = false;
 					hasEnteredPlatform = false;
 				}
 			} else if (isFalling) {
-				GetComponent<CapsuleCollider2D> ().isTrigger = false;
+				_collider.isTrigger = false;
 			}
 		}
 	}
