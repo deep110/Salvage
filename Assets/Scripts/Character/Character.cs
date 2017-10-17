@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 public class Character : MonoBehaviour {
 
@@ -41,7 +40,7 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Move(float inputX) {
-		_rigidbody.AddForce (new Vector2 (Math.Sign (inputX) * horiForce, 0));
+		_rigidbody.AddForce (new Vector2 (inputX * horiForce, 0));
 		_rigidbody.AddForce (new Vector2 (-drag * _rigidbody.velocity.x, 0));
 		if (Mathf.Abs(_rigidbody.velocity.x) >= 0.01f)
 			_animator.SetFloat ("Speed", Mathf.Abs (_rigidbody.velocity.x));

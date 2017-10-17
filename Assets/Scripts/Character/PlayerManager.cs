@@ -16,7 +16,6 @@ public class PlayerManager : Singleton <PlayerManager> {
     public bool isBeamPowerUpActive;
 
     private InputManager inputManager;
-    private const float positionCorrection = -0.643f;
 
     protected override void Awake() {
         base.Awake();
@@ -31,7 +30,7 @@ public class PlayerManager : Singleton <PlayerManager> {
 
 		switch (inputManager.GetCurrentState ()) {
 			case InputManager.InputState.JUMP:
-				Invoke ("JumpPlayerTwo", 0.2f);
+				Invoke("JumpPlayerTwo", 0.12f);
 				playerOneController.Jump();
 				break;
 
@@ -46,22 +45,10 @@ public class PlayerManager : Singleton <PlayerManager> {
 				break;
 
 			case InputManager.InputState.NONE:
-				playerOneController.Move(0);
-				if (playerOne.position.x - playerTwo.position.x > 0.1f) {
-					playerTwoController.Move(1);
-				} else if (playerTwo.position.x - playerOne.position.x > 0.1f) {
-					playerTwoController.Move(-1);
-				} else {
-					playerTwoController.Move(0);
-				}
-				break;
-
 			case InputManager.InputState.STILL:
 				playerOneController.Move(0);
-				if (playerOne.position.x - playerTwo.position.x > 0.1f) {
-					playerTwoController.Move(1);
-				} else if (playerTwo.position.x - playerOne.position.x > 0.1f) {
-					playerTwoController.Move(-1);
+				if (Mathf.Abs(playerOne.position.x - playerTwo.position.x) > 0.1f) {
+					playerTwoController.Move(Mathf.Sign(playerOne.position.x - playerTwo.position.x));
 				} else {
 					playerTwoController.Move(0);
 				}
@@ -70,7 +57,7 @@ public class PlayerManager : Singleton <PlayerManager> {
 			 
     }
 
-	void JumpPlayerTwo() {
+	private void JumpPlayerTwo() {
 		playerTwoController.Jump();
 	}
 
