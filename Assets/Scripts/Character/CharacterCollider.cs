@@ -18,13 +18,16 @@ public class CharacterCollider : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("Enemy")) {
-			other.gameObject.GetComponent<Enemy>().Collided();
+
+			if(other.gameObject.GetComponent<Enemy>() != null) //For laser
+				other.gameObject.GetComponent<Enemy>().Collided();
 
 			if (isShieldActive) {
 				deActivateShield = true;
 			} else {
 				EventManager.GameOver();
 			}
+
 		} else if (other.CompareTag("Coin")) {
 			other.gameObject.GetComponent<Coin>().Fall();
 
