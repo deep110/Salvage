@@ -20,19 +20,30 @@ public class LaserManager : MonoBehaviour {
 		}
 	}
 
-	void Update() {
-		if (Input.GetKeyDown (KeyCode.L)) {
-			Activate ();
-		}
-	}
+//	void Update() {
+//		if (Input.GetKeyDown (KeyCode.L)) {
+//			Activate ();
+//		}
+//	}
 
-	public void Activate() {
-		print ("patter.Length : " + pattern.Length / transform.childCount);
+	public float Activate() {
+		//The first laser starts initialDelay seconds after it is enabled
+		float initialDelay = 2f;
 		int index = Random.Range (0, pattern.Length / transform.childCount);
+		float duration = 0;
 		for (int i = 0; i < transform.childCount; i++) {
-			print ("index : " + index + " i : " + i);
-			Invoke ("ActivateLaser" + i, pattern [index, i]);
+			if (pattern [index, i] > duration) {
+				duration = pattern [index, i];
+			}
+			print ("Invoke laser " + i + " : " + pattern [index, i] + initialDelay);
+			Invoke ("ActivateLaser" + i, pattern [index, i] + initialDelay);
 		}
+		//for last laser will turn on till 2 sec then turn off
+		duration += 2;
+		duration += initialDelay;
+		print ("Invoke deactivate : " + duration);
+		Invoke ("DeactivateLaser", duration);
+		return duration;
 	}
 
 	private void ActivateLaser0() {
@@ -50,6 +61,10 @@ public class LaserManager : MonoBehaviour {
 	}
 	private void ActivateLaser4() {
 		lasers [4].Activate ();
+	}
+
+	private void DeactivateLaser() {
+		gameObject.SetActive (false);
 	}
 
 }

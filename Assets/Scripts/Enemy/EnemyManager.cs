@@ -10,11 +10,15 @@ public class EnemyManager : Singleton <EnemyManager> {
 		public GameObject tank;
 	}
 
+	public GameObject laserSet;
+
 	public Enemies enemies;
 
 	private Character playerOneController;
 	private bool isGameOver;
 	private int platformNumber;
+	//for if laser is on, no enemy should spawn
+	private bool isLaserOn = false;
 
 	void OnEnable() {
 		EventManager.GameOverEvent += gameOver;
@@ -24,9 +28,10 @@ public class EnemyManager : Singleton <EnemyManager> {
 		playerOneController = PlayerManager.Instance.playerOneController;
 
 		// start the coroutines
-		StartCoroutine(ManageBall());
-		StartCoroutine(ManageBook());
-		StartCoroutine(ManageTank());
+		StartCoroutine (ManageBall ());
+		StartCoroutine (ManageBook ());
+		StartCoroutine (ManageTank ());
+		StartCoroutine (ManageLaser ());
 	}
 
 	void OnDisable() {
@@ -47,13 +52,15 @@ public class EnemyManager : Singleton <EnemyManager> {
         while (!isGameOver) {
 			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
 
-			GameObject ball = ballPooler.SpawnInActive(new Vector3(0, lastStablePos.y, 0));
-			if (lastStablePos.x > 0) {
-				ball.GetComponent<Ball>().Roll(true);
-			} else {
-				ball.GetComponent<Ball>().Roll(false);
+			if (!isLaserOn) {
+				GameObject ball = ballPooler.SpawnInActive (new Vector3 (0, lastStablePos.y, 0));
+				if (lastStablePos.x > 0) {
+					ball.GetComponent<Ball> ().Roll (true);
+				} else {
+					ball.GetComponent<Ball> ().Roll (false);
+				}
+				ball.SetActive (true);
 			}
-			ball.SetActive(true);
 
 			yield return new WaitForSeconds(Random.Range(10f, 20f));
         }
@@ -67,8 +74,10 @@ public class EnemyManager : Singleton <EnemyManager> {
 		while (!isGameOver) {
 			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
 
-			bookPooler.Spawn(new Vector3(lastStablePos.x, lastStablePos.y + 8f, 0));
-			yield return new WaitForSeconds(Random.Range(4.5f, 7f));
+			if (!isLaserOn) {
+				bookPooler.Spawn (new Vector3 (lastStablePos.x, lastStablePos.y + 8f, 0));
+				yield return new WaitForSeconds (Random.Range (4.5f, 7f));
+			}
         }
 	}
 
@@ -81,16 +90,28 @@ public class EnemyManager : Singleton <EnemyManager> {
         while (!isGameOver) {
 			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
 
-			GameObject tank = tankPooler.SpawnInActive(new Vector3(0, lastStablePos.y, 0));
-			if (lastStablePos.x > 0) {
-				tank.GetComponent<Tank>().Move(true);
-			} else {
-				tank.GetComponent<Tank>().Move(false);
+			if (!isLaserOn) {
+				GameObject tank = tankPooler.SpawnInActive (new Vector3 (0, lastStablePos.y, 0));
+				if (lastStablePos.x > 0) {
+					tank.GetComponent<Tank> ().Move (true);
+				} else {
+					tank.GetComponent<Tank> ().Move (false);
+				}
+				tank.SetActive (true);
 			}
-			tank.SetActive(true);
 
 			yield return new WaitForSeconds(Random.Range(10f, 16f));
         }
+	}
+
+	private IEnumerator ManageLaser() {
+		while (!isGameOver) {
+			laserSet.SetActive (true);
+			isLaserOn = true;
+			float timeForLaser = laserSet.GetComponent<LaserManager> ().Activate ();
+			Invoke ("LaserIsOff", timeForLaser);
+			yield return new WaitForSeconds (Random.Range (30, 40));
+		}
 	}
 
 	private void platformClimbed(int platformNo) {
@@ -100,4 +121,9 @@ public class EnemyManager : Singleton <EnemyManager> {
 	private void gameOver() {
 		isGameOver = true;
 	}
+
+	private void LaserIsOff() {
+		isLaserOn = false;
+	}
+
 }
