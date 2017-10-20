@@ -5,9 +5,9 @@ using UnityEngine;
 public class LaserManager : MonoBehaviour {
 
 	private float[,] pattern = new float[,] {
-		{0, 1.5f, 3, 4.5f, 6},
-		{0, 0, 0, 2, 2},
-		{0, 2, 0, 2, 0},
+		{0.0f, 1.5f, 3.0f, 4.5f, 6.0f},
+		{0.0f, 0.0f, 0.0f, 2.0f, 2.0f},
+		{0.0f, 2.0f, 0.0f, 2.0f, 0.0f},
 	};
 
 	private Laser[] lasers;
@@ -19,12 +19,6 @@ public class LaserManager : MonoBehaviour {
 			lasers [i] = transform.GetChild (i).GetComponent<Laser>();
 		}
 	}
-
-//	void Update() {
-//		if (Input.GetKeyDown (KeyCode.L)) {
-//			Activate ();
-//		}
-//	}
 
 	public float Activate() {
 		//The first laser starts initialDelay seconds after it is enabled
@@ -38,8 +32,8 @@ public class LaserManager : MonoBehaviour {
 			print ("Invoke laser " + i + " : " + pattern [index, i] + initialDelay);
 			Invoke ("ActivateLaser" + i, pattern [index, i] + initialDelay);
 		}
-		//for last laser will turn on till 2 sec then turn off
-		duration += 2;
+		//for last laser will turn on till 2 sec then turn off + 1 sec wait before lasers disappear
+		duration += 3;
 		duration += initialDelay;
 		print ("Invoke deactivate : " + duration);
 		Invoke ("DeactivateLaser", duration);
