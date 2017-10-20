@@ -19,12 +19,6 @@ public class Laser : MonoBehaviour {
 		warmup.SetActive (false);
 	}
 
-	void Update() {
-		if (Input.GetKeyDown (KeyCode.L)) {
-			Activate ();
-		}
-	}
-
 	public void Activate () {
 		WarmUp ();
 		Invoke ("TurnOn", ontime);
