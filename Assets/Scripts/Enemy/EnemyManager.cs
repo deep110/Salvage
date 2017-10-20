@@ -76,8 +76,8 @@ public class EnemyManager : Singleton <EnemyManager> {
 
 			if (!isLaserOn) {
 				bookPooler.Spawn (new Vector3 (lastStablePos.x, lastStablePos.y + 8f, 0));
-				yield return new WaitForSeconds (Random.Range (4.5f, 7f));
 			}
+			yield return new WaitForSeconds (Random.Range (4.5f, 7f));
         }
 	}
 
@@ -99,7 +99,6 @@ public class EnemyManager : Singleton <EnemyManager> {
 				}
 				tank.SetActive (true);
 			}
-
 			yield return new WaitForSeconds(Random.Range(10f, 16f));
         }
 	}
@@ -110,7 +109,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 			isLaserOn = true;
 			float timeForLaser = laserSet.GetComponent<LaserManager> ().Activate ();
 			Invoke ("LaserIsOff", timeForLaser);
-			yield return new WaitForSeconds (Random.Range (30, 40));
+			yield return new WaitForSeconds (Random.Range (30f, 40f));
 		}
 	}
 
