@@ -104,8 +104,8 @@ public class EnemyManager : Singleton <EnemyManager> {
 	}
 
 	private IEnumerator ManageLaser() {
+		yield return new WaitForSeconds (1f);
 		while (!isGameOver) {
-			laserSet.SetActive (true);
 			isLaserOn = true;
 			float timeForLaser = laserSet.GetComponent<LaserManager> ().Activate ();
 			Invoke ("LaserIsOff", timeForLaser);
