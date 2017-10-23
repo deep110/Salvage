@@ -2,8 +2,10 @@
 
 public class Tank : Enemy {
 
+	public Vector2 _velocity;
+
 	void OnEnable() {
-		_rigidbody.velocity = _velocity;
+		GetComponent <Rigidbody2D>().velocity = _velocity;
 	}
 
 	/**

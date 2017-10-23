@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Laser : MonoBehaviour {
+public class Laser : Enemy {
 
 	public enum State {
 		ON, WARM_UP, OFF
 	};
 
+	public GameObject line, warmup;
 	public float ontime = 1f, total = 2f;
 
 	private State current;
-	public GameObject line, warmup;
 
-	void Start () {
+	protected override void Awake() {
 		current = State.OFF;
-		line.SetActive (false);
-		warmup.SetActive (false);
+		line.SetActive(false);
+		warmup.SetActive(false);
 	}
 
 	public void Activate () {
