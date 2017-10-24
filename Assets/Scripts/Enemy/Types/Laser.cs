@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Laser : Enemy {
 
@@ -18,24 +19,26 @@ public class Laser : Enemy {
 	}
 
 	public void Activate () {
-		WarmUp ();
-		Invoke ("TurnOn", ontime);
-		Invoke ("TurnOff", total);
+		StartCoroutine(manageLaser());
 	}
 
-	private void WarmUp() {
+	private IEnumerator manageLaser() {
+		// activate warmup
 		warmup.SetActive (true);
 		current = State.WARM_UP;
-	}
 
-	private void TurnOn() {
-		warmup.SetActive (false);
-		line.SetActive (true);
+		yield return new WaitForSeconds(ontime);
+
+		// turn off warmup and activate laser
+		warmup.SetActive(false);
+		line.SetActive(true);
 		current = State.ON;
-	}
 
-	private void TurnOff() {
+		yield return new WaitForSeconds(total - ontime);
+
+		// deactivate laser
 		line.SetActive (false);
+		current = State.OFF;
 	}
 
 }
