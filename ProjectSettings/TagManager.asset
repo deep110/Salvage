@@ -8,9 +8,9 @@ TagManager:
   - Ground
   - PlayerOne
   - PlayerTwo
-  - Coin
   - Enemy
   - PowerUp
+  - Egg
   layers:
   - Default
   - TransparentFX

@@ -6,19 +6,19 @@ public class EnemyManager : Singleton <EnemyManager> {
 	[System.Serializable]
 	public class Enemies {
 		public GameObject ball;
-		public GameObject book;
+		public GameObject copter;
 		public GameObject tank;
+		public GameObject laserGrid;
 	}
-
-	public GameObject laserSet;
 
 	public Enemies enemies;
 
 	private Character playerOneController;
 	private bool isGameOver;
 	private int platformNumber;
+
 	//for if laser is on, no enemy should spawn
-	private bool isLaserOn = false;
+	private bool isLaserOn;
 
 	void OnEnable() {
 		EventManager.GameOverEvent += gameOver;
@@ -28,10 +28,10 @@ public class EnemyManager : Singleton <EnemyManager> {
 		playerOneController = PlayerManager.Instance.playerOneController;
 
 		// start the coroutines
-		StartCoroutine (ManageBall ());
-		StartCoroutine (ManageBook ());
-		StartCoroutine (ManageTank ());
-		StartCoroutine (ManageLaser ());
+		StartCoroutine(ManageBall());
+		StartCoroutine(ManageCopter());
+		StartCoroutine(ManageTank());
+		StartCoroutine(ManageLaser());
 	}
 
 	void OnDisable() {
@@ -66,8 +66,8 @@ public class EnemyManager : Singleton <EnemyManager> {
         }
 	}
 
-	private IEnumerator ManageBook() {
-		var bookPooler = new ObjectPooler(enemies.book, 2);
+	private IEnumerator ManageCopter() {
+		var copterPooler = new ObjectPooler(enemies.copter, 2);
 
 		yield return new WaitWhile(() => platformNumber <= 5);
 
@@ -75,7 +75,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
 
 			if (!isLaserOn) {
-				bookPooler.Spawn (new Vector3 (lastStablePos.x, lastStablePos.y + 8f, 0));
+				copterPooler.Spawn (new Vector3 (lastStablePos.x, lastStablePos.y + 8f, 0));
 			}
 			yield return new WaitForSeconds (Random.Range (4.5f, 7f));
         }
@@ -107,7 +107,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 		yield return new WaitForSeconds (1f);
 		while (!isGameOver) {
 			isLaserOn = true;
-			float timeForLaser = laserSet.GetComponent<LaserManager> ().Activate ();
+			float timeForLaser = enemies.laserGrid.GetComponent<LaserManager>().Activate();
 			Invoke ("LaserIsOff", timeForLaser);
 			yield return new WaitForSeconds (Random.Range (30f, 40f));
 		}

@@ -2,11 +2,12 @@
 
 public class LaserManager : MonoBehaviour {
 
-	public enum LaserSetState {
+	private enum LaserSetState {
 		HIDDEN, TO_BE_SEEN, SEEN, TO_BE_HIDDEN
 	};
 
-	public Vector3 seenPosition, hiddenPosition;
+	public float moveDistance = 1f;
+	public const int NumberOfLasers = 5;
 
 	private float timeElapsed;
 	private float[,] pattern = {
@@ -18,14 +19,19 @@ public class LaserManager : MonoBehaviour {
 	private Laser[] lasers;
 	private LaserSetState current;
 
-	void Start() {
-		lasers = new Laser[5];
+	private Vector3 hiddenPosition;
+	private Vector3 seenPosition;
+
+	void Awake() {
+		lasers = new Laser[NumberOfLasers];
 		//Initialize lasers
-		for (int i = 0; i < transform.childCount; i++) {
+		for (int i = 0; i < NumberOfLasers; i++) {
 			lasers [i] = transform.GetChild(i).GetComponent<Laser>();
 		}
 
 		current = LaserSetState.HIDDEN;
+		hiddenPosition = transform.localPosition;
+		seenPosition = hiddenPosition - new Vector3(0, moveDistance, 0);
 	}
 
 	void Update() {
@@ -57,9 +63,9 @@ public class LaserManager : MonoBehaviour {
 		const float initialDelay = 2f;
 		timeElapsed = 0;
 		current = LaserSetState.TO_BE_SEEN;
-		int index = Random.Range(0, pattern.Length / transform.childCount);
+		int index = Random.Range(0, pattern.Length / NumberOfLasers);
 		float duration = 0;
-		for (int i = 0; i < transform.childCount; i++) {
+		for (int i = 0; i < NumberOfLasers; i++) {
 			if (pattern [index, i] > duration) {
 				duration = pattern [index, i];
 			}

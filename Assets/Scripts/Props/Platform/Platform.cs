@@ -38,7 +38,7 @@ public class Platform : MonoBehaviour {
 		if (platformIndex != -1) {
 			// deactivate the coins attached on this platform.
 			for (int i = 0; i < _transform.childCount; i++) {
-				if (_transform.GetChild(i).CompareTag("Coin")) {
+				if (_transform.GetChild(i).CompareTag("Egg")) {
 					_transform.GetChild(i).gameObject.SetActive(false);
 				}
 			}

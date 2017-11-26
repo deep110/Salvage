@@ -87,8 +87,8 @@ public class VerticalBeam : PowerUp {
                                     new Vector2(0.63f, 9f), 0, K_layerMask);
 
         for (int i = 0; i < colliders.Length; i++) {
-            if (colliders[i].CompareTag("Coin")) {
-                colliders[i].GetComponent<Coin>().Collect();
+            if (colliders[i].CompareTag("Egg")) {
+                colliders[i].GetComponent<Egg>().Collect();
             }
         }
 

@@ -19,8 +19,7 @@ public class CharacterCollider : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("Enemy")) {
 
-			if(other.gameObject.GetComponent<Enemy>() != null) //For laser
-				other.gameObject.GetComponent<Enemy>().Collided();
+			other.gameObject.GetComponent<Enemy>().Collided();
 
 			if (isShieldActive) {
 				deActivateShield = true;
@@ -28,8 +27,8 @@ public class CharacterCollider : MonoBehaviour {
 				EventManager.GameOver();
 			}
 
-		} else if (other.CompareTag("Coin")) {
-			other.gameObject.GetComponent<Coin>().Fall();
+		} else if (other.CompareTag("Egg")) {
+			other.gameObject.GetComponent<Egg>().Fall();
 
 		} else if (other.CompareTag("PowerUp")) {
 			PowerUpManager.Instance.AddActivePowerUp(other.gameObject.GetComponent<PowerUp>());
