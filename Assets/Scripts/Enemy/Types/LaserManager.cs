@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class LaserManager : MonoBehaviour {
 
@@ -69,7 +70,7 @@ public class LaserManager : MonoBehaviour {
 			if (pattern [index, i] > duration) {
 				duration = pattern [index, i];
 			}
-			Invoke("ActivateLaser" + i, pattern [index, i] + initialDelay);
+			StartCoroutine(ActivateLaser(i, pattern [index, i] + initialDelay));
 		}
 		//for last laser will turn on till 2 sec then turn off + 1 sec wait before lasers disappear
 		duration += 3;
@@ -78,21 +79,9 @@ public class LaserManager : MonoBehaviour {
 		return duration;
 	}
 
-	private void ActivateLaser0() {
-		lasers [0].Activate ();
-	}
-
-	private void ActivateLaser1() {
-		lasers [1].Activate ();
-	}
-	private void ActivateLaser2() {
-		lasers [2].Activate ();
-	}
-	private void ActivateLaser3() {
-		lasers [3].Activate ();
-	}
-	private void ActivateLaser4() {
-		lasers [4].Activate ();
+	private IEnumerator ActivateLaser(int laserIndex, float delay) {
+		yield return new WaitForSeconds(delay);
+		lasers[laserIndex].Activate();
 	}
 
 	private void DeactivateLaser() {

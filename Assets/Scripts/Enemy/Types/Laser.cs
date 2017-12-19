@@ -14,10 +14,10 @@ public class Laser : Enemy {
 	}
 
 	public void Activate() {
-		StartCoroutine(manageLaser());
+		StartCoroutine(ManageLaser());
 	}
 
-	private IEnumerator manageLaser() {
+	private IEnumerator ManageLaser() {
 		// activate warmup
 		warmup.SetActive (true);
 
@@ -31,7 +31,7 @@ public class Laser : Enemy {
 		yield return new WaitForSeconds(total - ontime);
 
 		// deactivate laser
-		line.SetActive (false);
+		line.SetActive(false);
 		laserCollider.enabled = false;
 	}
 

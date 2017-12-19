@@ -93,9 +93,9 @@ public class EnemyManager : Singleton <EnemyManager> {
 			if (!isLaserOn) {
 				GameObject tank = tankPooler.SpawnInActive (new Vector3 (0, lastStablePos.y, 0));
 				if (lastStablePos.x > 0) {
-					tank.GetComponent<Tank> ().Move (true);
+					tank.GetComponent<Tank>().Move(true);
 				} else {
-					tank.GetComponent<Tank> ().Move (false);
+					tank.GetComponent<Tank>().Move(false);
 				}
 				tank.SetActive (true);
 			}
@@ -108,8 +108,10 @@ public class EnemyManager : Singleton <EnemyManager> {
 		while (!isGameOver) {
 			isLaserOn = true;
 			float timeForLaser = enemies.laserGrid.GetComponent<LaserManager>().Activate();
-			Invoke ("LaserIsOff", timeForLaser);
-			yield return new WaitForSeconds (Random.Range (30f, 40f));
+			yield return new WaitForSeconds(timeForLaser);
+
+			isLaserOn = false;
+			yield return new WaitForSeconds(Random.Range (30f, 40f));
 		}
 	}
 
@@ -119,10 +121,6 @@ public class EnemyManager : Singleton <EnemyManager> {
 
 	private void gameOver() {
 		isGameOver = true;
-	}
-
-	private void LaserIsOff() {
-		isLaserOn = false;
 	}
 
 }
