@@ -3,22 +3,12 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton <UIManager> {
 
-	public Transform scorePanel;
+	public Text scorePanel;
 	public GameObject menuPanel;
 
 	public GameObject hBeamButton;
 	public GameObject vBeamButton;
 	public GameObject platformClearPanel;
-
-	private Text scoreText;
-	private Text platformText;
-
-	protected override void Awake() {
-		base.Awake();
-
-		scoreText = scorePanel.GetChild(0).GetComponent<Text>();
-		platformText = scorePanel.GetChild(1).GetComponent<Text>();
-	}
 
 	public void OnPauseButtonClick() {
 		Time.timeScale = 0;
@@ -26,16 +16,12 @@ public class UIManager : Singleton <UIManager> {
 	}
 
 	public void UpdateScoreText(int score) {
-		scoreText.text = score.ToString();
-	}
-
-	public void UpdatePlatformsClimbed(int platformsClimbed) {
-		platformText.text = platformsClimbed.ToString();
+		scorePanel.text = score.ToString();
 	}
 
 	public void ShowPlatformClear() {
 		platformClearPanel.SetActive (true);
-		Invoke ("HidePlatformClear", 2f);
+		Invoke("HidePlatformClear", 2f);
 	}
 
 	private void HidePlatformClear() {

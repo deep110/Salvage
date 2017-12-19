@@ -38,7 +38,6 @@ public class GamePlayManager : Singleton <GamePlayManager> {
 
 	private void onPlatformClimbed(int platforms) {
 		platformsClimbed = platforms;
-		uiManager.UpdatePlatformsClimbed(platforms);
 	}
 
 	private void onGameOver() {
@@ -50,8 +49,8 @@ public class GamePlayManager : Singleton <GamePlayManager> {
 	}
 
 	private void onPlatformClear() {
-		//increase the score by 5
-		score += 5;
+		//increase the score by 3
+		score += 3;
 		//display the platform clear panel
 		uiManager.ShowPlatformClear();
 		//update the ui score
