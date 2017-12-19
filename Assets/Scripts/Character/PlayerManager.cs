@@ -47,7 +47,7 @@ public class PlayerManager : Singleton <PlayerManager> {
 			case InputManager.InputState.NONE:
 			case InputManager.InputState.STILL:
 				playerOneController.Move(0);
-				if (Mathf.Abs(playerOne.position.x - playerTwo.position.x) > 0.1f) {
+				if (Mathf.Abs(playerOne.position.x - playerTwo.position.x) > 0.05f) {
 					playerTwoController.Move(Mathf.Sign(playerOne.position.x - playerTwo.position.x));
 				} else {
 					playerTwoController.Move(0);
