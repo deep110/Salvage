@@ -22,7 +22,7 @@ public class Egg : MonoBehaviour {
 	}
 
 	public void Collect() {
-		GetComponent<Transform> ().GetComponentInParent<Platform> ().SetCoinFall();
+		GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinFall();
 		EventManager.CoinCollected();
 		gameObject.SetActive(false);
 		isFalling = false;

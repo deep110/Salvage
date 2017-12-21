@@ -28,7 +28,7 @@ public class PlayerManager : Singleton <PlayerManager> {
 
     void Update() {
 
-		switch (inputManager.GetCurrentState ()) {
+		switch (inputManager.GetCurrentState()) {
 			case InputManager.InputState.JUMP:
 				Invoke("JumpPlayerTwo", 0.12f);
 				playerOneController.Jump();

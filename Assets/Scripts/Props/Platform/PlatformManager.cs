@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlatformManager : Singleton <PlatformManager> {
 
@@ -15,12 +14,9 @@ public class PlatformManager : Singleton <PlatformManager> {
 
     private int maxPlatformIndex;
 
-    private Queue<GameObject> activePlatforms;
-
     void Start() {
         platformPooler = new ObjectPooler(_platform, 8);
         coinPooler = new ObjectPooler(_coin, 32);
-        activePlatforms = new Queue<GameObject>();
         initPlatforms();
     }
 
@@ -32,12 +28,6 @@ public class PlatformManager : Singleton <PlatformManager> {
 
         platform.GetComponent<Platform>().platformIndex = maxPlatformIndex;
         platform.SetActive(true);
-        activePlatforms.Enqueue(platform);
-    }
-
-    public void RemovePlatform() {
-        GameObject removedPlatform = activePlatforms.Dequeue();
-        removedPlatform.SetActive(false);
     }
 
     public GameObject GetCoin() {

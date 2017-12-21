@@ -45,6 +45,7 @@ public class Platform : MonoBehaviour {
 
 			// reset coins fallen
 			numberCoinsFallen = 0;
+			platformIndex = -1;
 		}
 	}
 
