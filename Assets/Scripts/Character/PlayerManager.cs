@@ -16,6 +16,8 @@ public class PlayerManager : Singleton <PlayerManager> {
     public bool isBeamPowerUpActive;
 
     private InputManager inputManager;
+    private bool jump;
+
 
     protected override void Awake() {
         base.Awake();
@@ -27,34 +29,44 @@ public class PlayerManager : Singleton <PlayerManager> {
     }
 
     void Update() {
+		// keydown events read in Update and consumed in FixedUpdate
+		jump |= (inputManager.GetCurrentState() == InputManager.InputState.JUMP);
+    }
 
-		switch (inputManager.GetCurrentState()) {
-			case InputManager.InputState.JUMP:
-				Invoke("JumpPlayerTwo", 0.12f);
-				playerOneController.Jump();
-				break;
+    void FixedUpdate() {
+		if (jump) {
+			jumpPlayers();
+		} else {
+			switch (inputManager.GetCurrentState()) {
+				case InputManager.InputState.MOVE:
+					playerOneController.Move(inputManager.GetDeltaX());
+					break;
 
-			case InputManager.InputState.LEFT:
-				playerOneController.Move(-1);
-				playerTwoController.Move(-1);
-				break;
+				case InputManager.InputState.NONE:
+				case InputManager.InputState.STILL:
+					playerOneController.Move(0);
+					break;
+			}
 
-			case InputManager.InputState.RIGHT:
-				playerOneController.Move(1);
-				playerTwoController.Move(1);
-				break;
-
-			case InputManager.InputState.NONE:
-			case InputManager.InputState.STILL:
-				playerOneController.Move(0);
-				if (Mathf.Abs(playerOne.position.x - playerTwo.position.x) > 0.05f) {
-					playerTwoController.Move(Mathf.Sign(playerOne.position.x - playerTwo.position.x));
-				} else {
-					playerTwoController.Move(0);
-				}
-				break;
+			// make playerTwo follow player one
+			float diff = (playerOne.position.x - playerTwo.position.x);
+			if (Mathf.Abs(diff) > 0.08f) {
+				playerTwoController.Move(diff);
+			} else {
+				playerTwoController.Move(0);
+			}
 		}
-			 
+
+		playerOneController.Hover();
+		playerTwoController.Hover();
+    }
+
+    private void jumpPlayers() {
+		if (!playerOneController.IsJumping && !playerTwoController.IsJumping) {
+			playerOneController.Jump();
+			Invoke("JumpPlayerTwo", 0.1f);
+			jump = false;
+		}
     }
 
 	private void JumpPlayerTwo() {

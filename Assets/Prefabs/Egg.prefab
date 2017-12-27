@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b259b11ded7e430dafaffddd4b3039f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallVelocity: {x: 0, y: -8}
+  fallVelocity: {x: 0, y: -10}
 --- !u!212 &212280738054859566
 SpriteRenderer:
   m_ObjectHideFlags: 1

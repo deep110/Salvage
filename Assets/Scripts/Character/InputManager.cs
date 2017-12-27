@@ -4,19 +4,13 @@ using UnityEngine.EventSystems;
 public class InputManager : MonoBehaviour {
 
 	public enum InputState {
-		NONE, STILL, LEFT, RIGHT, JUMP
+		NONE, STILL, MOVE, JUMP
 	};
-
-	[HideInInspector]
-	public Vector2 pointerPos;
-
-	[HideInInspector]
-	public bool pointerClick;
 
 	public float thresholdMove = 10f;
 
-
 	private InputState current;
+	private float deltaX;
 	private float prevX, prevY;
 
 	void Awake() {
@@ -25,6 +19,7 @@ public class InputManager : MonoBehaviour {
 
 	void Start() {
 		current = InputState.NONE;
+		deltaX = 0;
 
 		if (!Application.isMobilePlatform) {
 			prevX = Input.mousePosition.x;
@@ -43,17 +38,15 @@ public class InputManager : MonoBehaviour {
 	private void mapMobileInput() {
 		if (Input.touchCount > 0 && EventSystem.current.currentSelectedGameObject == null) {
 			Touch touch = Input.GetTouch(0);
+			deltaX = touch.deltaPosition.x;
+
 			switch (current) {
 				case InputState.NONE:
 					if (touch.phase == TouchPhase.Ended) {
 						current = InputState.JUMP;
 					} else if (touch.phase == TouchPhase.Moved) {
-						if (Mathf.Abs (touch.deltaPosition.x) >= Mathf.Abs (touch.deltaPosition.y)) {
-							if (touch.deltaPosition.x / Time.deltaTime > thresholdMove) {
-								current = InputState.RIGHT;
-							} else {
-								current = InputState.LEFT;
-							}
+						if (Mathf.Abs(touch.deltaPosition.x) >= Mathf.Abs(touch.deltaPosition.y)) {
+							current = InputState.MOVE;
 						}
 					}
 					break;
@@ -63,46 +56,38 @@ public class InputManager : MonoBehaviour {
 					break;
 
 				case InputState.STILL:
-				case InputState.LEFT:
-				case InputState.RIGHT:
-					if (touch.phase == TouchPhase.Ended) {
-						current = InputState.NONE;
-					} else if (touch.phase == TouchPhase.Moved) {
-						if (touch.deltaPosition.x / Time.deltaTime > thresholdMove) {
-							current = InputState.RIGHT;
-						} else if (touch.deltaPosition.x / Time.deltaTime < -thresholdMove) {
-							current = InputState.LEFT;
-						} else {
+				case InputState.MOVE:
+					switch (touch.phase) {
+						case TouchPhase.Ended:
+							current = InputState.NONE;
+							break;
+						case TouchPhase.Moved:
+							current = (Mathf.Abs(touch.deltaPosition.x/Time.deltaTime)> thresholdMove)
+								? InputState.MOVE : InputState.STILL;
+							break;
+						case TouchPhase.Stationary:
 							current = InputState.STILL;
-						}
-					} else if (touch.phase == TouchPhase.Stationary) {
-						current = InputState.STILL;
+							break;
 					}
 					break;
 			}
 		} else {
 			current = InputState.NONE;
+			deltaX = 0;
 		}
 	}
 
 	private void mapKeyBoardInput() {
-		float deltaX = Input.mousePosition.x - prevX;
-		prevX = Input.mousePosition.x;
-		prevY = Input.mousePosition.y;
+		deltaX = Input.mousePosition.x - prevX;
 
 		switch (current) {
 			case InputState.NONE:
 				float deltaY = Input.mousePosition.y - prevY;
-				if (Input.GetMouseButtonUp (0)) {
+				if (Input.GetMouseButtonUp(0)) {
 					current = InputState.JUMP;
-				} else if (Input.GetMouseButton(0)) {
-					if (Mathf.Abs (deltaX) >= Mathf.Abs (deltaY)) {
-						if (deltaX / Time.deltaTime > thresholdMove) {
-							current = InputState.RIGHT;
-						} else if (deltaX / Time.deltaTime < -thresholdMove) {
-							current = InputState.LEFT;
-						}
-					}
+				} else if (Mathf.Abs(deltaX) >= Mathf.Abs(deltaY)
+							&& Mathf.Abs(deltaX / Time.deltaTime) > thresholdMove) {
+					current = InputState.MOVE;
 				}
 				break;
 
@@ -111,26 +96,32 @@ public class InputManager : MonoBehaviour {
 				break;
 
 			case InputState.STILL:
-			case InputState.LEFT:
-			case InputState.RIGHT:
+				if (Input.GetMouseButtonUp(0)) {
+					current = InputState.JUMP;
+				} else {
+					current = (Mathf.Abs(deltaX / Time.deltaTime) > thresholdMove)
+						? InputState.MOVE : InputState.STILL;
+				}
+				break;
+			case InputState.MOVE:
 				if (Input.GetMouseButtonUp(0)) {
 					current = InputState.NONE;
-				} else if (Input.GetMouseButton(0)) {
-					if (deltaX / Time.deltaTime > thresholdMove) {
-						current = InputState.RIGHT;
-					} else if (deltaX / Time.deltaTime < -thresholdMove) {
-						current = InputState.LEFT;
-					} else {
-						current = InputState.STILL;
-					}
 				} else {
-					current = InputState.STILL;
+					current = (Mathf.Abs(deltaX / Time.deltaTime) > thresholdMove)
+						? InputState.MOVE : InputState.STILL;
 				}
 				break;
 		}
+
+		prevX = Input.mousePosition.x;
+		prevY = Input.mousePosition.y;
 	}
 
 	public InputState GetCurrentState() {
 		return current;
+	}
+
+	public float GetDeltaX() {
+		return deltaX / Screen.width;
 	}
 }
