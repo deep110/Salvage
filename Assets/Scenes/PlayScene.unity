@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 44}
   - component: {fileID: 57}
   - component: {fileID: 90}
+  - component: {fileID: 3}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -29,6 +30,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6424d7ef8e6e846ac8635313f9cfaea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trauma: 0
+  maxOffset: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -153,7 +167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &14
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,8 +780,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -2.8, y: 4.5}
-  - {x: 2.8, y: 4.5}
+  - {x: -2.8, y: 4.2}
+  - {x: 2.8, y: 4.2}
 --- !u!81 &57
 AudioListener:
   m_ObjectHideFlags: 0

@@ -21,8 +21,8 @@ public class CameraFollow : MonoBehaviour {
 			Vector3 targetPos = target.position + Vector3.forward*offsetZ + distanceCorrection;
 			Vector3 newPos = Vector3.SmoothDamp(_transform.position, targetPos, ref currentVelocity, damping);
 
-			// restrict camera movement to y only
-			newPos.x = 0;
+			// restrict camera movement to y only, do not change x
+			newPos.x = _transform.position.x;
 			_transform.position = newPos;
 		}
 	}
