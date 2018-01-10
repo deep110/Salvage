@@ -22,7 +22,7 @@ public class Shield : PowerUp {
     public override void Tick() {
 		base.Tick();
 
-		if (playerOneCollider.deActivateShield || playerTwoCollider.deActivateShield) {
+		if (!(playerOneCollider.isShieldActive && playerTwoCollider.isShieldActive)) {
 			timeSinceStart = duration;
 		}
     }
