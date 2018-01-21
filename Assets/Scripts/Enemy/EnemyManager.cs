@@ -43,22 +43,18 @@ public class EnemyManager : Singleton <EnemyManager> {
 	}
 
 	private IEnumerator ManageBall() {
-		var ballPooler = new ObjectPooler(enemies.ball, 3);
+		var ballPooler = new ObjectPooler(enemies.ball, 2);
 
 		// wait for some time to spawn enemies
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
 
         // spawn enemies till game is not over
         while (!isGameOver) {
 			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
 
 			if (!isLaserOn) {
-				GameObject ball = ballPooler.SpawnInActive (new Vector3 (0, lastStablePos.y, 0));
-				if (lastStablePos.x > 0) {
-					ball.GetComponent<Ball> ().Roll (true);
-				} else {
-					ball.GetComponent<Ball> ().Roll (false);
-				}
+				GameObject ball = ballPooler.SpawnInActive(new Vector3 (0, lastStablePos.y, 0));
+				ball.GetComponent<Ball>().Roll((lastStablePos.x > 0));
 				ball.SetActive (true);
 			}
 
@@ -75,9 +71,9 @@ public class EnemyManager : Singleton <EnemyManager> {
 			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
 
 			if (!isLaserOn) {
-				copterPooler.Spawn (new Vector3 (lastStablePos.x, lastStablePos.y + 8f, 0));
+				copterPooler.Spawn(new Vector3 (lastStablePos.x, lastStablePos.y + 8f, 0));
 			}
-			yield return new WaitForSeconds (Random.Range (4.5f, 7f));
+			yield return new WaitForSeconds(Random.Range (4.5f, 7f));
         }
 	}
 
@@ -92,11 +88,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 
 			if (!isLaserOn) {
 				GameObject tank = tankPooler.SpawnInActive (new Vector3 (0, lastStablePos.y, 0));
-				if (lastStablePos.x > 0) {
-					tank.GetComponent<Tank>().Move(true);
-				} else {
-					tank.GetComponent<Tank>().Move(false);
-				}
+				tank.GetComponent<Tank>().Move((lastStablePos.x > 0));
 				tank.SetActive (true);
 			}
 			yield return new WaitForSeconds(Random.Range(10f, 16f));
@@ -104,7 +96,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 	}
 
 	private IEnumerator ManageLaser() {
-		yield return new WaitForSeconds (1f);
+		yield return new WaitWhile(() => platformNumber <= 15);
 		while (!isGameOver) {
 			isLaserOn = true;
 			float timeForLaser = enemies.laserGrid.GetComponent<LaserManager>().Activate();

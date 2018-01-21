@@ -42,7 +42,7 @@ public class Character : MonoBehaviour {
 			_transform.position = position;
 		}
 
-		lastStablePosition = new Vector2(_transform.position.x, _transform.position.y);
+		lastStablePosition = new Vector2(_transform.position.x, rayCastPosition.position.y - hoverHeight);
 	}
 
 	public void Move(float inputX) {
