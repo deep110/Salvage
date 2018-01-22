@@ -9,6 +9,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 		public GameObject copter;
 		public GameObject tank;
 		public GameObject laserGrid;
+		public GameObject spikes;
 	}
 
 	public Enemies enemies;
@@ -28,6 +29,7 @@ public class EnemyManager : Singleton <EnemyManager> {
 		playerOneController = PlayerManager.Instance.playerOneController;
 
 		// start the coroutines
+		StartCoroutine(ManageSpikes());
 		StartCoroutine(ManageBall());
 		StartCoroutine(ManageCopter());
 		StartCoroutine(ManageTank());
@@ -40,6 +42,29 @@ public class EnemyManager : Singleton <EnemyManager> {
 
 		// stop coroutines
 		StopAllCoroutines();
+	}
+
+	private IEnumerator ManageSpikes() {
+		var spikesPooler = new ObjectPooler (enemies.spikes, 3);
+		yield return new WaitWhile(() => platformNumber <= 5);
+
+		while (!isGameOver) {
+			Vector2 lastStablePos = playerOneController.GetLastStablePosition();
+
+			if (!isLaserOn) {
+				if (platformNumber >= 30) {
+					GameObject spikes = spikesPooler.SpawnInActive (new Vector3 (0, lastStablePos.y + 1.65f * 4, 0));
+					spikes.SetActive (true);
+				}
+
+				GameObject spikes2 = spikesPooler.SpawnInActive (new Vector3 (0, lastStablePos.y + 1.65f * 3, 0));
+				spikes2.transform.localScale = (2 * Random.Range(0, 1) - 1) * spikes2.transform.localScale;
+				spikes2.GetComponentInChildren<SpikeTriggerController> ().SetSpeed ((2 * Random.Range(0, 1) - 1) * 1);
+				spikes2.SetActive (true);
+			}
+
+			yield return new WaitForSeconds(Random.Range(10f, 20f));
+		}
 	}
 
 	private IEnumerator ManageBall() {

@@ -3,6 +3,7 @@
 public abstract class Enemy : MonoBehaviour {
 
 	protected Transform _transform;
+	public bool isActive = true;
 
 	protected virtual void Awake() {
 		_transform = GetComponent<Transform>();

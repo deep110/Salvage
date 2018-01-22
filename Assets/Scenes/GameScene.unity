@@ -1272,6 +1272,7 @@ MonoBehaviour:
     copter: {fileID: 1004162979196546, guid: 64e5c1eb52e794abe93d6e9e338e256a, type: 2}
     tank: {fileID: 1175504685903638, guid: b8fb2550331744d23afe8002637acd19, type: 2}
     laserGrid: {fileID: 1973375824}
+    spikes: {fileID: 1483264155543142, guid: a2803abb4062c4d7ea9b40832f96380d, type: 2}
 --- !u!114 &103
 MonoBehaviour:
   m_ObjectHideFlags: 0

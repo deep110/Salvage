@@ -19,10 +19,12 @@ public class CharacterCollider : MonoBehaviour {
 		cameraShake = Camera.main.GetComponent<CameraShake>();
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {
+	void OnTriggerStay2D(Collider2D other) {
 		if (other.CompareTag("Enemy")) {
-			if (!isInvincible) {
-				other.gameObject.GetComponent<Enemy>().Collided();
+			Enemy enemy = other.GetComponent<Enemy> ();
+			if (!isInvincible && enemy.isActive) {
+				enemy.Collided();
+				print (other.gameObject.name);
 				StartCoroutine(HandleEnemyCollision());
 			}
 
