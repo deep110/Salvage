@@ -57,10 +57,9 @@ public class EnemyManager : Singleton <EnemyManager> {
 					spikes.SetActive (true);
 				}
 
-				GameObject spikes2 = spikesPooler.SpawnInActive (new Vector3 (0, lastStablePos.y + 1.65f * 3, 0));
-				spikes2.transform.localScale = (2 * Random.Range(0, 1) - 1) * spikes2.transform.localScale;
-				spikes2.GetComponentInChildren<SpikeTriggerController> ().SetSpeed ((2 * Random.Range(0, 1) - 1) * 1);
-				spikes2.SetActive (true);
+				GameObject spikes2 = spikesPooler.SpawnInActive(new Vector3 (0, lastStablePos.y + 1.65f * 3, 0));
+				spikes2.GetComponentInChildren<SpikeTriggerController>().SetSpeed ((2 * Random.Range(0, 1) - 1) * 1);
+				spikes2.SetActive(true);
 			}
 
 			yield return new WaitForSeconds(Random.Range(10f, 20f));

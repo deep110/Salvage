@@ -24,7 +24,6 @@ public class CharacterCollider : MonoBehaviour {
 			Enemy enemy = other.GetComponent<Enemy> ();
 			if (!isInvincible && enemy.isActive) {
 				enemy.Collided();
-				print (other.gameObject.name);
 				StartCoroutine(HandleEnemyCollision());
 			}
 
