@@ -88,8 +88,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1435252948462590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.24, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalPosition: {x: 0, y: 0.032, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 4489541430141794}
   m_RootOrder: 0
@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1984169575073312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.68, z: 0}
+  m_LocalPosition: {x: 0, y: -0.252, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4489541430141794}
@@ -114,7 +114,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1283211246154320}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4063062003760476}
@@ -203,8 +203,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.26}
-  m_Size: {x: 0.467, y: 0.82}
+  m_Offset: {x: 0, y: 0.075}
+  m_Size: {x: 0.5, y: 0.76}
   m_Direction: 0
 --- !u!70 &70934282741113720
 CapsuleCollider2D:
@@ -218,8 +218,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.26}
-  m_Size: {x: 0.467, y: 0.82}
+  m_Offset: {x: 0, y: 0.075}
+  m_Size: {x: 0.5, y: 0.76}
   m_Direction: 0
 --- !u!95 &95089094303649110
 Animator:
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff79e005e82f8474994e6a3b3ebe3b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deActivateShield: 0
+  isShieldActive: 0
 --- !u!114 &114470665986477708
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
   isFirstPlayer: 1
   horiForce: 36
   jumpForce: 175
-  hoverHeight: 0.3
+  hoverHeight: 0.5
   hoverForce: 50
   rayCastPosition: {fileID: 4481169007725384}
 --- !u!212 &212173367074345422
@@ -300,8 +300,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 0519f197990dc461f8e9b50214d74852, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 711c5ef2bb78a4035a711f75c3a05df6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -346,7 +346,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.241}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.285}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

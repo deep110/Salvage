@@ -23,6 +23,7 @@ public class Character : MonoBehaviour {
 	private bool isJumping;
 	private float forceX;
 	private bool hasEnteredPlatform;
+	private bool facingRight;
 	private Vector2 lastStablePosition;
 
 	private const int platformLayerMask = 1 << 10;
@@ -35,12 +36,6 @@ public class Character : MonoBehaviour {
 		_rigidbody = GetComponent<Rigidbody2D>();
 		_animator = GetComponent<Animator>();
 		_collider = GetComponent<CapsuleCollider2D>();
-
-		if (isFirstPlayer) {
-			Vector3 position = _transform.position;
-			position.y += 1.8f;
-			_transform.position = position;
-		}
 
 		lastStablePosition = new Vector2(_transform.position.x, rayCastPosition.position.y - hoverHeight);
 	}
@@ -66,7 +61,6 @@ public class Character : MonoBehaviour {
 	public void Jump() {
 		if(!isJumping) {
 			isJumping = true;
-			_animator.SetTrigger("Jump");
 			_collider.isTrigger = true;
 			// add a force in the up direction
 			_rigidbody.velocity = Vector3.zero;
@@ -104,6 +98,29 @@ public class Character : MonoBehaviour {
 			// reset jump after sometime
 			Invoke("allowJump", 0.3f);
 		}
+	}
+
+	// Checking to see if the sprite should be flipped
+	// this is done in LateUpdate since the Animator may override the localScale
+	void LateUpdate() {
+		// get the current scale
+		Vector3 localScale = _transform.localScale;
+		float _vx = _rigidbody.velocity.x;
+
+		if (_vx > 0) {
+			facingRight = true;
+		} else if (_vx < 0) { // moving left so face left
+			facingRight = false;
+		}
+
+		// check to see if scale x is right for the player
+		// if not, multiple by -1 which is an easy way to flip a sprite
+		if (((facingRight) && (localScale.x > 0)) || ((!facingRight) && (localScale.x < 0))) {
+			localScale.x *= -1;
+		}
+
+		// update the scale
+		_transform.localScale = localScale;
 	}
 
 	public Vector2 GetLastStablePosition() {
