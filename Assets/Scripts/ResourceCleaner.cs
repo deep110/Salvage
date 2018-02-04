@@ -7,7 +7,7 @@
 public class ResourceCleaner : MonoBehaviour {
 	
 	void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.CompareTag("Egg") || other.gameObject.CompareTag("Enemy")) {
+        if (other.gameObject.CompareTag("Crystal") || other.gameObject.CompareTag("Enemy")) {
             other.gameObject.SetActive(false);
         } else if (other.gameObject.CompareTag("PowerUp")) {
         	if (!other.gameObject.GetComponent<PowerUp>().IsActive) {

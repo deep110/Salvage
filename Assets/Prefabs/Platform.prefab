@@ -79,10 +79,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPositions:
-  - {x: -2, y: 0.36, z: 0}
-  - {x: -0.7, y: 0.36, z: 0}
-  - {x: 0.7, y: 0.36, z: 0}
-  - {x: 2, y: 0.36, z: 0}
+  - {x: -2, y: 0.7, z: 0}
+  - {x: -0.7, y: 0.7, z: 0}
+  - {x: 0.7, y: 0.7, z: 0}
+  - {x: 2, y: 0.7, z: 0}
   platformIndex: 0
 --- !u!212 &212888456561825972
 SpriteRenderer:

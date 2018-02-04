@@ -28,8 +28,8 @@ public class CharacterCollider : MonoBehaviour {
 				StartCoroutine(HandleEnemyCollision());
 			}
 
-		} else if (other.CompareTag("Egg")) {
-			other.gameObject.GetComponent<Egg>().Fall();
+		} else if (other.CompareTag("Crystal")) {
+			other.gameObject.GetComponent<Crystal>().Fall();
 
 		} else if (other.CompareTag("PowerUp")) {
 			PowerUpManager.Instance.AddActivePowerUp(other.gameObject.GetComponent<PowerUp>());

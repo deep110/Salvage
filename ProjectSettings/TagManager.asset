@@ -10,8 +10,8 @@ TagManager:
   - PlayerTwo
   - Enemy
   - PowerUp
-  - Egg
   - Spike Trig
+  - Crystal
   layers:
   - Default
   - TransparentFX

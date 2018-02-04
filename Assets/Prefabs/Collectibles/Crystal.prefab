@@ -22,10 +22,11 @@ GameObject:
   - component: {fileID: 212280738054859566}
   - component: {fileID: 50664505808879644}
   - component: {fileID: 58228005899899868}
+  - component: {fileID: 95210241439230698}
   - component: {fileID: 114031039035653696}
   m_Layer: 0
-  m_Name: Egg
-  m_TagString: Egg
+  m_Name: Crystal
+  m_TagString: Crystal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +79,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.03}
   serializedVersion: 2
   m_Radius: 0.19
+--- !u!95 &95210241439230698
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1954554939540690}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 280291c0a908a4a7bbe8ff73def95379, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114031039035653696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,7 +142,7 @@ SpriteRenderer:
   m_SortingLayerID: 1758957141
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ca369321496e04ffdaf6ee21a4f3bc15, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e6a7b23d0da84a1db8ba7a4ba1b4ba9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

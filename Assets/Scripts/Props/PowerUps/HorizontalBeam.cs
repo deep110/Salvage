@@ -86,8 +86,8 @@ public class HorizontalBeam : PowerUp {
                                     new Vector2(4f, 0.63f), 0, K_layerMask);
 
         for (int i = 0; i < colliders.Length; i++) {
-            if (colliders[i].CompareTag("Egg")) {
-                colliders[i].GetComponent<Egg>().Collect();
+            if (colliders[i].CompareTag("Crystal")) {
+                colliders[i].GetComponent<Crystal>().Collect();
             }
         }
 

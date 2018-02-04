@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Egg : MonoBehaviour {
+public class Crystal : MonoBehaviour {
 
 	public Vector2 fallVelocity = new Vector2(0, -3);
 
