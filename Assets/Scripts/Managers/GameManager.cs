@@ -2,12 +2,12 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GameManager : PersistentSingleton <GameManager> {
+public class GameManager : PersistentSingleton<GameManager> {
 
-	private IEnumerator Start () {
-		LocalizationManager.Instance.LoadLocalizedText("english");
+    private IEnumerator Start() {
+        LocalizationManager.Instance.LoadLocalizedText("english");
 
-		while (!LocalizationManager.Instance.IsReady()) {
+        while (!LocalizationManager.Instance.IsReady()) {
             yield return null;
         }
 

@@ -1,1 +1,16 @@
-{"items":[{"key":"game_title","value":"सालवेज"},{"key":"button_start","value":"शुरू करें"},{"key":"text_game_over","value":"समाप्त"}]}
+{
+    "items": [
+        {
+            "key": "game_title",
+            "value": "सालवेज"
+        },
+        {
+            "key": "button_start",
+            "value": "शुरू करें"
+        },
+        {
+            "key": "text_game_over",
+            "value": "समाप्त"
+        }
+    ]
+}

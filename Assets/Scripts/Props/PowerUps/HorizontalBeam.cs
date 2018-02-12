@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class HorizontalBeam : PowerUp {
 
-	public GameObject dragableSprite;
+    public GameObject dragableSprite;
 
-	private enum BeamState {
-		START,
-		ONGOING,
-		FIRE,
-		NONE
-	}
+    private enum BeamState {
+        START,
+        ONGOING,
+        FIRE,
+        NONE
+    }
 
-	private GameObject beamButton;
+    private GameObject beamButton;
     private GameObject beam;
-	private BeamState beamState;
+    private BeamState beamState;
 
     protected const int K_layerMask = 1 << 0;
 
 
-	protected override void Start() {
+    protected override void Start() {
         base.Start();
         beam = transform.GetChild(0).gameObject;
         beamButton = UIManager.Instance.hBeamButton;
@@ -33,7 +33,7 @@ public class HorizontalBeam : PowerUp {
     }
 
     public override void Tick() {
-		switch(beamState) {
+        switch (beamState) {
 
             case BeamState.START:
                 base.Tick();
@@ -56,24 +56,24 @@ public class HorizontalBeam : PowerUp {
                 break;
 
             case BeamState.NONE:
-            	timeSinceStart = duration;
+                timeSinceStart = duration;
                 base.Tick();
                 break;
         }
     }
 
-	public override void Ended() {
+    public override void Ended() {
         beamButton.SetActive(false);
         base.Ended();
     }
 
     private Vector3 getTouchPosition() {
-    	Vector3 position = (Application.isMobilePlatform)
-    			? Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)
-    			: Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 position = (Application.isMobilePlatform)
+                ? Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)
+                : Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-     	position.z = 0;
-     	return position;
+        position.z = 0;
+        return position;
     }
 
     private IEnumerator fireBeam(float beamPositionY) {

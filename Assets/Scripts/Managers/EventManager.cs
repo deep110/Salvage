@@ -1,38 +1,38 @@
 ﻿
 public static class EventManager {
 
-	public delegate void Call();
-	public delegate void CallArgs<T>(T arg0);
-	
-	// game over event
-	public static event Call GameOverEvent;
+    public delegate void Call();
+    public delegate void CallArgs<T>(T arg0);
 
-	public static void GameOver() {
-		if(GameOverEvent != null)
-	        GameOverEvent();
-	}
+    // game over event
+    public static event Call GameOverEvent;
 
-	// coin collect event
-	public static event Call CoinCollectEvent;
+    public static void GameOver() {
+        if (GameOverEvent != null)
+            GameOverEvent();
+    }
 
-	public static void CoinCollected() {
-		if(CoinCollectEvent != null)
-	        CoinCollectEvent();
-	}
+    // coin collect event
+    public static event Call CoinCollectEvent;
 
-	// platform climb event
-	public static event CallArgs <int> PlatformClimbEvent;
+    public static void CoinCollected() {
+        if (CoinCollectEvent != null)
+            CoinCollectEvent();
+    }
 
-	public static void PlatformClimbed(int platformNumber) {
-		if(PlatformClimbEvent != null)
-	        PlatformClimbEvent(platformNumber);
-	}
+    // platform climb event
+    public static event CallArgs<int> PlatformClimbEvent;
 
-	// platform clear event
-	public static event Call PlatformClearEvent;
+    public static void PlatformClimbed(int platformNumber) {
+        if (PlatformClimbEvent != null)
+            PlatformClimbEvent(platformNumber);
+    }
 
-	public static void PlatformClear() {
-		if (PlatformClearEvent != null)
-			PlatformClearEvent ();
-	}
+    // platform clear event
+    public static event Call PlatformClearEvent;
+
+    public static void PlatformClear() {
+        if (PlatformClearEvent != null)
+            PlatformClearEvent();
+    }
 }

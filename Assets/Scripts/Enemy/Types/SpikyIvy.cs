@@ -2,7 +2,7 @@
 
 public class SpikyIvy : Enemy {
 
-	public void Spawn() {
-		
-	}
+    public void Spawn() {
+
+    }
 }

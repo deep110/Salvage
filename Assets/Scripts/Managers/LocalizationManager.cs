@@ -10,29 +10,29 @@ public class LocalizationItem {
 
 [System.Serializable]
 public class LocalizationData {
-    public LocalizationItem [] items;
+    public LocalizationItem[] items;
 }
 
 
-public class LocalizationManager : PersistentSingleton <LocalizationManager> {
+public class LocalizationManager : PersistentSingleton<LocalizationManager> {
 
-	private Dictionary<string, string> localizedText;
-	private bool isReady;
+    private Dictionary<string, string> localizedText;
+    private bool isReady;
 
-	public void LoadLocalizedText(string languageName){
+    public void LoadLocalizedText(string languageName) {
 
-        localizedText = new Dictionary <string, string> ();
-        string filePath = Path.Combine(Application.streamingAssetsPath, "text_"+languageName+".json");
+        localizedText = new Dictionary<string, string>();
+        string filePath = Path.Combine(Application.streamingAssetsPath, "text_" + languageName + ".json");
 
         if (File.Exists(filePath)) {
             string dataAsJson = File.ReadAllText(filePath);
             LocalizationData loadedData = JsonUtility.FromJson<LocalizationData>(dataAsJson);
 
-            for (int i = 0; i < loadedData.items.Length; i++){
-                localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);   
+            for (int i = 0; i < loadedData.items.Length; i++) {
+                localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);
             }
         } else {
-            Debug.LogError ("Cannot find file!");
+            Debug.LogError("Cannot find file!");
             isReady = false;
         }
 
@@ -44,7 +44,7 @@ public class LocalizationManager : PersistentSingleton <LocalizationManager> {
     }
 
     public bool IsReady() {
-    	return isReady;
+        return isReady;
     }
 
 }

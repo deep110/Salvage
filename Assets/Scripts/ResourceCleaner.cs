@@ -5,14 +5,14 @@
 * or enemies.
 */
 public class ResourceCleaner : MonoBehaviour {
-	
-	void OnTriggerExit2D(Collider2D other) {
+
+    void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("Crystal") || other.gameObject.CompareTag("Enemy")) {
             other.gameObject.SetActive(false);
         } else if (other.gameObject.CompareTag("PowerUp")) {
-        	if (!other.gameObject.GetComponent<PowerUp>().IsActive) {
-        		Destroy(other.gameObject);
-        	}
+            if (!other.gameObject.GetComponent<PowerUp>().IsActive) {
+                Destroy(other.gameObject);
+            }
         }
     }
 }

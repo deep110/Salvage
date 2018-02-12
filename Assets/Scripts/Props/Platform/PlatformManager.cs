@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlatformManager : Singleton <PlatformManager> {
+public class PlatformManager : Singleton<PlatformManager> {
 
     public GameObject _platform;
     public GameObject _coin;
@@ -34,7 +34,7 @@ public class PlatformManager : Singleton <PlatformManager> {
         return coinPooler.GetPooledObject();
     }
 
-    private void initPlatforms () {
+    private void initPlatforms() {
         for (int i = 0; i < 5; i++) {
             AddPlatform();
         }

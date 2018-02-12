@@ -11,7 +11,7 @@ using System.Collections.Generic;
 /// </summary>
 public class WeightedRandomizer<T> {
 
-	private static WeightedRandomizer<T> _instance;
+    private static WeightedRandomizer<T> _instance;
     private static Dictionary<T, int> _weights;
 
     private static Random _random = new Random();
@@ -20,11 +20,11 @@ public class WeightedRandomizer<T> {
     ///		An ordered list with the current spawn rates. The list will be updated
     ///     so that selected items will have a smaller chance of being repeated.
     /// </param>
-    public static WeightedRandomizer<T> From(Dictionary<T, int> weights){
-    	if (_instance == null) {
-    		_instance = new WeightedRandomizer<T>();
-    	}
-    	_weights = weights;
+    public static WeightedRandomizer<T> From(Dictionary<T, int> weights) {
+        if (_instance == null) {
+            _instance = new WeightedRandomizer<T>();
+        }
+        _weights = weights;
         return _instance;
     }
 

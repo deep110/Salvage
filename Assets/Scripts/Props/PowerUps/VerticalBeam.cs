@@ -33,7 +33,7 @@ public class VerticalBeam : PowerUp {
     }
 
     public override void Tick() {
-        switch(beamState) {
+        switch (beamState) {
 
             case BeamState.START:
                 base.Tick();

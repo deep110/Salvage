@@ -5,9 +5,9 @@ public class PlatformDetector : MonoBehaviour {
 
     public bool isTopEdge = true;
 
-	private PlatformManager platformManager;
+    private PlatformManager platformManager;
 
-	void Start() {
+    void Start() {
         platformManager = PlatformManager.Instance;
     }
 

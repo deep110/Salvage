@@ -7,7 +7,7 @@
 
 public class PersistentSingleton<T> : MonoBehaviour where T : MonoBehaviour {
 
-	private static T _instance;
+    private static T _instance;
 
     public static T Instance { get { return _instance; } }
 
@@ -18,7 +18,7 @@ public class PersistentSingleton<T> : MonoBehaviour where T : MonoBehaviour {
             Destroy(gameObject);
         } else {
             _instance = this as T;
-            DontDestroyOnLoad (this);
+            DontDestroyOnLoad(this);
         }
     }
 }

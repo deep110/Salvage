@@ -2,34 +2,34 @@ using UnityEngine;
 
 public class Shield : PowerUp {
 
-	private CharacterCollider playerOneCollider;
-	private CharacterCollider playerTwoCollider;
+    private CharacterCollider playerOneCollider;
+    private CharacterCollider playerTwoCollider;
 
-	protected override void Start() {
+    protected override void Start() {
         base.Start();
 
         playerOneCollider = PlayerManager.Instance.playerOne.GetComponent<CharacterCollider>();
-		playerTwoCollider = PlayerManager.Instance.playerTwo.GetComponent<CharacterCollider>();
+        playerTwoCollider = PlayerManager.Instance.playerTwo.GetComponent<CharacterCollider>();
     }
 
-	public override void Collected() {
+    public override void Collected() {
         base.Collected();
 
         playerOneCollider.ActivateShield();
-		playerTwoCollider.ActivateShield();
+        playerTwoCollider.ActivateShield();
     }
 
     public override void Tick() {
-		base.Tick();
+        base.Tick();
 
-		if (!(playerOneCollider.isShieldActive && playerTwoCollider.isShieldActive)) {
-			timeSinceStart = duration;
-		}
+        if (!(playerOneCollider.isShieldActive && playerTwoCollider.isShieldActive)) {
+            timeSinceStart = duration;
+        }
     }
 
-	public override void Ended() {
+    public override void Ended() {
         playerOneCollider.DeActivateShield();
-		playerTwoCollider.DeActivateShield();
+        playerTwoCollider.DeActivateShield();
 
         base.Ended();
     }
