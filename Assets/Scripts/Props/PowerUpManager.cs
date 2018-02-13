@@ -55,7 +55,7 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     public void AddActivePowerUp(PowerUp powerUp) {
         if (!powerUp.IsActive) {
             for (int i = 0; i < activePowerUps.Count; i++) {
-                if (activePowerUps[i].powerUpName == powerUp.powerUpName) {
+                if (activePowerUps[i].name == powerUp.name) {
                     activePowerUps[i].ResetTime();
                     Destroy(powerUp.gameObject); // now remove this powerup
                     return;

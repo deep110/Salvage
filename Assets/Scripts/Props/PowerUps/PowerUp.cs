@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
 public abstract class PowerUp : MonoBehaviour {
 
-    public string powerUpName;
+    public new string name;
     public float duration;
     public float fallSpeed = 1.6f;
 
