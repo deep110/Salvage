@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
 
-public class Copter : Enemy {
+public class Copter : Enemy, IAttackable {
 
-    public Vector2 _velocity;
-    private Rigidbody2D _rigidbody;
-
-    protected override void Awake() {
-        base.Awake();
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
+    public float speed = 1.3f;
 
     void OnEnable() {
-        _velocity.Set(0, -1.3f);
-        _rigidbody.velocity = _velocity;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, -speed);
     }
+
+    public void Attack(int difficultyLevel, Vector2 playerPosition, int platformLevel) {
+        _transform.position = new Vector3(playerPosition.x, playerPosition.y + 8f, 0);
+    }
+
 }

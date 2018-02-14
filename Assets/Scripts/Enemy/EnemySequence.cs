@@ -17,6 +17,5 @@ public class EnemySequence : ScriptableObject {
         public EnemyType enemyType;
         public float waitTime;
         public int platformLevel;
-        public bool direction;
     }
 }

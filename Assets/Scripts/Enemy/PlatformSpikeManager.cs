@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpikeTriggerController : MonoBehaviour {
+public class PlatformSpikeManager : MonoBehaviour, IAttackable {
 
     public float speed = 1f;
 
@@ -23,5 +23,9 @@ public class SpikeTriggerController : MonoBehaviour {
 
     public void SetSpeed(float speed) {
         this.speed = speed;
+    }
+
+    public void Attack(int difficultyLevel, Vector2 playerPosition, int platformLevel) {
+        
     }
 }

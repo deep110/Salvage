@@ -1,32 +1,30 @@
 using UnityEngine;
 
-public class Ball : Enemy {
+public class Ball : Enemy, IAttackable {
 
-    public Vector2 _velocity;
+    public float speed = 1.3f;
+
+    private Vector2 _velocity = Vector2.zero;
 
     void OnEnable() {
         GetComponent<Rigidbody2D>().velocity = _velocity;
     }
 
-    /**
-	 * @param {boolean} right - indicating whether ball should start from left
-	 *							or right
-	 */
-    public void Roll(bool right) {
-        var localPosition = new Vector3();
+    public void Attack(int difficultyLevel, Vector2 playerPosition, int platformLevel) {
+        float ballPositionY = playerPosition.y + platformLevel * PLATFORM_GAP + 1.3f;
+        var localPosition = new Vector3(MAX_SCREEN_X, ballPositionY, 0);
         Vector3 localScale = _transform.localScale;
+        _velocity.x = speed;
 
-        if (right) {
-            _velocity.Set(1.3f, 0);
-            localPosition.Set(-3f, 1.3f, 0);
+        if (playerPosition.x > 0) {
+            localPosition.x *= -1;
             localScale.x = -1;
         } else {
-            _velocity.Set(-1.3f, 0);
-            localPosition.Set(3f, 1.3f, 0);
             localScale.x = 1;
+            _velocity.x *= -1;
         }
 
-        _transform.position += localPosition;
+        _transform.position = localPosition;
         _transform.localScale = localScale;
     }
 }

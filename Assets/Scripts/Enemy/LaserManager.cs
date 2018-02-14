@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class LaserManager : MonoBehaviour {
+public class LaserManager : MonoBehaviour, IAttackable {
 
     private enum LaserSetState {
         HIDDEN, TO_BE_SEEN, SEEN, TO_BE_HIDDEN
@@ -59,7 +59,7 @@ public class LaserManager : MonoBehaviour {
         }
     }
 
-    public float Activate() {
+    public void Attack(int difficultyLevel, Vector2 playerPosition, int platformLevel) {
         //The first laser starts initialDelay seconds after it is enabled
         const float initialDelay = 2f;
         timeElapsed = 0;
@@ -76,7 +76,7 @@ public class LaserManager : MonoBehaviour {
         duration += 3;
         duration += initialDelay;
         Invoke("DeactivateLaser", duration);
-        return duration;
+        // return duration;
     }
 
     private IEnumerator ActivateLaser(int laserIndex, float delay) {

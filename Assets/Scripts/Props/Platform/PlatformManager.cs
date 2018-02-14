@@ -5,7 +5,7 @@ public class PlatformManager : Singleton<PlatformManager> {
     public GameObject _platform;
     public GameObject _coin;
 
-    public float _platformGap = 1.65f;
+    public const float _platformGap = 1.65f;
     public float _initialPlatformPos = -1f;
 
     private ObjectPooler platformPooler;

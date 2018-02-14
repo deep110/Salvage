@@ -2,10 +2,14 @@
 
 public abstract class Enemy : MonoBehaviour {
 
-    protected Transform _transform;
     public bool isActive = true;
 
+    protected Transform _transform;
+    protected float PLATFORM_GAP = 1.65f;
+    protected float MAX_SCREEN_X = 3f;
+
     protected virtual void Awake() {
+        PLATFORM_GAP = PlatformManager._platformGap;
         _transform = GetComponent<Transform>();
     }
 
@@ -14,4 +18,5 @@ public abstract class Enemy : MonoBehaviour {
         // play sound
         gameObject.SetActive(false);
     }
+
 }
