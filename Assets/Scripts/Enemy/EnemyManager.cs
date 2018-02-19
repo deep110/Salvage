@@ -70,39 +70,19 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     private void spawnEnemy(int sequenceLevel, EnemySequence.EnemyData enemyData) {
         GameObject enemy = enemyPooler[enemyData.enemyType].GetPooledObject();
+        enemy.SetActive(true);        
         enemy.GetComponent<IAttackable>().Attack(
             sequenceLevel,
             playerOneController.GetLastStablePosition(),
             enemyData.platformLevel
         );
-        enemy.SetActive(true);
     }
 
     private EnemySequence getRandomSequence() {
         return levelZeroSequences[Random.Range(0, levelZeroSequences.Length)];
+        // return levelOneSequences[Random.Range(0, levelOneSequences.Length)];
+        // return levelTwoSequences[Random.Range(0, levelTwoSequences.Length)];
     }
-
-    #region old coroutines
-    private IEnumerator ManageSpikes() {
-        var spikesPooler = new ObjectPooler(enemies.spikes, 3);
-        yield return new WaitWhile(() => platformNumber <= 5);
-
-        while (!isGameOver) {
-            Vector2 lastStablePos = playerOneController.GetLastStablePosition();
-
-            if (platformNumber >= 30) {
-                GameObject spikes = spikesPooler.SpawnInActive(new Vector3(0, lastStablePos.y + 1.65f * 4, 0));
-                spikes.SetActive(true);
-            }
-
-            GameObject spikes2 = spikesPooler.SpawnInActive(new Vector3(0, lastStablePos.y + 1.65f * 3, 0));
-            spikes2.GetComponentInChildren<PlatformSpikeManager>().SetSpeed((2 * Random.Range(0, 1) - 1) * 1);
-            spikes2.SetActive(true);
-
-            yield return new WaitForSeconds(Random.Range(10f, 20f));
-        }
-    }
-    #endregion
 
     private void createEnemyPooler() {
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.BALL, new ObjectPooler(enemies.ball, 3));

@@ -24,6 +24,7 @@ public class LaserManager : MonoBehaviour, IAttackable {
     private Vector3 seenPosition;
 
     void Awake() {
+        transform.SetParent(Camera.main.transform);
         lasers = new Laser[NumberOfLasers];
         //Initialize lasers
         for (int i = 0; i < NumberOfLasers; i++) {
@@ -51,6 +52,7 @@ public class LaserManager : MonoBehaviour, IAttackable {
                 if (timeElapsed >= 1) {
                     current = LaserSetState.HIDDEN;
                     timeElapsed = 0;
+                    gameObject.SetActive(false);
                 }
                 break;
             case LaserSetState.HIDDEN:

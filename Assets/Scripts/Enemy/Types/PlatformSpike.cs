@@ -66,6 +66,9 @@ public class PlatformSpike : Enemy {
         }
     }
 
+    public override void Collided() {
+    }
+
     private float incrementTime(float time) {
         time += Time.deltaTime * speed;
         if (time > 1.0f) {

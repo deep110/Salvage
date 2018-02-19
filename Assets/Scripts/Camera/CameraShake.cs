@@ -26,8 +26,10 @@ public class CameraShake : MonoBehaviour {
     }
 
     public void Apply(float trauma) {
+        if (this.trauma == 0) {
+            basePosition = _transform.position;
+        }
         this.trauma = trauma;
-        basePosition = _transform.position;
     }
 
     private Vector3 Shake(float shake) {

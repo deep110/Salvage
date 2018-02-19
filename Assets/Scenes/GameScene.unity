@@ -262,6 +262,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 39}
+  - component: {fileID: 30}
   - component: {fileID: 43}
   - component: {fileID: 110}
   m_Layer: 8
@@ -422,6 +423,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &30
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 20}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5
 --- !u!4 &31
 Transform:
   m_ObjectHideFlags: 0
@@ -1279,8 +1300,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89921a812d5664ae9b674730a72823aa, type: 2}
   - {fileID: 11400000, guid: 278e99b536811418290953341f79ae59, type: 2}
   - {fileID: 11400000, guid: 74657d453e353406e8fa8c68faca568e, type: 2}
-  levelOneSequences: []
-  levelTwoSequences: []
+  - {fileID: 11400000, guid: bc19ad9d356f846de92d739462a43691, type: 2}
+  levelOneSequences:
+  - {fileID: 11400000, guid: ee6bebdbdf4cd434f8a283a642b8ccca, type: 2}
+  levelTwoSequences:
+  - {fileID: 11400000, guid: f8944de0168014441af62f3360e2abf6, type: 2}
 --- !u!114 &103
 MonoBehaviour:
   m_ObjectHideFlags: 0
