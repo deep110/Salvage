@@ -18,20 +18,20 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Time.timeScale = 1;
         uiManager = UIManager.Instance;
 
-        EventManager.CoinCollectEvent += onCoinCollected;
+        EventManager.CrystalCollectEvent += onCrystalCollected;
         EventManager.PlatformClimbEvent += onPlatformClimbed;
         EventManager.GameOverEvent += onGameOver;
         EventManager.PlatformClearEvent += onPlatformClear;
     }
 
     void OnDisable() {
-        EventManager.CoinCollectEvent -= onCoinCollected;
+        EventManager.CrystalCollectEvent -= onCrystalCollected;
         EventManager.PlatformClimbEvent -= onPlatformClimbed;
         EventManager.GameOverEvent -= onGameOver;
         EventManager.PlatformClearEvent -= onPlatformClear;
     }
 
-    private void onCoinCollected() {
+    private void onCrystalCollected() {
         score++;
         uiManager.UpdateScoreText(score);
     }

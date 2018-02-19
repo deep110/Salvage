@@ -13,11 +13,11 @@ public static class EventManager {
     }
 
     // coin collect event
-    public static event Call CoinCollectEvent;
+    public static event Call CrystalCollectEvent;
 
-    public static void CoinCollected() {
-        if (CoinCollectEvent != null)
-            CoinCollectEvent();
+    public static void CrystalCollected() {
+        if (CrystalCollectEvent != null)
+            CrystalCollectEvent();
     }
 
     // platform climb event

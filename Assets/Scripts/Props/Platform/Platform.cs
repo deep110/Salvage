@@ -51,7 +51,7 @@ public class Platform : MonoBehaviour {
 
     /// called by coin child to tell that it has been collected.
     /// It also checks if all coins on platform have been collected or not
-    public void SetCoinFall() {
+    public void SetCrystalFall() {
         numberCoinsFallen++;
 
         // Check if all platform coins are collected by the player

@@ -22,8 +22,8 @@ public class Crystal : MonoBehaviour {
     }
 
     public void Collect() {
-        GetComponent<Transform>().GetComponentInParent<Platform>().SetCoinFall();
-        EventManager.CoinCollected();
+        GetComponent<Transform>().GetComponentInParent<Platform>().SetCrystalFall();
+        EventManager.CrystalCollected();
         gameObject.SetActive(false);
         isFalling = false;
     }
