@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4b9923cacae49a58926b38e8079261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpName: Shield
+  name: Shield
   duration: 8
   fallSpeed: 1.6
 --- !u!212 &212043574620062268

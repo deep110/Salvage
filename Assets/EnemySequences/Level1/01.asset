@@ -16,3 +16,9 @@ MonoBehaviour:
   - enemyType: 3
     waitTime: 0
     platformLevel: 0
+  - enemyType: 2
+    waitTime: 8
+    platformLevel: 0
+  - enemyType: 2
+    waitTime: 2
+    platformLevel: 0

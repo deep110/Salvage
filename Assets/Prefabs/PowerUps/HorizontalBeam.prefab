@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab7d413851f34385aa3638fc11ece6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpName: HorizontalBeam
+  name: HorizontalBeam
   duration: 15
   fallSpeed: 1.6
   dragableSprite: {fileID: 1711623318215644, guid: c984ffdbe702a40d391b313d137b1e2c,

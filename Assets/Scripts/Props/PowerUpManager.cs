@@ -72,10 +72,11 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     }
 
     private IEnumerator GeneratePowerUps() {
+        var _wd = new WeightedRandomizer<GameObject>(powerUpWeights);
         while (!isGameOver) {
             yield return new WaitForSeconds(10f);
 
-            GameObject selected = WeightedRandomizer<GameObject>.From(powerUpWeights).TakeOne();
+            GameObject selected = _wd.TakeOne();
             var powerUpPosition = new Vector3(
                 Random.Range(-2.5f, 2.5f),
                 _camera.position.y + 6f,
