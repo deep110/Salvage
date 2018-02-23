@@ -4,9 +4,9 @@ public class Ball : Enemy, IAttackable {
 
     public float speed = 1.3f;
 
-    private Vector2 _velocity = Vector2.zero;
+    private Vector2 _velocity;
 
-    void OnEnable() {
+    private void OnEnable() {
         GetComponent<Rigidbody2D>().velocity = _velocity;
     }
 

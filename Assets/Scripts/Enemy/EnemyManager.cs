@@ -24,18 +24,17 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     private bool isGameOver;
     private int platformNumber;
+    private int randomizerLevel = 0;
+    private WeightedRandomizer<int> weightedRandomizer;
 
 
     void OnEnable() {
         EventManager.GameOverEvent += gameOver;
         EventManager.PlatformClimbEvent += platformClimbed;
 
-        isGameOver = false;
         playerOneController = PlayerManager.Instance.playerOneController;
 
-        enemyPooler = new Dictionary<EnemySequence.EnemyData.EnemyType, ObjectPooler>();
         createEnemyPooler();
-
         StartCoroutine(SpawnEnemies());
     }
 
@@ -63,34 +62,74 @@ public class EnemyManager : Singleton<EnemyManager> {
                 }
 
                 // wait time between each sequence
-                yield return new WaitForSeconds(3.5f);
+                yield return new WaitForSeconds(2.5f);
             }
         }
     }
 
     private void spawnEnemy(int sequenceLevel, EnemySequence.EnemyData enemyData) {
         GameObject enemy = enemyPooler[enemyData.enemyType].GetPooledObject();
-        enemy.SetActive(true);        
         enemy.GetComponent<IAttackable>().Attack(
             sequenceLevel,
             playerOneController.GetLastStablePosition(),
             enemyData.platformLevel
         );
+        enemy.SetActive(true);        
     }
 
     private EnemySequence getRandomSequence() {
-        return levelZeroSequences[Random.Range(0, levelZeroSequences.Length)];
-        // return levelOneSequences[Random.Range(0, levelOneSequences.Length)];
-        // return levelTwoSequences[Random.Range(0, levelTwoSequences.Length)];
+        EnemySequence enemySequence = null;
+        if (platformNumber <= 30) {
+            enemySequence = levelZeroSequences[Random.Range(0, levelZeroSequences.Length)];
+        } else if (platformNumber <= 60) {
+            updateRandomizer(1);
+            int seqLevel = weightedRandomizer.TakeOne();
+            if (seqLevel == 1) {
+                enemySequence = levelOneSequences[Random.Range(0, levelOneSequences.Length)];
+            } else {
+                enemySequence = levelZeroSequences[Random.Range(0, levelZeroSequences.Length)];
+                enemySequence.level = 1;
+            }
+        } else {
+            updateRandomizer(2);
+            int seqLevel = weightedRandomizer.TakeOne();
+            if (seqLevel == 2) {
+                enemySequence = levelTwoSequences[Random.Range(0, levelTwoSequences.Length)];
+            } else if (seqLevel == 1) {
+                enemySequence = levelOneSequences[Random.Range(0, levelOneSequences.Length)];
+                enemySequence.level = 2;
+            } else {
+                enemySequence = levelZeroSequences[Random.Range(0, levelZeroSequences.Length)];
+                enemySequence.level = 2;
+            }
+        }
+
+        return enemySequence;
     }
 
     private void createEnemyPooler() {
+        enemyPooler = new Dictionary<EnemySequence.EnemyData.EnemyType, ObjectPooler>();
+        
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.BALL, new ObjectPooler(enemies.ball, 3));
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.COPTER, new ObjectPooler(enemies.copter, 2));
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.SPIKY_IVY, new ObjectPooler(enemies.spikyIvy, 3));
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.TANK, new ObjectPooler(enemies.tank, 2));
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.LASER, new ObjectPooler(enemies.laserGrid, 1));
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.PLATFORM_SPIKE, new ObjectPooler(enemies.spikes, 2));
+    }
+
+    private void updateRandomizer(int currentLevel) {
+        if (currentLevel == 1 && randomizerLevel != 1) {
+            weightedRandomizer = new WeightedRandomizer<int>(new Dictionary<int, int> {
+                {0, 60}, {1, 40}
+            });
+            randomizerLevel = 1;
+        } else if (currentLevel == 2 && randomizerLevel != 2) {
+            weightedRandomizer = new WeightedRandomizer<int>(new Dictionary<int, int> {
+                {0, 45}, {1, 30}, {2, 25}
+            });
+            randomizerLevel = 2;
+        }
     }
 
     private void platformClimbed(int platformNumber) {

@@ -38,6 +38,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     private void onPlatformClimbed(int platforms) {
         platformsClimbed = platforms;
+        uiManager.UpdatePlatformText(platforms);
     }
 
     private void onGameOver() {

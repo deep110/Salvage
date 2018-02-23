@@ -31,6 +31,17 @@ public class WeightedRandomizer<T> {
         }
     }
 
+    public void UpdateWeights(Dictionary<T, int> weights) {
+        // Sorts the weights list
+        _sortedItems = Sort(weights);
+
+        totalWeights = 0;
+        // Sums all spawn rates
+        foreach (var spawn in weights) {
+            totalWeights += spawn.Value;
+        }
+    }
+
     /// <summary>
     /// Randomizes one item
     /// </summary>

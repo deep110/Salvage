@@ -17,6 +17,9 @@ public class Laser : Enemy {
         StartCoroutine(ManageLaser());
     }
 
+    public override void Collided() {
+    }
+
     private IEnumerator ManageLaser() {
         // activate warmup
         warmup.SetActive(true);

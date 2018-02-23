@@ -9,16 +9,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c8bc6722df944df79333c077249ba69, type: 3}
-  m_Name: 01
+  m_Name: 02
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
   enemies:
-  - enemyType: 3
+  - enemyType: 1
     waitTime: 0
-    platformLevel: 0
+    platformLevel: 1
+  - enemyType: 4
+    waitTime: 0
+    platformLevel: 3
+  - enemyType: 0
+    waitTime: 4
+    platformLevel: 3
   - enemyType: 2
-    waitTime: 8
-    platformLevel: 0
-  - enemyType: 2
-    waitTime: 2
+    waitTime: 6
     platformLevel: 0

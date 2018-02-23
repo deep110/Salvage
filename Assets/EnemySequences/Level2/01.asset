@@ -11,8 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8bc6722df944df79333c077249ba69, type: 3}
   m_Name: 01
   m_EditorClassIdentifier: 
-  level: 0
+  level: 2
   enemies:
   - enemyType: 4
     waitTime: 0
     platformLevel: 3
+  - enemyType: 2
+    waitTime: 10
+    platformLevel: 0

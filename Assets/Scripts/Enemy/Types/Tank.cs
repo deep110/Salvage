@@ -6,7 +6,7 @@ public class Tank : Enemy, IAttackable {
 
     private Vector2 _velocity;
 
-    void OnEnable() {
+    private void OnEnable() {
         GetComponent<Rigidbody2D>().velocity = _velocity;
     }
 

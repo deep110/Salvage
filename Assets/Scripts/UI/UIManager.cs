@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager> {
 
     public Text scorePanel;
+    public Text platformPanel;
     public GameObject menuPanel;
 
     public GameObject hBeamButton;
@@ -17,6 +18,10 @@ public class UIManager : Singleton<UIManager> {
 
     public void UpdateScoreText(int score) {
         scorePanel.text = score.ToString();
+    }
+
+    public void UpdatePlatformText(int score) {
+        platformPanel.text = score.ToString();
     }
 
     public void ShowPlatformClear() {
