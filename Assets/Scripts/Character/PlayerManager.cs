@@ -36,25 +36,25 @@ public class PlayerManager : Singleton<PlayerManager> {
     void FixedUpdate() {
         if (jump) {
             jumpPlayers();
+        }
+
+        switch (inputManager.GetCurrentState()) {
+            case InputManager.InputState.MOVE:
+                playerOneController.Move(inputManager.GetDeltaX());
+                break;
+
+            case InputManager.InputState.NONE:
+            case InputManager.InputState.STILL:
+                playerOneController.Move(0);
+                break;
+        }
+
+        // make playerTwo follow player one
+        float diff = (playerOne.position.x - playerTwo.position.x);
+        if (Mathf.Abs(diff) > 0.08f) {
+            playerTwoController.Move(diff);
         } else {
-            switch (inputManager.GetCurrentState()) {
-                case InputManager.InputState.MOVE:
-                    playerOneController.Move(inputManager.GetDeltaX());
-                    break;
-
-                case InputManager.InputState.NONE:
-                case InputManager.InputState.STILL:
-                    playerOneController.Move(0);
-                    break;
-            }
-
-            // make playerTwo follow player one
-            float diff = (playerOne.position.x - playerTwo.position.x);
-            if (Mathf.Abs(diff) > 0.08f) {
-                playerTwoController.Move(diff);
-            } else {
-                playerTwoController.Move(0);
-            }
+            playerTwoController.Move(0);
         }
 
         playerOneController.Hover();

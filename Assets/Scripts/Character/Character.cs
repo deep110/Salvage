@@ -64,7 +64,7 @@ public class Character : MonoBehaviour {
             _collider.isTrigger = true;
             // add a force in the up direction
             _rigidbody.velocity = Vector3.zero;
-            _rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            _rigidbody.AddRelativeForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             // play the jump sound
         }
     }
