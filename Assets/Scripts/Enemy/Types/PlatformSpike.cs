@@ -2,6 +2,8 @@
 
 public class PlatformSpike : Enemy {
 
+    public Sprite [] spikes;
+
     public float height = 0.3f;
     public float speed = 0.7f;
 
@@ -18,6 +20,7 @@ public class PlatformSpike : Enemy {
         currentState = State.OPEN;
         position.x = transform.localPosition.x;
         isActive = true;
+        GetComponent<SpriteRenderer>().sprite = spikes[Random.Range(0, spikes.Length)];
     }
 
     void Update() {
