@@ -62,7 +62,13 @@ public class EnemyManager : Singleton<EnemyManager> {
                 }
 
                 // wait time between each sequence
-                yield return new WaitForSeconds(2.5f);
+                float waitSequenceTime = Random.Range(2.2f, 2.5f);
+                if (enemySequence.level == 1) {
+                    waitSequenceTime -= 0.5f;
+                } else if (enemySequence.level == 2) {
+                    waitSequenceTime -= Random.Range(0.5f, 0.8f);
+                }
+                yield return new WaitForSeconds(waitSequenceTime);
             }
         }
     }

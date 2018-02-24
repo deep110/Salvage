@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Ball : Enemy, IAttackable {
 
-    public float speed = 1.3f;
+    public float speed = 1.35f;
 
     private Vector2 _velocity;
 
@@ -14,7 +14,7 @@ public class Ball : Enemy, IAttackable {
         float ballPositionY = playerPosition.y + platformLevel * PLATFORM_GAP + 1.3f;
         var localPosition = new Vector3(MAX_SCREEN_X, ballPositionY, 0);
         Vector3 localScale = _transform.localScale;
-        _velocity.x = speed;
+        _velocity.x = getSpeed(difficultyLevel);
 
         if (playerPosition.x > 0) {
             localPosition.x *= -1;
@@ -26,5 +26,9 @@ public class Ball : Enemy, IAttackable {
 
         _transform.position = localPosition;
         _transform.localScale = localScale;
+    }
+
+    private float getSpeed(int difficultyLevel) {
+        return speed - difficultyLevel * (speed/10f);
     }
 }
