@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Copter : Enemy, IAttackable {
+public class Bee : Enemy, IAttackable {
 
     public float speed = 1.35f;
 
