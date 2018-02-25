@@ -263,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFirstPlayer: 1
   horiForce: 36
-  jumpForce: 175
+  jumpForce: 180
   hoverHeight: 0.5
   hoverForce: 50
   rayCastPosition: {fileID: 4481169007725384}
