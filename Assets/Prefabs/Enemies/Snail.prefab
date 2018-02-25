@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 212824168096203996}
   - component: {fileID: 50653206165884396}
   - component: {fileID: 61843284955015036}
-  - component: {fileID: 114462772698695582}
+  - component: {fileID: 114692005064064998}
   m_Layer: 0
-  m_Name: Tank
+  m_Name: Snail
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1175504685903638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2067957, y: -0.49048087, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,20 +75,20 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.26}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2190477, y: 1.2190477}
+    oldSize: {x: 1.1823529, y: 1.1823529}
     newSize: {x: 0.9, y: 0.9}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 1.26}
+  m_Size: {x: 0.95, y: 0.56}
   m_EdgeRadius: 0
---- !u!114 &114462772698695582
+--- !u!114 &114692005064064998
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,10 +96,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1175504685903638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ea1b69f25cb48edb86a627ad858b7d, type: 3}
+  m_Script: {fileID: 11500000, guid: b51d8bc04e4c04b09ae49770a2b4655b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _velocity: {x: 0, y: 0}
+  isActive: 1
+  speed: 0.3
 --- !u!212 &212824168096203996
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -134,7 +135,7 @@ SpriteRenderer:
   m_SortingLayerID: 959562883
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d1f9d54d1181344a8bc465f04fd8fd49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee704eebbd5fa417384b50cff8cd6be3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -597,10 +597,10 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: -7}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -5, y: 10}
+  - {x: -5, y: 11.5}
   - {x: -5, y: 0}
   - {x: 5, y: 0}
-  - {x: 5, y: 10}
+  - {x: 5, y: 11.5}
 --- !u!20 &44
 Camera:
   m_ObjectHideFlags: 0
