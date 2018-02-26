@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff79e005e82f8474994e6a3b3ebe3b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shockwave: {fileID: 1159975989410236, guid: 11834029e1113499e81b04d64b3ed2f5, type: 2}
   isShieldActive: 0
 --- !u!114 &114470665986477708
 MonoBehaviour:

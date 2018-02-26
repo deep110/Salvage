@@ -7,6 +7,8 @@ using UnityEngine;
 ///</summary>
 public class CharacterCollider : MonoBehaviour {
 
+    public GameObject shockwave;
+
     [HideInInspector]
     public bool isShieldActive;
 
@@ -53,12 +55,13 @@ public class CharacterCollider : MonoBehaviour {
 
     private IEnumerator HandleEnemyCollision() {
         cameraShake.Apply(0.5f);
+        Instantiate(shockwave, transform.position, Quaternion.identity);
 
         if (isShieldActive) {
             isShieldActive = false;
             StartCoroutine(BlinkPlayer(2f));
         } else {
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.6f);
             EventManager.GameOver();
         }
     }

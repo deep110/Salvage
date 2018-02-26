@@ -16,7 +16,7 @@ public class Snail : Enemy, IAttackable {
 
     private void FixedUpdate() {
         timeElasped += Time.fixedDeltaTime;
-        float velX = speedMin + (speedMax - speedMin) * Mathf.Sin(timeElasped);
+        float velX = speedMin + (speedMax - speedMin) * Mathf.Sin(1.5f * timeElasped);
 
         if (!isMovingRight) velX *= -1f;
 

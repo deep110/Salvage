@@ -2,7 +2,7 @@
 
 public class SpikyIvy : Enemy, IAttackable {
 
-    private float ivyWidth = 0.3f;
+    private float ivyWidth = 0.4f;
 
     public void Attack(int difficultyLevel, Vector2 playerPosition, int platformLevel) {
         float ivyPositionY = playerPosition.y + platformLevel * PLATFORM_GAP;
