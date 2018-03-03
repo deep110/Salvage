@@ -18,6 +18,7 @@ public class Character : MonoBehaviour {
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private CapsuleCollider2D _collider;
+    private Transform _lightingEmitter;
 
     // player tracking
     private bool isJumping;
@@ -36,6 +37,9 @@ public class Character : MonoBehaviour {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _collider = GetComponent<CapsuleCollider2D>();
+
+        if (!isFirstPlayer)
+            _lightingEmitter = _transform.GetChild(3);
 
         lastStablePosition = new Vector2(_transform.position.x, rayCastPosition.position.y - hoverHeight);
     }
@@ -63,7 +67,7 @@ public class Character : MonoBehaviour {
             isJumping = true;
             _collider.isTrigger = true;
             // add a force in the up direction
-            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.velocity = Vector2.zero;
             _rigidbody.AddRelativeForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             // play the jump sound
         }
@@ -121,6 +125,8 @@ public class Character : MonoBehaviour {
 
         // update the scale
         _transform.localScale = localScale;
+        if (!isFirstPlayer)
+            _lightingEmitter.localScale = localScale;
     }
 
     public Vector2 GetLastStablePosition() {

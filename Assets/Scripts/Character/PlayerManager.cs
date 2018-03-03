@@ -64,13 +64,9 @@ public class PlayerManager : Singleton<PlayerManager> {
     private void jumpPlayers() {
         if (!playerOneController.IsJumping && !playerTwoController.IsJumping) {
             playerOneController.Jump();
-            Invoke("JumpPlayerTwo", 0.1f);
+            playerTwoController.Jump();
             jump = false;
         }
-    }
-
-    private void JumpPlayerTwo() {
-        playerTwoController.Jump();
     }
 
 }
