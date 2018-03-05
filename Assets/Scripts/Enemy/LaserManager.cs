@@ -53,7 +53,6 @@ public class LaserManager : MonoBehaviour, IAttackable {
             //for last laser will turn on till 2 sec then turn off + 1 sec wait before lasers disappear
             duration += 3;
             duration += initialDelay;
-            print(duration);
             Invoke("DeactivateLaser", duration);
         }
     }
