@@ -10,6 +10,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject hBeamButton;
     public GameObject vBeamButton;
     public GameObject platformClearPanel;
+    public GameObject settingsPanel;
 
     public void OnPauseButtonClick() {
         Time.timeScale = 0;
@@ -31,5 +32,9 @@ public class UIManager : Singleton<UIManager> {
 
     private void HidePlatformClear() {
         platformClearPanel.SetActive(false);
+    }
+
+    public void setSettingsPanelState(bool open) {
+        settingsPanel.SetActive(open);
     }
 }
