@@ -5,10 +5,8 @@ public class UIManager : Singleton<UIManager> {
 
     public Text scorePanel;
     public Text platformPanel;
-    public GameObject menuPanel;
 
-    public GameObject hBeamButton;
-    public GameObject vBeamButton;
+    public GameObject menuPanel;
     public GameObject platformClearPanel;
     public GameObject settingsPanel;
 

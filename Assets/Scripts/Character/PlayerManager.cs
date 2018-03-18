@@ -12,9 +12,6 @@ public class PlayerManager : Singleton<PlayerManager> {
     [HideInInspector]
     public Character playerTwoController;
 
-    [HideInInspector]
-    public bool isBeamPowerUpActive;
-
     private InputManager inputManager;
     private bool jump;
 

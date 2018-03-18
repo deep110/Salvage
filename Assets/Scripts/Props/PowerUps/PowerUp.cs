@@ -20,6 +20,7 @@ public abstract class PowerUp : MonoBehaviour {
     /// starts powerup life time.
     public virtual void Collected() {
         GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         timeSinceStart = 0;
         active = true;
