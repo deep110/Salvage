@@ -4,24 +4,28 @@ public class PlatformManager : Singleton<PlatformManager> {
 
     public GameObject _platform;
     public GameObject _coin;
+    public Transform _groundPosition;
 
     public const float _platformGap = 1.65f;
-    public float _initialPlatformPos = -1f;
 
     private ObjectPooler platformPooler;
     private ObjectPooler coinPooler;
     private Vector3 platformPosition;
+    private float initialPlatformPos;    
 
     private int maxPlatformIndex;
 
     void Start() {
-        platformPooler = new ObjectPooler(_platform, 8);
-        coinPooler = new ObjectPooler(_coin, 32);
+        platformPooler = new ObjectPooler(_platform, 7);
+        coinPooler = new ObjectPooler(_coin, 28);
+        initialPlatformPos = _groundPosition.position.y + _platformGap;
+
+        // initialize the starting platforms
         initPlatforms();
     }
 
     public void AddPlatform() {
-        platformPosition.Set(0, _initialPlatformPos + maxPlatformIndex * _platformGap, 0);
+        platformPosition.Set(0, initialPlatformPos + maxPlatformIndex * _platformGap, 0);
 
         GameObject platform = platformPooler.SpawnInActive(platformPosition);
         maxPlatformIndex++;
