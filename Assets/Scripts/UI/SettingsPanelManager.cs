@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsManager : MonoBehaviour {
+public class SettingsPanelManager : MonoBehaviour {
 
 	public Toggle sound;
 	public Toggle vfx;

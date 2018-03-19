@@ -10,8 +10,6 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     public int score;
     public int platformsClimbed;
 
-    public GameObject gameOverDialog;
-
     private UIManager uiManager;
 
     void Start() {
@@ -20,14 +18,14 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
         EventManager.CrystalCollectEvent += onCrystalCollected;
         EventManager.PlatformClimbEvent += onPlatformClimbed;
-        EventManager.GameOverEvent += onGameOver;
+        EventManager.GameStateEvent += onGameOver;
         EventManager.PlatformClearEvent += onPlatformClear;
     }
 
     void OnDisable() {
         EventManager.CrystalCollectEvent -= onCrystalCollected;
         EventManager.PlatformClimbEvent -= onPlatformClimbed;
-        EventManager.GameOverEvent -= onGameOver;
+        EventManager.GameStateEvent -= onGameOver;
         EventManager.PlatformClearEvent -= onPlatformClear;
     }
 
@@ -38,15 +36,22 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     private void onPlatformClimbed(int platforms) {
         platformsClimbed = platforms;
-        uiManager.UpdatePlatformText(platforms);
+        // uiManager.UpdatePlatformText(platforms);
     }
 
-    private void onGameOver() {
-        // pause the game
-        Time.timeScale = 0;
+    private void onGameOver(bool isOver) {
+        if (isOver) {
+            // pause the game
+            Time.timeScale = 0;
 
-        // show the gameOver dialog
-        gameOverDialog.SetActive(true);
+            // show the gameOver dialog
+            uiManager.setPlayerRevivePanelState(true);
+        } else {
+            // revival is called
+            Time.timeScale = 1;
+            // disable the revival dialog
+            uiManager.setPlayerRevivePanelState(false);
+        }
     }
 
     private void onPlatformClear() {

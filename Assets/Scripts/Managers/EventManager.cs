@@ -5,11 +5,11 @@ public static class EventManager {
     public delegate void CallArgs<T>(T arg0);
 
     // game over event
-    public static event Call GameOverEvent;
+    public static event CallArgs<bool> GameStateEvent;
 
-    public static void GameOver() {
-        if (GameOverEvent != null)
-            GameOverEvent();
+    public static void GameStateChange(bool isOver) {
+        if (GameStateEvent != null)
+            GameStateEvent(isOver);
     }
 
     // coin collect event

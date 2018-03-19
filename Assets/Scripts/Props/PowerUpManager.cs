@@ -34,7 +34,7 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     }
 
     void Start() {
-        EventManager.GameOverEvent += gameOver;
+        EventManager.GameStateEvent += gameOver;
         StartCoroutine(GeneratePowerUps());
     }
 
@@ -67,14 +67,14 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     }
 
     void onDisable() {
-        EventManager.GameOverEvent -= gameOver;
+        EventManager.GameStateEvent -= gameOver;
         StopAllCoroutines();
     }
 
     private IEnumerator GeneratePowerUps() {
         var _wd = new WeightedRandomizer<GameObject>(powerUpWeights);
         while (!isGameOver) {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(Random.Range(15, 22));
 
             GameObject selected = _wd.TakeOne();
             var powerUpPosition = new Vector3(
@@ -85,7 +85,11 @@ public class PowerUpManager : Singleton<PowerUpManager> {
         }
     }
 
-    private void gameOver() {
-        isGameOver = true;
+    private void gameOver(bool isOver) {
+        isGameOver = isOver;
+        if (!isOver) {
+            StopAllCoroutines();
+            StartCoroutine(GeneratePowerUps());
+        }
     }
 }

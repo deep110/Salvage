@@ -61,8 +61,9 @@ public class CharacterCollider : MonoBehaviour {
             isShieldActive = false;
             StartCoroutine(BlinkPlayer(2f));
         } else {
+            GetComponent<Character>().PlayerDeath();
             yield return new WaitForSeconds(0.6f);
-            EventManager.GameOver();
+            EventManager.GameStateChange(true);
         }
     }
 

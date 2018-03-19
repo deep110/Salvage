@@ -31,8 +31,7 @@ public class Character : MonoBehaviour {
     private int platformsClimbed;
 
     void Awake() {
-        // get a reference to the components we are going to be changing and store
-        // a reference for efficiency purposes
+        // get a reference to the components
         _transform = GetComponent<Transform>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -132,6 +131,11 @@ public class Character : MonoBehaviour {
     public Vector2 GetLastStablePosition() {
         lastStablePosition.x = _transform.position.x;
         return lastStablePosition;
+    }
+
+    public void PlayerDeath() {
+        print("i m called");
+        _animator.SetTrigger("Death");
     }
 
     private void updatePlatformsClimbed() {

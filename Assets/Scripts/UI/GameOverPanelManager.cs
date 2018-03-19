@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverDialogManager : MonoBehaviour {
+public class GameOverPanelManager : MonoBehaviour {
 
     public void OnRestartAccepted() {
         // reload the scene

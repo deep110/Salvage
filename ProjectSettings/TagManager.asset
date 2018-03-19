@@ -51,11 +51,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Collectible
-    uniqueID: 1758957141
-    locked: 0
   - name: Enemy
     uniqueID: 959562883
+    locked: 0
+  - name: Collectible
+    uniqueID: 1758957141
     locked: 0
   - name: UI
     uniqueID: 1864545873

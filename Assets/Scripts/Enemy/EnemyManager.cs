@@ -29,8 +29,9 @@ public class EnemyManager : Singleton<EnemyManager> {
 
 
     void OnEnable() {
-        EventManager.GameOverEvent += gameOver;
+        EventManager.GameStateEvent += gameOver;
         EventManager.PlatformClimbEvent += platformClimbed;
+
 
         playerOneController = PlayerManager.Instance.playerOneController;
 
@@ -39,7 +40,7 @@ public class EnemyManager : Singleton<EnemyManager> {
     }
 
     void OnDisable() {
-        EventManager.GameOverEvent -= gameOver;
+        EventManager.GameStateEvent -= gameOver;
         EventManager.PlatformClimbEvent -= platformClimbed;
 
         StopAllCoroutines();
@@ -142,8 +143,12 @@ public class EnemyManager : Singleton<EnemyManager> {
         this.platformNumber = platformNumber;
     }
 
-    private void gameOver() {
-        isGameOver = true;
+    private void gameOver(bool isOver) {
+        isGameOver = isOver;
+        if (!isOver) {
+            StopAllCoroutines();
+            StartCoroutine(SpawnEnemies());
+        }
     }
 
 }
