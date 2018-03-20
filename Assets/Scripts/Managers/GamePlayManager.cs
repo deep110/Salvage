@@ -9,6 +9,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     public int score;
     public int platformsClimbed;
+    public bool isTutorialShown;
 
     private UIManager uiManager;
 
@@ -44,8 +45,15 @@ public class GamePlayManager : Singleton<GamePlayManager> {
             // pause the game
             Time.timeScale = 0;
 
-            // show the gameOver dialog
+            // show the player revival dialog
             uiManager.setPlayerRevivePanelState(true);
+
+            // update high score to prefs
+            PlayerData playerData = DataManager.Instance.GetData();
+            if (playerData.highScore < score) {
+                playerData.highScore = score;
+                DataManager.Instance.SetData(playerData);
+            }
         } else {
             // revival is called
             Time.timeScale = 1;
@@ -55,8 +63,8 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     }
 
     private void onPlatformClear() {
-        //increase the score by 3
-        score += 3;
+        //increase the score by 2
+        score += 2;
         //display the platform clear panel
         uiManager.ShowPlatformClear();
         //update the ui score

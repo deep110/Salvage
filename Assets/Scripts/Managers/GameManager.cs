@@ -13,7 +13,7 @@ public class GameManager : PersistentSingleton<GameManager> {
 
         yield return new WaitForSeconds(1.2f);
 
-        SceneManager.LoadScene(1);
+        // SceneManager.LoadScene(1);
     }
 
 }

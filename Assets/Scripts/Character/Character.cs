@@ -134,7 +134,6 @@ public class Character : MonoBehaviour {
     }
 
     public void PlayerDeath() {
-        print("i m called");
         _animator.SetTrigger("Death");
     }
 
