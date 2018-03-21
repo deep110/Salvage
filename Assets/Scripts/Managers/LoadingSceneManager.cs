@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GameManager : PersistentSingleton<GameManager> {
+public class LoadingSceneManager : MonoBehaviour {
 
     private IEnumerator Start() {
         LocalizationManager.Instance.LoadLocalizedText("english");
@@ -13,7 +13,7 @@ public class GameManager : PersistentSingleton<GameManager> {
 
         yield return new WaitForSeconds(1.2f);
 
-        // SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
     }
 
 }

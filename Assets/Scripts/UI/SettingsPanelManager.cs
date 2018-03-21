@@ -30,7 +30,7 @@ public class SettingsPanelManager : MonoBehaviour {
 	}
 
 	public void closePanel() {
-		UIManager.Instance.setSettingsPanelState(false);
+		gameObject.SetActive(false);
 
 		playerData.isSoundOn = sound.isOn;
 		playerData.isVfxOn = vfx.isOn;
