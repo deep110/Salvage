@@ -17,7 +17,6 @@ public class PowerUpManager : Singleton<PowerUpManager> {
 
     private List<PowerUp> activePowerUps;
     private Dictionary<GameObject, int> powerUpWeights;
-    private bool isGameOver;
 
 
     protected override void Awake() {
@@ -39,15 +38,13 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     }
 
     void Update() {
-        if (!isGameOver) {
-            for (int i = 0; i < activePowerUps.Count; i++) {
-                PowerUp item = activePowerUps[i];
-                if (item.IsActive) {
-                    item.Tick();
-                } else {
-                    activePowerUps.Remove(item);
-                    item.Ended();
-                }
+        for (int i = 0; i < activePowerUps.Count; i++) {
+            PowerUp item = activePowerUps[i];
+            if (item.IsActive) {
+                item.Tick();
+            } else {
+                activePowerUps.Remove(item);
+                item.Ended();
             }
         }
     }
@@ -73,7 +70,7 @@ public class PowerUpManager : Singleton<PowerUpManager> {
 
     private IEnumerator GeneratePowerUps() {
         var _wd = new WeightedRandomizer<GameObject>(powerUpWeights);
-        while (!isGameOver) {
+        while (true) {
             yield return new WaitForSeconds(Random.Range(15, 22));
 
             GameObject selected = _wd.TakeOne();
@@ -86,10 +83,17 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     }
 
     private void gameOver(bool isOver) {
-        isGameOver = isOver;
         if (!isOver) {
-            StopAllCoroutines();
             StartCoroutine(GeneratePowerUps());
+        } else {
+            StopAllCoroutines();
+
+            // empty all active powerups
+            for (int i = 0; i < activePowerUps.Count; i++) {
+                PowerUp item = activePowerUps[i];
+                activePowerUps.Remove(item);
+                item.Ended();
+            }
         }
     }
 }
