@@ -44,7 +44,7 @@ public class LocalizationManager : PersistentSingleton<LocalizationManager> {
     }
 
     public bool IsReady() {
-        return isReady;
+        return Instance != null && isReady;
     }
 
 }

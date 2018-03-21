@@ -7,7 +7,7 @@ public class LocalizedText : MonoBehaviour {
     public string key;
 
     void Start() {
-        if (LocalizationManager.Instance != null) {
+        if (LocalizationManager.Instance.IsReady()) {
             Text text = GetComponent<Text>();
             text.text = LocalizationManager.Instance.GetLocalizedValue(key);
         }
