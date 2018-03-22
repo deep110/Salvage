@@ -50,26 +50,28 @@ public class EnemyManager : Singleton<EnemyManager> {
         // wait for some time at start before spawning enemies
         yield return new WaitForSeconds(2f);
 
-        while (!isGameOver) {
-            // choose a enemy sequence at random
-            EnemySequence enemySequence = getRandomSequence();
+        while (true) {
+            if (!isGameOver) {
+                // choose a enemy sequence at random
+                EnemySequence enemySequence = getRandomSequence();
 
-            if (enemySequence != null) {
-                foreach(EnemySequence.EnemyData enemyData in enemySequence.enemies) {
-                    if (enemyData.waitTime > 0) {
-                        yield return new WaitForSeconds(enemyData.waitTime);
+                if (enemySequence != null) {
+                    foreach(EnemySequence.EnemyData enemyData in enemySequence.enemies) {
+                        if (enemyData.waitTime > 0) {
+                            yield return new WaitForSeconds(enemyData.waitTime);
+                        }
+                        spawnEnemy(enemySequence.level, enemyData);
                     }
-                    spawnEnemy(enemySequence.level, enemyData);
-                }
 
-                // wait time between each sequence
-                float waitSequenceTime = Random.Range(2.2f, 2.5f);
-                if (enemySequence.level == 1) {
-                    waitSequenceTime -= 0.5f;
-                } else if (enemySequence.level == 2) {
-                    waitSequenceTime -= Random.Range(0.5f, 0.8f);
+                    // wait time between each sequence
+                    float waitSequenceTime = Random.Range(2.2f, 2.5f);
+                    if (enemySequence.level == 1) {
+                        waitSequenceTime -= 0.5f;
+                    } else if (enemySequence.level == 2) {
+                        waitSequenceTime -= Random.Range(0.5f, 0.8f);
+                    }
+                    yield return new WaitForSeconds(waitSequenceTime);
                 }
-                yield return new WaitForSeconds(waitSequenceTime);
             }
         }
     }
@@ -145,10 +147,6 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     private void gameOver(bool isOver) {
         isGameOver = isOver;
-        if (!isOver) {
-            StopAllCoroutines();
-            StartCoroutine(SpawnEnemies());
-        }
     }
 
 }

@@ -14,10 +14,10 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     public PowerUps powerUps;
 
     private Transform _camera;
-
     private List<PowerUp> activePowerUps;
     private Dictionary<GameObject, int> powerUpWeights;
 
+    private bool isGameOver;
 
     protected override void Awake() {
         base.Awake();
@@ -71,23 +71,22 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     private IEnumerator GeneratePowerUps() {
         var _wd = new WeightedRandomizer<GameObject>(powerUpWeights);
         while (true) {
-            yield return new WaitForSeconds(Random.Range(15, 22));
+            if (!isGameOver) {
+                yield return new WaitForSeconds(Random.Range(15, 22));
 
-            GameObject selected = _wd.TakeOne();
-            var powerUpPosition = new Vector3(
-                Random.Range(-2.5f, 2.5f),
-                _camera.position.y + 6f,
-                0);
-            Instantiate(selected, powerUpPosition, Quaternion.identity);
+                GameObject selected = _wd.TakeOne();
+                var powerUpPosition = new Vector3(
+                    Random.Range(-2.5f, 2.5f),
+                    _camera.position.y + 6f,
+                    0);
+                Instantiate(selected, powerUpPosition, Quaternion.identity);
+            }
         }
     }
 
     private void gameOver(bool isOver) {
-        if (!isOver) {
-            StartCoroutine(GeneratePowerUps());
-        } else {
-            StopAllCoroutines();
-
+        isGameOver = isOver;
+        if (isOver) {
             // empty all active powerups
             for (int i = 0; i < activePowerUps.Count; i++) {
                 PowerUp item = activePowerUps[i];
