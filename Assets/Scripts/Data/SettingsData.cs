@@ -1,17 +1,13 @@
-public class PlayerData {
-
-    public int highScore;
+public class SettingsData {
 
     public bool isSoundOn;
-
     public bool isVfxOn;
-
     public bool isTutorialOn;
 
-    public PlayerData() {
-        highScore = 0;
+    public SettingsData() {
         isSoundOn = true;
         isVfxOn = true;
         isTutorialOn = true;
     }
+
 }

@@ -7,14 +7,14 @@ public class SettingsPanelManager : MonoBehaviour {
 	public Toggle vfx;
 	public Toggle tutorial;
 
-	private PlayerData playerData;
+	private SettingsData settingsData;
 
 	private void Awake() {
-		playerData = DataManager.Instance.GetData();
+		settingsData = DataManager.Instance.GetSettingsData();
 
-		sound.isOn = playerData.isSoundOn;
-		vfx.isOn = playerData.isVfxOn;
-		tutorial.isOn = playerData.isTutorialOn;
+		sound.isOn = settingsData.isSoundOn;
+		vfx.isOn = settingsData.isVfxOn;
+		tutorial.isOn = settingsData.isTutorialOn;
 	}
 
 	public void ToogleSound(bool isSelected) {
@@ -32,11 +32,11 @@ public class SettingsPanelManager : MonoBehaviour {
 	public void closePanel() {
 		gameObject.SetActive(false);
 
-		playerData.isSoundOn = sound.isOn;
-		playerData.isVfxOn = vfx.isOn;
-		playerData.isTutorialOn = tutorial.isOn;
+		settingsData.isSoundOn = sound.isOn;
+		settingsData.isVfxOn = vfx.isOn;
+		settingsData.isTutorialOn = tutorial.isOn;
 
-		DataManager.Instance.SetData(playerData);
+		DataManager.Instance.SetSettingsData(settingsData);
 	}
 }
 

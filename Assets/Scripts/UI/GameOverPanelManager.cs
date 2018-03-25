@@ -11,17 +11,10 @@ public class GameOverPanelManager : MonoBehaviour {
         int score = GamePlayManager.Instance.score;
         currentScore.text = score.ToString();
 
-        PlayerData playerData = DataManager.Instance.GetData();
+        int hScore = DataManager.Instance.GetAnalyticsData().highScore;
+        highScore.text = hScore.ToString();
 
-        if (playerData.highScore < score) {
-            highScore.text = score.ToString();
-
-            // update high score to prefs
-            playerData.highScore = score;
-            DataManager.Instance.SetData(playerData);
-        } else {
-            highScore.text = playerData.highScore.ToString();
-        }
+        GamePlayManager.Instance.OnGameOverDialogPop();
     }
 
     public void OnRestartAccepted() {
@@ -29,5 +22,4 @@ public class GameOverPanelManager : MonoBehaviour {
         SceneManager.LoadScene(2);
     }
 
-    
 }

@@ -20,7 +20,7 @@ public class EnemyManager : Singleton<EnemyManager> {
     public EnemySequence[] levelTwoSequences;
 
     private Character playerOneController;
-    private Dictionary <EnemySequence.EnemyData.EnemyType, ObjectPooler> enemyPooler;
+    private Dictionary<EnemySequence.EnemyData.EnemyType, ObjectPooler> enemyPooler;
 
     private bool isGameOver;
     private int platformNumber;
@@ -56,7 +56,7 @@ public class EnemyManager : Singleton<EnemyManager> {
                 EnemySequence enemySequence = getRandomSequence();
 
                 if (enemySequence != null) {
-                    foreach(EnemySequence.EnemyData enemyData in enemySequence.enemies) {
+                    foreach (EnemySequence.EnemyData enemyData in enemySequence.enemies) {
                         if (enemyData.waitTime > 0) {
                             yield return new WaitForSeconds(enemyData.waitTime);
                         }
@@ -83,7 +83,7 @@ public class EnemyManager : Singleton<EnemyManager> {
             playerOneController.GetLastStablePosition(),
             enemyData.platformLevel
         );
-        enemy.SetActive(true);        
+        enemy.SetActive(true);
     }
 
     private EnemySequence getRandomSequence() {
@@ -118,7 +118,7 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     private void createEnemyPooler() {
         enemyPooler = new Dictionary<EnemySequence.EnemyData.EnemyType, ObjectPooler>();
-        
+
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.BALL, new ObjectPooler(enemies.ball, 3));
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.COPTER, new ObjectPooler(enemies.copter, 2));
         enemyPooler.Add(EnemySequence.EnemyData.EnemyType.SPIKY_IVY, new ObjectPooler(enemies.spikyIvy, 3));

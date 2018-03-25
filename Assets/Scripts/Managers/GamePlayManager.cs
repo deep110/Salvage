@@ -10,12 +10,17 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     public int score;
     public int platformsClimbed;
     public bool isTutorialShown;
+    public int revialChancesLeft = 1;
 
     private UIManager uiManager;
+    private DataManager dataManager;
+    private float sessionStartTime = 0;
 
-    void Start() {
+    private void Start() {
         Time.timeScale = 1;
         uiManager = UIManager.Instance;
+        dataManager = DataManager.Instance;
+        sessionStartTime = Time.realtimeSinceStartup;
 
         EventManager.CrystalCollectEvent += onCrystalCollected;
         EventManager.PlatformClimbEvent += onPlatformClimbed;
@@ -23,11 +28,21 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         EventManager.PlatformClearEvent += onPlatformClear;
     }
 
-    void OnDisable() {
+    private void OnDestroy() {
         EventManager.CrystalCollectEvent -= onCrystalCollected;
         EventManager.PlatformClimbEvent -= onPlatformClimbed;
         EventManager.GameStateEvent -= onGameOver;
         EventManager.PlatformClearEvent -= onPlatformClear;
+    }
+
+    public void OnGameOverDialogPop() {
+        // update session count
+        dataManager.sessionsCount += 1;        
+
+        // show ad
+        if (dataManager.sessionsCount % 4 == 0 && AdsManager.Instance.IsReady(false)) {
+            AdsManager.Instance.ShowSimpleAd();
+        }
     }
 
     private void onCrystalCollected() {
@@ -37,27 +52,25 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     private void onPlatformClimbed(int platforms) {
         platformsClimbed = platforms;
-        // uiManager.UpdatePlatformText(platforms);
     }
 
     private void onGameOver(bool isOver) {
         if (isOver) {
             // pause the game
             Time.timeScale = 0;
+            // update analytics to local storage
+            updateAnalytics();
 
-            // show the player revival dialog
-            uiManager.setPlayerRevivePanelState(true);
-
-            // update high score to prefs
-            PlayerData playerData = DataManager.Instance.GetData();
-            if (playerData.highScore < score) {
-                playerData.highScore = score;
-                DataManager.Instance.SetData(playerData);
+            if (revialChancesLeft > 0 && AdsManager.Instance.IsReady(true)) {
+                revialChancesLeft = revialChancesLeft - 1;
+                uiManager.setPlayerRevivePanelState(true);
+            } else {
+                // show gameOver Dialog
+                uiManager.setGameOverPanelState(true);
             }
         } else {
-            // revival is called
+            // revival activated
             Time.timeScale = 1;
-            // disable the revival dialog
             uiManager.setPlayerRevivePanelState(false);
         }
     }
@@ -69,5 +82,21 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         uiManager.ShowPlatformClear();
         //update the ui score
         uiManager.UpdateScoreText(score);
+    }
+
+    private void updateAnalytics() {
+        AnalyticsData analyticsData = DataManager.Instance.GetAnalyticsData();
+
+        // update session length
+        int sessionLength = (int)(Time.realtimeSinceStartup - sessionStartTime);
+        DataManager.Instance.sessionLength += sessionLength;
+        sessionStartTime += sessionLength;
+
+        // update high score
+        if (score > analyticsData.highScore) {
+            analyticsData.highScore = score;
+        }
+
+        DataManager.Instance.SetAnalyticsData(analyticsData);
     }
 }

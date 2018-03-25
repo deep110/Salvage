@@ -1,15 +1,10 @@
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class PlayerRevivePanelManager : MonoBehaviour {
 
     public void ReviveAccepted() {
-        // TODO:
-        // Connect with AdsManager
-        // Show a video ad
-        // Revive only if full ad is seen
-
-        // Call Revive
-        EventManager.GameStateChange(false);
+        AdsManager.Instance.ShowRewardedAd(handleShowResult);
     }
 
     public void ReviveRejected() {
@@ -18,5 +13,17 @@ public class PlayerRevivePanelManager : MonoBehaviour {
 
         // show gameOver Dialog
         UIManager.Instance.setGameOverPanelState(true);
+    }
+
+    private void handleShowResult(ShowResult result) {
+        if (result == ShowResult.Finished) {
+            // Call Revive
+            EventManager.GameStateChange(false);
+
+        } else if (result == ShowResult.Skipped || result == ShowResult.Failed) {
+            Debug.LogWarning(result.ToString());
+            
+            ReviveRejected();
+        }
     }
 }
