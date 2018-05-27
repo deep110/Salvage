@@ -37,11 +37,14 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     public void OnGameOverDialogPop() {
         // update session count
-        dataManager.sessionsCount += 1;        
-
-        // show ad
-        if (dataManager.sessionsCount % 4 == 0 && AdsManager.Instance.IsReady(false)) {
-            AdsManager.Instance.ShowSimpleAd();
+        dataManager.sessionsCount += 1;
+        bool isShown = RateBox.Instance.Show();
+        // don't do anything else when ratebox is shown
+        if (!isShown) {
+            // show ad
+            if (dataManager.sessionsCount % 4 == 0 && AdsManager.Instance.IsReady(false)) {
+                AdsManager.Instance.ShowSimpleAd();
+            }
         }
     }
 

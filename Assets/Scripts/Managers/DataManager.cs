@@ -7,6 +7,7 @@ public class DataManager : PersistentSingleton<DataManager> {
 
     private SettingsData settingsData;
     private AnalyticsData analyticsData;
+    private int coolDownTime;
 
     // settings data keys
     private const string KEY_VFX_ON = "isVfxOn";
@@ -16,10 +17,12 @@ public class DataManager : PersistentSingleton<DataManager> {
     // analytics data keys
     private const string KEY_HIGHSCORE = "highScore";
     private const string KEY_IS_RATED = "isRated";
+    private const string KEY_COOL_DOWN_TIME = "coolDownTime";
 
     private void Start() {
         sessionsCount = 0;
         sessionLength = 0;
+        coolDownTime = 0;
     }
 
     public SettingsData GetSettingsData() {
@@ -53,6 +56,7 @@ public class DataManager : PersistentSingleton<DataManager> {
     public void SetAnalyticsData(AnalyticsData analyticsData) {
         PlayerPrefs.SetInt(KEY_HIGHSCORE, analyticsData.highScore);
         PlayerPrefs.SetInt(KEY_IS_RATED, (int)analyticsData.isRated);
+        PlayerPrefs.SetInt(KEY_COOL_DOWN_TIME, analyticsData.coolDownTime);
     }
 
     public AnalyticsData GetAnalyticsData() {
@@ -66,8 +70,40 @@ public class DataManager : PersistentSingleton<DataManager> {
             if (PlayerPrefs.HasKey(KEY_IS_RATED)) {
                 analyticsData.isRated = (AnalyticsData.RateState)PlayerPrefs.GetInt(KEY_IS_RATED);
             }
+
+            if (PlayerPrefs.HasKey(KEY_COOL_DOWN_TIME)) {
+                analyticsData.coolDownTime = PlayerPrefs.GetInt(KEY_COOL_DOWN_TIME);
+            }
         }
 
         return analyticsData;
+    }
+
+    public void ResetCoolDownTime() {
+        coolDownTime = (int)Time.realtimeSinceStartup;
+    }
+
+    public int GetCoolDownTime() {
+        if (analyticsData == null) {
+            analyticsData = GetAnalyticsData();
+        }
+        int totalCoolDownTime = 0;
+        if (analyticsData.isRated == AnalyticsData.RateState.POSTPONED) {
+            totalCoolDownTime = analyticsData.coolDownTime + (int)(Time.realtimeSinceStartup) - coolDownTime;
+            PlayerPrefs.SetInt(KEY_COOL_DOWN_TIME, totalCoolDownTime);
+            coolDownTime = (int)Time.realtimeSinceStartup;
+        }
+
+        return totalCoolDownTime;
+    }
+
+    private void OnApplicationQuit() {
+        if (analyticsData == null) {
+            analyticsData = GetAnalyticsData();
+        }
+        if (analyticsData.isRated == AnalyticsData.RateState.POSTPONED) {
+            int totalCoolDownTime = analyticsData.coolDownTime + (int)(Time.realtimeSinceStartup) - coolDownTime;
+            PlayerPrefs.SetInt(KEY_COOL_DOWN_TIME, totalCoolDownTime);
+        }
     }
 }
