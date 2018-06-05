@@ -80,6 +80,9 @@ public class InputManager : MonoBehaviour {
     private void mapKeyBoardInput() {
         deltaX = Input.mousePosition.x - prevX;
 
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         switch (current) {
             case InputState.NONE:
                 float deltaY = Input.mousePosition.y - prevY;

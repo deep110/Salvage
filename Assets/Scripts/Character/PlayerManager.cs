@@ -14,6 +14,7 @@ public class PlayerManager : Singleton<PlayerManager> {
 
     private InputManager inputManager;
     private bool jump;
+    private float jumpActiveTimeElasped;
 
 
     protected override void Awake() {
@@ -28,6 +29,14 @@ public class PlayerManager : Singleton<PlayerManager> {
     void Update() {
         // keydown events read in Update and consumed in FixedUpdate
         jump |= (inputManager.GetCurrentState() == InputManager.InputState.JUMP);
+
+        if (jump) {
+            jumpActiveTimeElasped += Time.unscaledDeltaTime;
+            if (jumpActiveTimeElasped > 0.3f) {
+                jump = false;
+                jumpActiveTimeElasped = 0;
+            }
+        }
     }
 
     void FixedUpdate() {
@@ -63,6 +72,7 @@ public class PlayerManager : Singleton<PlayerManager> {
             playerOneController.Jump();
             playerTwoController.Jump();
             jump = false;
+            jumpActiveTimeElasped = 0;
         }
     }
 
