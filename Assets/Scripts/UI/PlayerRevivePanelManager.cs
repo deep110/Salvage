@@ -11,14 +11,17 @@ public class PlayerRevivePanelManager : MonoBehaviour {
         // disable this dialog
         gameObject.SetActive(false);
 
-        // show gameOver Dialog
-        UIManager.Instance.setGameOverPanelState(true);
+        // Update revival state failed to GamePlay Manager
+        GamePlayManager.Instance.UpdateRevival(false);
     }
 
     private void handleShowResult(ShowResult result) {
         if (result == ShowResult.Finished) {
-            // Call Revive
-            GamePlayManager.Instance.OnGameOver(false);
+            // Update revival state success to GamePlay Manager
+            GamePlayManager.Instance.UpdateRevival(true);
+
+            // disable this dialog
+            gameObject.SetActive(false);
 
         } else if (result == ShowResult.Skipped || result == ShowResult.Failed) {
             Debug.LogWarning(result.ToString());

@@ -63,7 +63,7 @@ public class CharacterCollider : MonoBehaviour {
         } else {
             GetComponent<Character>().PlayerDeath();
             yield return new WaitForSeconds(1f);
-            GamePlayManager.Instance.OnGameOver(true);
+            GamePlayManager.Instance.OnGameOver();
         }
     }
 

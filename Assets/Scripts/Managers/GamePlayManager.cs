@@ -43,21 +43,56 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         EventManager.PlatformClearEvent -= onPlatformClear;
     }
 
-    public void OnGameOverDialogPop() {
+    public void UpdateRevival(bool revivalAccepted) {
+        if (revivalAccepted) {
+            Time.timeScale = 1;
+            gameState = GameState.RUNNING;
+        } else {
+            // end the game
+            makeGameEnd();
+        }
+    }
+
+    public void OnGameOver() {
+        // pause the game
+        Time.timeScale = 0;
+        // update analytics to local storage
+        updateAnalytics();
+
+        if (revialChancesLeft > 0 && AdsManager.Instance.IsReady(true)) {
+            revialChancesLeft = revialChancesLeft - 1;
+            gameState = GameState.ENDED;
+            uiManager.setPlayerRevivePanelState(true);
+        } else {
+            // end the game
+            makeGameEnd();
+        }
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    //--------------------------------------------------------------------------------
+    // PRIVATE METHODS
+    //--------------------------------------------------------------------------------
+
+    private void makeGameEnd() {
+        gameState = GameState.ENDED;
+
         // update session count
         dataManager.sessionsCount += 1;
         bool isShown = RateBox.Instance.Show();
-        // don't do anything else when ratebox is shown
+
+        // don't show ads when ratebox is shown
         if (!isShown) {
             // show ad
             if (dataManager.sessionsCount % 4 == 0 && AdsManager.Instance.IsReady(false)) {
                 AdsManager.Instance.ShowSimpleAd();
             }
         }
-    }
-
-    public GameState getGameState() {
-        return gameState;
+        // show gameOver Dialog
+        uiManager.setGameOverPanelState(true);
     }
 
     private void onCrystalCollected() {
@@ -67,27 +102,6 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     private void onPlatformClimbed(int platforms) {
         platformsClimbed = platforms;
-    }
-
-    public void OnGameOver(bool isOver) {
-        if (isOver) {
-            // pause the game
-            Time.timeScale = 0;
-            // update analytics to local storage
-            updateAnalytics();
-
-            if (revialChancesLeft > 0 && AdsManager.Instance.IsReady(true)) {
-                revialChancesLeft = revialChancesLeft - 1;
-                uiManager.setPlayerRevivePanelState(true);
-            } else {
-                // show gameOver Dialog
-                uiManager.setGameOverPanelState(true);
-            }
-        } else {
-            // revival activated
-            Time.timeScale = 1;
-            uiManager.setPlayerRevivePanelState(false);
-        }
     }
 
     private void onPlatformClear() {

@@ -13,8 +13,6 @@ public class GameOverPanelManager : MonoBehaviour {
 
         int hScore = DataManager.Instance.GetAnalyticsData().highScore;
         highScore.text = hScore.ToString();
-
-        GamePlayManager.Instance.OnGameOverDialogPop();
     }
 
     public void OnRestartAccepted() {
