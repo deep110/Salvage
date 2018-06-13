@@ -22,16 +22,13 @@ public class EnemyManager : Singleton<EnemyManager> {
     private Character playerOneController;
     private Dictionary<EnemySequence.EnemyData.EnemyType, ObjectPooler> enemyPooler;
 
-    private bool isGameOver;
     private int platformNumber;
     private int randomizerLevel = 0;
     private WeightedRandomizer<int> weightedRandomizer;
 
 
-    void OnEnable() {
-        EventManager.GameStateEvent += gameOver;
+    private void Start() {
         EventManager.PlatformClimbEvent += platformClimbed;
-
 
         playerOneController = PlayerManager.Instance.playerOneController;
 
@@ -39,19 +36,15 @@ public class EnemyManager : Singleton<EnemyManager> {
         StartCoroutine(SpawnEnemies());
     }
 
-    void OnDisable() {
-        EventManager.GameStateEvent -= gameOver;
+    private void OnDestroy() {
         EventManager.PlatformClimbEvent -= platformClimbed;
 
         StopAllCoroutines();
     }
 
     private IEnumerator SpawnEnemies() {
-        // wait for some time at start before spawning enemies
-        yield return new WaitForSeconds(2f);
-
         while (true) {
-            if (!isGameOver) {
+            if (GamePlayManager.Instance.getGameState() == GamePlayManager.GameState.RUNNING) {
                 // choose a enemy sequence at random
                 EnemySequence enemySequence = getRandomSequence();
 
@@ -64,13 +57,7 @@ public class EnemyManager : Singleton<EnemyManager> {
                     }
 
                     // wait time between each sequence
-                    float waitSequenceTime = Random.Range(2.2f, 2.5f);
-                    if (enemySequence.level == 1) {
-                        waitSequenceTime -= 0.5f;
-                    } else if (enemySequence.level == 2) {
-                        waitSequenceTime -= Random.Range(0.5f, 0.8f);
-                    }
-                    yield return new WaitForSeconds(waitSequenceTime);
+                    yield return new WaitForSeconds(getRandomWaitTime(enemySequence.level));
                 }
             }
         }
@@ -116,6 +103,16 @@ public class EnemyManager : Singleton<EnemyManager> {
         return enemySequence;
     }
 
+    private float getRandomWaitTime(int enemyLevel) {
+        float waitSequenceTime = Random.Range(1.2f, 2.0f);
+        if (enemyLevel == 1) {
+            waitSequenceTime -= 0.5f;
+        } else if (enemyLevel == 2) {
+            waitSequenceTime -= Random.Range(0.5f, 0.8f);
+        }
+        return waitSequenceTime;
+    }
+
     private void createEnemyPooler() {
         enemyPooler = new Dictionary<EnemySequence.EnemyData.EnemyType, ObjectPooler>();
 
@@ -143,10 +140,6 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     private void platformClimbed(int platformNumber) {
         this.platformNumber = platformNumber;
-    }
-
-    private void gameOver(bool isOver) {
-        isGameOver = isOver;
     }
 
 }

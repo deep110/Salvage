@@ -4,14 +4,6 @@ public static class EventManager {
     public delegate void Call();
     public delegate void CallArgs<T>(T arg0);
 
-    // game over event
-    public static event CallArgs<bool> GameStateEvent;
-
-    public static void GameStateChange(bool isOver) {
-        if (GameStateEvent != null)
-            GameStateEvent(isOver);
-    }
-
     // coin collect event
     public static event Call CrystalCollectEvent;
 

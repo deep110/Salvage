@@ -18,7 +18,7 @@ public class PlayerRevivePanelManager : MonoBehaviour {
     private void handleShowResult(ShowResult result) {
         if (result == ShowResult.Finished) {
             // Call Revive
-            EventManager.GameStateChange(false);
+            GamePlayManager.Instance.OnGameOver(false);
 
         } else if (result == ShowResult.Skipped || result == ShowResult.Failed) {
             Debug.LogWarning(result.ToString());

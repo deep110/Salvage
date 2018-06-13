@@ -7,31 +7,39 @@
 */
 public class GamePlayManager : Singleton<GamePlayManager> {
 
+    public enum GameState {
+        TO_BE_STARTED,
+        RUNNING,
+        PAUSED,
+        ENDED,
+    }
+
     public int score;
     public int platformsClimbed;
     public bool isTutorialShown;
     public int revialChancesLeft = 1;
 
+    private GameState gameState;
+
     private UIManager uiManager;
     private DataManager dataManager;
     private float sessionStartTime = 0;
 
-    private void Start() {
+    private void OnEnable() {
         Time.timeScale = 1;
+        gameState = GameState.RUNNING;
         uiManager = UIManager.Instance;
         dataManager = DataManager.Instance;
         sessionStartTime = Time.realtimeSinceStartup;
 
         EventManager.CrystalCollectEvent += onCrystalCollected;
         EventManager.PlatformClimbEvent += onPlatformClimbed;
-        EventManager.GameStateEvent += onGameOver;
         EventManager.PlatformClearEvent += onPlatformClear;
     }
 
-    private void OnDestroy() {
+    private void OnDisable() {
         EventManager.CrystalCollectEvent -= onCrystalCollected;
         EventManager.PlatformClimbEvent -= onPlatformClimbed;
-        EventManager.GameStateEvent -= onGameOver;
         EventManager.PlatformClearEvent -= onPlatformClear;
     }
 
@@ -48,6 +56,10 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         }
     }
 
+    public GameState getGameState() {
+        return gameState;
+    }
+
     private void onCrystalCollected() {
         score++;
         uiManager.UpdateScoreText(score);
@@ -57,7 +69,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         platformsClimbed = platforms;
     }
 
-    private void onGameOver(bool isOver) {
+    public void OnGameOver(bool isOver) {
         if (isOver) {
             // pause the game
             Time.timeScale = 0;

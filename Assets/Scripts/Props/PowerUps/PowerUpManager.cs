@@ -17,8 +17,6 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     private List<PowerUp> activePowerUps;
     private Dictionary<GameObject, int> powerUpWeights;
 
-    private bool isGameOver;
-
     protected override void Awake() {
         base.Awake();
 
@@ -32,12 +30,11 @@ public class PowerUpManager : Singleton<PowerUpManager> {
         activePowerUps = new List<PowerUp>();
     }
 
-    void Start() {
-        EventManager.GameStateEvent += gameOver;
+    private void Start() {
         StartCoroutine(GeneratePowerUps());
     }
 
-    void Update() {
+    private void Update() {
         for (int i = 0; i < activePowerUps.Count; i++) {
             PowerUp item = activePowerUps[i];
             if (item.IsActive) {
@@ -63,15 +60,14 @@ public class PowerUpManager : Singleton<PowerUpManager> {
         }
     }
 
-    void onDisable() {
-        EventManager.GameStateEvent -= gameOver;
+    private void onDisable() {
         StopAllCoroutines();
     }
 
     private IEnumerator GeneratePowerUps() {
         var _wd = new WeightedRandomizer<GameObject>(powerUpWeights);
         while (true) {
-            if (!isGameOver) {
+            if (GamePlayManager.Instance.getGameState() == GamePlayManager.GameState.RUNNING) {
                 yield return new WaitForSeconds(Random.Range(15, 22));
 
                 GameObject selected = _wd.TakeOne();
@@ -80,18 +76,13 @@ public class PowerUpManager : Singleton<PowerUpManager> {
                     _camera.position.y + 6f,
                     0);
                 Instantiate(selected, powerUpPosition, Quaternion.identity);
-            }
-        }
-    }
-
-    private void gameOver(bool isOver) {
-        isGameOver = isOver;
-        if (isOver) {
-            // empty all active powerups
-            for (int i = 0; i < activePowerUps.Count; i++) {
-                PowerUp item = activePowerUps[i];
-                activePowerUps.Remove(item);
-                item.Ended();
+            } else if (GamePlayManager.Instance.getGameState() == GamePlayManager.GameState.ENDED) {
+                // empty all active powerups
+                for (int i = 0; i < activePowerUps.Count; i++) {
+                    PowerUp item = activePowerUps[i];
+                    activePowerUps.Remove(item);
+                    item.Ended();
+                }
             }
         }
     }
