@@ -114,11 +114,11 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     }
 
     private void updateAnalytics() {
-        AnalyticsData analyticsData = DataManager.Instance.GetAnalyticsData();
+        AnalyticsData analyticsData = dataManager.GetAnalyticsData();
 
         // update session length
         int sessionLength = (int)(Time.realtimeSinceStartup - sessionStartTime);
-        DataManager.Instance.sessionLength += sessionLength;
+        dataManager.sessionLength += sessionLength;
         sessionStartTime += sessionLength;
 
         // update high score
@@ -126,6 +126,6 @@ public class GamePlayManager : Singleton<GamePlayManager> {
             analyticsData.highScore = score;
         }
 
-        DataManager.Instance.SetAnalyticsData(analyticsData);
+        dataManager.SetAnalyticsData(analyticsData);
     }
 }

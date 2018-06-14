@@ -63,7 +63,7 @@ PlayerSettings:
   use32BitDisplayBuffer: 1
   preserveFramebufferAlpha: 0
   disableDepthAndStencilBuffers: 0
-  androidBlitType: 2
+  androidBlitType: 0
   defaultIsFullScreen: 0
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
@@ -126,7 +126,7 @@ PlayerSettings:
     16:10: 0
     16:9: 1
     Others: 0
-  bundleVersion: 0.6.4
+  bundleVersion: 0.6.9
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
