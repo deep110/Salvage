@@ -1303,7 +1303,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   platformsClimbed: 0
-  isTutorialShown: 0
   revialChancesLeft: 1
 --- !u!114 &110
 MonoBehaviour:
@@ -7400,7 +7399,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -711127066
+  randomSeed: 893305375
   InitialModule:
     serializedVersion: 3
     enabled: 1

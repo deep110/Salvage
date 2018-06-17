@@ -16,7 +16,6 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     public int score;
     public int platformsClimbed;
-    public bool isTutorialShown;
     public int revialChancesLeft = 1;
 
     private GameState gameState;
@@ -50,6 +49,14 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         } else {
             // end the game
             makeGameEnd();
+        }
+    }
+
+    public void UpdateTutorial(bool isShowingTutorial) {
+        if (isShowingTutorial) {
+            gameState = GameState.PAUSED;
+        } else {
+            gameState = GameState.RUNNING;
         }
     }
 

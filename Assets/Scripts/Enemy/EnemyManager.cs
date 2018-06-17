@@ -20,7 +20,7 @@ public class EnemyManager : Singleton<EnemyManager> {
     public EnemySequence[] levelTwoSequences;
 
     private Character playerOneController;
-    private Dictionary<EnemySequence.EnemyData.EnemyType, ObjectPooler> enemyPooler;
+    private Dictionary<EnemyType, ObjectPooler> enemyPooler;
 
     private int platformNumber;
     private int randomizerLevel = 0;
@@ -114,14 +114,14 @@ public class EnemyManager : Singleton<EnemyManager> {
     }
 
     private void createEnemyPooler() {
-        enemyPooler = new Dictionary<EnemySequence.EnemyData.EnemyType, ObjectPooler>();
+        enemyPooler = new Dictionary<EnemyType, ObjectPooler>();
 
-        enemyPooler.Add(EnemySequence.EnemyData.EnemyType.BALL, new ObjectPooler(enemies.ball, 3));
-        enemyPooler.Add(EnemySequence.EnemyData.EnemyType.COPTER, new ObjectPooler(enemies.copter, 2));
-        enemyPooler.Add(EnemySequence.EnemyData.EnemyType.SPIKY_IVY, new ObjectPooler(enemies.spikyIvy, 3));
-        enemyPooler.Add(EnemySequence.EnemyData.EnemyType.TANK, new ObjectPooler(enemies.tank, 2));
-        enemyPooler.Add(EnemySequence.EnemyData.EnemyType.LASER, new ObjectPooler(enemies.laserGrid, 1));
-        enemyPooler.Add(EnemySequence.EnemyData.EnemyType.PLATFORM_SPIKE, new ObjectPooler(enemies.spikes, 2));
+        enemyPooler.Add(EnemyType.BALL, new ObjectPooler(enemies.ball, 3));
+        enemyPooler.Add(EnemyType.COPTER, new ObjectPooler(enemies.copter, 2));
+        enemyPooler.Add(EnemyType.SPIKY_IVY, new ObjectPooler(enemies.spikyIvy, 3));
+        enemyPooler.Add(EnemyType.TANK, new ObjectPooler(enemies.tank, 2));
+        enemyPooler.Add(EnemyType.LASER, new ObjectPooler(enemies.laserGrid, 1));
+        enemyPooler.Add(EnemyType.PLATFORM_SPIKE, new ObjectPooler(enemies.spikes, 2));
     }
 
     private void updateRandomizer(int currentLevel) {
