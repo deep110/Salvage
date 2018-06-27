@@ -36,6 +36,10 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         EventManager.PlatformClearEvent += onPlatformClear;
     }
 
+    private void Start() {
+        AudioManager.Instance.PlaySound("gameplay");
+    }
+
     private void OnDisable() {
         EventManager.CrystalCollectEvent -= onCrystalCollected;
         EventManager.PlatformClimbEvent -= onPlatformClimbed;
@@ -86,6 +90,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     private void makeGameEnd() {
         gameState = GameState.ENDED;
+        AudioManager.Instance.StopSound("gameplay");
 
         // update session count
         dataManager.sessionsCount += 1;

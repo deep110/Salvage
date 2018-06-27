@@ -26,7 +26,7 @@ public class SettingsPanelManager : MonoBehaviour {
 	}
 
 	public void ToogleTutorial(bool isSelected) {
-		Debug.Log("Tutorial: "+ isSelected);
+		//
 	}
 
 	public void closePanel() {

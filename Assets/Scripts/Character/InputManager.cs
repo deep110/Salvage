@@ -13,11 +13,11 @@ public class InputManager : MonoBehaviour {
     private float deltaX;
     private float prevX, prevY;
 
-    void Awake() {
+    private void Awake() {
         Application.targetFrameRate = 60;
     }
 
-    void Start() {
+    private void Start() {
         current = InputState.NONE;
         deltaX = 0;
 
@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour {
         }
     }
 
-    void Update() {
+    private void Update() {
         if (Application.isMobilePlatform) {
             mapMobileInput();
         } else {

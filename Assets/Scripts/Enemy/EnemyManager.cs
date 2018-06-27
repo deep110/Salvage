@@ -44,6 +44,8 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     private IEnumerator SpawnEnemies() {
         while (true) {
+            yield return new WaitUntil(() => GamePlayManager.Instance.getGameState() != GamePlayManager.GameState.TO_BE_STARTED);
+            
             if (GamePlayManager.Instance.getGameState() == GamePlayManager.GameState.RUNNING) {
                 // choose a enemy sequence at random
                 EnemySequence enemySequence = getRandomSequence();

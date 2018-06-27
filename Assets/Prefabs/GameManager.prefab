@@ -54,6 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee754a0918e144b6bab3234bbf2c32f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sessionsCount: 0
+  sessionLength: 0
 --- !u!114 &114271628020968416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,7 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a18eb231fcca4564a664d54fa66180b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: gameplay
+    audioClip: {fileID: 8300000, guid: 6612f99bd92d24ee192021c79c4695fc, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
 --- !u!114 &114893015216343554
 MonoBehaviour:
   m_ObjectHideFlags: 1

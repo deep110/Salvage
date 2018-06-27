@@ -67,6 +67,9 @@ public class PowerUpManager : Singleton<PowerUpManager> {
     private IEnumerator GeneratePowerUps() {
         var _wd = new WeightedRandomizer<GameObject>(powerUpWeights);
         while (true) {
+            // wait till gameplay have started
+            yield return new WaitUntil(() => GamePlayManager.Instance.getGameState() != GamePlayManager.GameState.TO_BE_STARTED);
+            
             if (GamePlayManager.Instance.getGameState() == GamePlayManager.GameState.RUNNING) {
                 yield return new WaitForSeconds(Random.Range(15, 22));
 

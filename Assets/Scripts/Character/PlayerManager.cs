@@ -26,7 +26,7 @@ public class PlayerManager : Singleton<PlayerManager> {
         playerTwoController = playerTwo.GetComponent<Character>();
     }
 
-    void Update() {
+    private void Update() {
         // keydown events read in Update and consumed in FixedUpdate
         jump |= (inputManager.GetCurrentState() == InputManager.InputState.JUMP);
 
@@ -39,7 +39,7 @@ public class PlayerManager : Singleton<PlayerManager> {
         }
     }
 
-    void FixedUpdate() {
+    private void FixedUpdate() {
         if (jump) {
             jumpPlayers();
         }
