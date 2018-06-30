@@ -8,6 +8,7 @@ using UnityEngine;
 public class CharacterCollider : MonoBehaviour {
 
     public GameObject shockwave;
+    public ParticleSystem playerDeath;
 
     [HideInInspector]
     public bool isShieldActive;
@@ -55,14 +56,15 @@ public class CharacterCollider : MonoBehaviour {
 
     private IEnumerator HandleEnemyCollision() {
         cameraShake.Apply(0.5f);
-        Instantiate(shockwave, transform.position, Quaternion.identity);
 
         if (isShieldActive) {
             isShieldActive = false;
             StartCoroutine(BlinkPlayer(2f));
         } else {
             GetComponent<Character>().PlayerDeath();
-            yield return new WaitForSeconds(1f);
+            playerDeath.Play();
+            Instantiate(shockwave, transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(1.8f);
             GamePlayManager.Instance.OnGameOver();
         }
     }
