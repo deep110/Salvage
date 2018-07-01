@@ -12,7 +12,7 @@ public class PlatformDetector : MonoBehaviour {
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.CompareTag("Platform")) {
+        if (other.CompareTag("Platform")) {
             if (isTopEdge) {
                 // add Platform
                 platformManager.AddPlatform();

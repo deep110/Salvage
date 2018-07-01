@@ -9,7 +9,7 @@ public class SettingsPanelManager : MonoBehaviour {
 
 	private SettingsData settingsData;
 
-	private void Awake() {
+	private void OnEnable() {
 		settingsData = DataManager.Instance.GetSettingsData();
 
 		sound.isOn = settingsData.isSoundOn;

@@ -135,6 +135,7 @@ public class Character : MonoBehaviour {
 
     public void PlayerDeath() {
         _animator.SetTrigger("Death");
+        _collider.enabled = false;
     }
 
     private void updatePlatformsClimbed() {

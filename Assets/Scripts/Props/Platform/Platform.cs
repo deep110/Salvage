@@ -5,7 +5,7 @@
 ///</summary>
 public class Platform : MonoBehaviour {
 
-    public Vector3[] coinPositions;
+    public Vector3[] crystalPositions;
 
     /// - unique index of platform
     /// - set by Platform Manager
@@ -24,12 +24,12 @@ public class Platform : MonoBehaviour {
 
     void OnEnable() {
         if (platformIndex != -1) {
-            for (int i = 0; i < coinPositions.Length; i++) {
-                GameObject coin = platformManager.GetCoin();
-                coin.transform.parent = _transform;
-                coin.transform.localPosition = coinPositions[i];
-                coin.transform.rotation = Quaternion.identity;
-                coin.SetActive(true);
+            for (int i = 0; i < crystalPositions.Length; i++) {
+                GameObject crystal = platformManager.GetCrystal();
+                crystal.transform.parent = _transform;
+                crystal.transform.localPosition = crystalPositions[i];
+                crystal.transform.rotation = Quaternion.identity;
+                crystal.SetActive(true);
             }
         }
     }

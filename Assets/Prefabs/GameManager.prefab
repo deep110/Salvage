@@ -81,7 +81,7 @@ MonoBehaviour:
   sounds:
   - name: gameplay
     audioClip: {fileID: 8300000, guid: 6612f99bd92d24ee192021c79c4695fc, type: 3}
-    volume: 0.4
+    volume: 0.2
     pitch: 1
     loop: 1
 --- !u!114 &114893015216343554

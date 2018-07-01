@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdsManager : PersistentSingleton<AdsManager> {
+public class AdsManager : Singleton<AdsManager> {
 
     #if UNITY_ANDROID
     private string gameId = "1744253";

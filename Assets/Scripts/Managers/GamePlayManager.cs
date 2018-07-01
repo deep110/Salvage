@@ -26,7 +26,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     private void OnEnable() {
         Time.timeScale = 1;
-        gameState = GameState.RUNNING;
+        gameState = GameState.TO_BE_STARTED;
         uiManager = UIManager.Instance;
         dataManager = DataManager.Instance;
         sessionStartTime = Time.realtimeSinceStartup;
@@ -46,21 +46,20 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         EventManager.PlatformClearEvent -= onPlatformClear;
     }
 
+    public void StartGame() {
+        gameState = GameState.RUNNING;
+    }
+
     public void UpdateRevival(bool revivalAccepted) {
         if (revivalAccepted) {
             Time.timeScale = 1;
             gameState = GameState.RUNNING;
+
+            // revival accepted, play music again
+            AudioManager.Instance.PlaySound("gameplay");
         } else {
             // end the game
             makeGameEnd();
-        }
-    }
-
-    public void UpdateTutorial(bool isShowingTutorial) {
-        if (isShowingTutorial) {
-            gameState = GameState.PAUSED;
-        } else {
-            gameState = GameState.RUNNING;
         }
     }
 
@@ -69,6 +68,8 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         Time.timeScale = 0;
         // update analytics to local storage
         updateAnalytics();
+        // stop background music
+        AudioManager.Instance.StopSound("gameplay");
 
         if (revialChancesLeft > 0 && AdsManager.Instance.IsReady(true)) {
             revialChancesLeft = revialChancesLeft - 1;
@@ -90,7 +91,6 @@ public class GamePlayManager : Singleton<GamePlayManager> {
 
     private void makeGameEnd() {
         gameState = GameState.ENDED;
-        AudioManager.Instance.StopSound("gameplay");
 
         // update session count
         dataManager.sessionsCount += 1;

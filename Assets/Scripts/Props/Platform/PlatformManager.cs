@@ -34,7 +34,7 @@ public class PlatformManager : Singleton<PlatformManager> {
         platform.SetActive(true);
     }
 
-    public GameObject GetCoin() {
+    public GameObject GetCrystal() {
         return coinPooler.GetPooledObject();
     }
 
