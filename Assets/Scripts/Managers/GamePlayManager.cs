@@ -19,7 +19,6 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     public int revialChancesLeft = 1;
 
     private GameState gameState;
-
     private UIManager uiManager;
     private DataManager dataManager;
     private float sessionStartTime = 0;
@@ -30,20 +29,14 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         uiManager = UIManager.Instance;
         dataManager = DataManager.Instance;
         sessionStartTime = Time.realtimeSinceStartup;
-
-        EventManager.CrystalCollectEvent += onCrystalCollected;
-        EventManager.PlatformClimbEvent += onPlatformClimbed;
-        EventManager.PlatformClearEvent += onPlatformClear;
     }
 
     private void Start() {
         AudioManager.Instance.PlaySound("gameplay");
-    }
 
-    private void OnDisable() {
-        EventManager.CrystalCollectEvent -= onCrystalCollected;
-        EventManager.PlatformClimbEvent -= onPlatformClimbed;
-        EventManager.PlatformClearEvent -= onPlatformClear;
+        EventManager.CrystalCollectEvent += onCrystalCollected;
+        EventManager.PlatformClimbEvent += onPlatformClimbed;
+        EventManager.PlatformClearEvent += onPlatformClear;
     }
 
     public void StartGame() {
@@ -105,6 +98,11 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         }
         // show gameOver Dialog
         uiManager.setGameOverPanelState(true);
+
+        // unsubscribe events
+        EventManager.CrystalCollectEvent -= onCrystalCollected;
+        EventManager.PlatformClimbEvent -= onPlatformClimbed;
+        EventManager.PlatformClearEvent -= onPlatformClear;
     }
 
     private void onCrystalCollected() {

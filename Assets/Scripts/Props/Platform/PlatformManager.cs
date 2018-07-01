@@ -9,15 +9,15 @@ public class PlatformManager : Singleton<PlatformManager> {
     public const float _platformGap = 1.65f;
 
     private ObjectPooler platformPooler;
-    private ObjectPooler coinPooler;
+    private ObjectPooler crystalPooler;
     private Vector3 platformPosition;
     private float initialPlatformPos;    
 
     private int maxPlatformIndex;
 
-    void Start() {
+    private void Start() {
         platformPooler = new ObjectPooler(_platform, 7);
-        coinPooler = new ObjectPooler(_coin, 28);
+        crystalPooler = new ObjectPooler(_coin, 28);
         initialPlatformPos = _groundPosition.position.y + _platformGap;
 
         // initialize the starting platforms
@@ -26,16 +26,15 @@ public class PlatformManager : Singleton<PlatformManager> {
 
     public void AddPlatform() {
         platformPosition.Set(0, initialPlatformPos + maxPlatformIndex * _platformGap, 0);
-
         GameObject platform = platformPooler.SpawnInActive(platformPosition);
         maxPlatformIndex++;
 
-        platform.GetComponent<Platform>().platformIndex = maxPlatformIndex;
         platform.SetActive(true);
+        platform.GetComponent<Platform>().InitCrystals(this);
     }
 
     public GameObject GetCrystal() {
-        return coinPooler.GetPooledObject();
+        return crystalPooler.GetPooledObject();
     }
 
     private void initPlatforms() {
