@@ -52,6 +52,9 @@ public class GamePlayManager : Singleton<GamePlayManager> {
             Time.timeScale = 1;
             gameState = GameState.RUNNING;
 
+            // revive players
+            PlayerManager.Instance.RevivePlayers();
+
             // revival accepted, play music again
             AudioManager.Instance.PlaySound("gameplay");
         } else {

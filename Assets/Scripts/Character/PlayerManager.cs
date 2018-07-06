@@ -67,6 +67,11 @@ public class PlayerManager : Singleton<PlayerManager> {
         playerTwoController.Hover();
     }
 
+    public void RevivePlayers() {
+        playerOneController.Revive();
+        playerTwoController.Revive();
+    }
+
     private void jumpPlayers() {
         if (!playerOneController.IsJumping && !playerTwoController.IsJumping) {
             playerOneController.Jump();

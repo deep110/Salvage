@@ -54,6 +54,10 @@ public class CharacterCollider : MonoBehaviour {
         }
     }
 
+    public void BlinkPlayer() {
+        StartCoroutine(BlinkPlayer(2f));
+    }
+
     private IEnumerator HandleEnemyCollision() {
         cameraShake.Apply(0.5f);
 

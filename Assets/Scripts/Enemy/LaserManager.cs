@@ -26,7 +26,7 @@ public class LaserManager : MonoBehaviour, IAttackable {
 
     void Awake() {
         transform.SetParent(Camera.main.transform);
-        transform.localPosition = new Vector3(0, 1, 0);
+        transform.localPosition = new Vector3(0, 1, 10);
         lasers = new Laser[NumberOfLasers];
         //Initialize lasers
         for (int i = 0; i < NumberOfLasers; i++) {

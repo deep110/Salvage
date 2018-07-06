@@ -30,7 +30,7 @@ public class Character : MonoBehaviour {
     private const int platformLayerMask = 1 << 10;
     private int platformsClimbed;
 
-    void Awake() {
+    private void Awake() {
         // get a reference to the components
         _transform = GetComponent<Transform>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -85,11 +85,11 @@ public class Character : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
         hasEnteredPlatform |= (other.CompareTag("Platform") && isJumping);
     }
 
-    void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("Platform") && isJumping && hasEnteredPlatform) {
             _collider.isTrigger = false;
             hasEnteredPlatform = false;
@@ -105,7 +105,7 @@ public class Character : MonoBehaviour {
 
     // Checking to see if the sprite should be flipped
     // this is done in LateUpdate since the Animator may override the localScale
-    void LateUpdate() {
+    private void LateUpdate() {
         // get the current scale
         Vector3 localScale = _transform.localScale;
         float _vx = _rigidbody.velocity.x;
@@ -136,6 +136,12 @@ public class Character : MonoBehaviour {
     public void PlayerDeath() {
         _animator.SetTrigger("Death");
         _collider.enabled = false;
+    }
+
+    public void Revive() {
+        _animator.SetTrigger("Revive");
+        GetComponent<CharacterCollider>().BlinkPlayer();
+        _collider.enabled = true;
     }
 
     private void updatePlatformsClimbed() {
