@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager> {
 
     public Text scorePanel;
-    public Text platformPanel;
 
+    public GameObject startText;
     public GameObject menuPanel;
     public GameObject platformClearPanel;
     public GameObject settingsPanel;
@@ -19,10 +19,6 @@ public class UIManager : Singleton<UIManager> {
 
     public void UpdateScoreText(int score) {
         scorePanel.text = score.ToString();
-    }
-
-    public void UpdatePlatformText(int score) {
-        platformPanel.text = score.ToString();
     }
 
     public void ShowPlatformClear() {
@@ -44,5 +40,9 @@ public class UIManager : Singleton<UIManager> {
 
     public void setPlayerRevivePanelState(bool open) {
         playerRevivePanel.SetActive(open);
+    }
+
+    public void setStartTextState(bool shown) {
+        startText.SetActive(shown);
     }
 }

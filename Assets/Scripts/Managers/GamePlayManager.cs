@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 /**
 * Act as top level manager for the game
@@ -31,15 +32,18 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         sessionStartTime = Time.realtimeSinceStartup;
     }
 
-    private void Start() {
+    private IEnumerator Start() {
         AudioManager.Instance.PlaySound("gameplay");
 
         EventManager.CrystalCollectEvent += onCrystalCollected;
         EventManager.PlatformClimbEvent += onPlatformClimbed;
         EventManager.PlatformClearEvent += onPlatformClear;
-    }
 
-    public void StartGame() {
+        uiManager.setStartTextState(true);
+        yield return new WaitForSeconds(2f);
+
+        // start the game
+        uiManager.setStartTextState(false);
         gameState = GameState.RUNNING;
     }
 
