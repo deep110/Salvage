@@ -4169,7 +4169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4211,7 +4211,7 @@ MonoBehaviour:
   m_fontStyle: 16
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4228,7 +4228,7 @@ MonoBehaviour:
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_parseCtrlCharacters: 1
+  m_parseCtrlCharacters: 0
   m_isOrthographic: 1
   m_isCullingEnabled: 0
   m_ignoreRectMaskCulling: 0

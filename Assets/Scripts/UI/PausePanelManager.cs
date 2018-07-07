@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 public class PausePanelManager : MonoBehaviour {
 
     public void OnHomeClicked() {
-        SceneManager.LoadScene(1);
+        Time.timeScale = 1;
         gameObject.SetActive(false);
+        SceneManager.LoadScene(2);
     }
 
     public void OnPlayClicked() {
