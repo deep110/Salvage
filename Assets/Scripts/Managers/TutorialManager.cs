@@ -11,7 +11,13 @@ public class TutorialManager : MonoBehaviour {
     public TMP_Text tutorialText;
 
     [Header("Step One")]
-    public GameObject playerFinalPosition;
+    public GameObject playerRightPosition;
+
+    [Header("Step Two")]
+    public GameObject playerLeftPosition;
+
+    [Header("Step Four")]
+    public GameObject crystal;
 
     private Character playerOneController;
     private Character playerTwoController;
@@ -19,44 +25,68 @@ public class TutorialManager : MonoBehaviour {
 
     private bool isTutorialRunning;
     private int tutorialStep;
+    private bool crystalCollected;
 
 
     private void Start() {
         inputManager = GetComponent<InputManager>();
         playerOneController = playerOne.GetComponent<Character>();
         playerTwoController = playerTwo.GetComponent<Character>();
-        tutorialStep = 1;
 
         StartCoroutine(runTutorial());
     }
 
     private IEnumerator runTutorial() {
+        // prepare things for runnning first tutorial
+        tutorialStep = 1;
         isTutorialRunning = true;
+        playerRightPosition.SetActive(true);
+
         while (isTutorialRunning) {
             switch (tutorialStep) {
                 case 1:
-                    if (checkIsDragComplete()) {
+                    if (checkIsRightDragComplete()) {
                         tutorialStep++;
-                        playerFinalPosition.GetComponent<ParticleSystem>().Stop();
+                        playerRightPosition.SetActive(false);
                         tutorialText.text = "Awesome !!";
-                        yield return new WaitForSeconds(2f);
-                        tutorialText.text = "Tap to jump!";
+                        yield return new WaitForSeconds(1f);
+
+                        // make things ready for next step
+                        tutorialText.text = "Drag the finger to move\nleft";
+                        playerLeftPosition.SetActive(true);
                     }
                     break;
 
                 case 2:
-                    if (jumpPlayers()) {
+                    if (checkIsLeftDragComplete()) {
                         tutorialStep++;
+                        playerLeftPosition.SetActive(false);
                         tutorialText.text = "Awesome !!";
-                        yield return new WaitForSeconds(2f);
-                        tutorialText.text = "Knock the crystal to collect";
+                        yield return new WaitForSeconds(1f);
+
+                        // make things ready for next step
+                        tutorialText.text = "Now\nTap to jump!";
                     }
                     break;
 
                 case 3:
-                    yield return new WaitForSeconds(5f);
+                    if (jumpPlayers()) {
+                        tutorialStep++;
+                        tutorialText.text = "Awesome !!";
+                        yield return new WaitForSeconds(1f);
+
+                        // make things ready for next step
+                        tutorialText.text = "Knock the crystal to collect";
+                        EventManager.CrystalCollectEvent += onCrystalCollected;
+                        crystal.SetActive(true);
+                    }
+                    break;
+
+                case 4:
+                    yield return new WaitUntil(() => crystalCollected);
                     tutorialStep++;
                     tutorialText.text = "You Rock !!";
+                    EventManager.CrystalCollectEvent -= onCrystalCollected;
                     yield return new WaitForSeconds(2f);
                     break;
 
@@ -70,8 +100,12 @@ public class TutorialManager : MonoBehaviour {
         }
     }
 
-    private bool checkIsDragComplete() {
-        return (playerOne.position.x > playerFinalPosition.transform.position.x);
+    private bool checkIsRightDragComplete() {
+        return (playerOne.position.x > playerRightPosition.transform.position.x);
+    }
+
+    private bool checkIsLeftDragComplete() {
+        return (playerOne.position.x < playerLeftPosition.transform.position.x);
     }
 
     private void FixedUpdate() {
@@ -108,6 +142,10 @@ public class TutorialManager : MonoBehaviour {
             return true;
         }
         return false;
+    }
+
+    private void onCrystalCollected() {
+        crystalCollected = true;
     }
 
     private void loadGameScene() {

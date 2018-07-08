@@ -50,7 +50,7 @@ public class AnimateText : MonoBehaviour {
             }
 
             if (visibleCount > totalVisibleCharacters) {
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(2f);
                 visibleCount = 0;
             }
 
@@ -58,7 +58,7 @@ public class AnimateText : MonoBehaviour {
             textComponent.maxVisibleCharacters = visibleCount;
             visibleCount += 1;
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.03f);
         }
     }
 

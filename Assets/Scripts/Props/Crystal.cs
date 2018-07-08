@@ -27,8 +27,11 @@ public class Crystal : MonoBehaviour {
         }
     }
 
-    public void Collect() {      
-        GetComponent<Transform>().GetComponentInParent<Platform>().SetCrystalFall();
+    public void Collect() { 
+        Platform platform = GetComponent<Transform>().GetComponentInParent<Platform>();
+        if (platform)
+            platform.SetCrystalFall();
+        
         EventManager.CrystalCollected();
 
         // instantiate the teleport particle system

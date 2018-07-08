@@ -29,6 +29,7 @@ public class Character : MonoBehaviour {
 
     private const int platformLayerMask = 1 << 10;
     private int platformsClimbed;
+    private bool isDead;
 
     private void Awake() {
         // get a reference to the components
@@ -62,7 +63,7 @@ public class Character : MonoBehaviour {
     }
 
     public void Jump() {
-        if (!isJumping) {
+        if (!isJumping && !isDead) {
             isJumping = true;
             _collider.isTrigger = true;
             // add a force in the up direction
@@ -134,14 +135,16 @@ public class Character : MonoBehaviour {
     }
 
     public void PlayerDeath() {
+        isDead = true;
         _animator.SetTrigger("Death");
-        _collider.enabled = false;
     }
 
     public void Revive() {
-        _animator.SetTrigger("Revive");
-        GetComponent<CharacterCollider>().BlinkPlayer();
-        _collider.enabled = true;
+        if (isDead) {
+            _animator.SetTrigger("Revive");
+            isDead = false;
+        }
+        GetComponent<CharacterCollider>().PlayerRevived();
     }
 
     private void updatePlatformsClimbed() {
@@ -151,5 +154,10 @@ public class Character : MonoBehaviour {
 
     private void allowJump() {
         isJumping = false;
+    }
+
+    private void Print(string message) {
+        if (!isFirstPlayer)
+            Debug.Log(message);
     }
 }

@@ -16,6 +16,7 @@ public class CharacterCollider : MonoBehaviour {
     private CameraShake cameraShake;
     private GameObject shield;
     private bool isInvincible;
+    private bool isDead;
 
     void Awake() {
         shield = transform.GetChild(0).gameObject;
@@ -23,18 +24,20 @@ public class CharacterCollider : MonoBehaviour {
     }
 
     void OnTriggerStay2D(Collider2D other) {
-        if (other.CompareTag("Enemy")) {
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (!isInvincible && enemy.isActive) {
-                enemy.Collided();
-                StartCoroutine(HandleEnemyCollision());
+        if (!isDead) {
+            if (other.CompareTag("Enemy")) {
+                Enemy enemy = other.GetComponent<Enemy>();
+                if (!isInvincible && enemy.isActive) {
+                    enemy.Collided();
+                    StartCoroutine(HandleEnemyCollision());
+                }
+
+            } else if (other.CompareTag("Crystal")) {
+                other.gameObject.GetComponent<Crystal>().Fall();
+
+            } else if (other.CompareTag("PowerUp")) {
+                PowerUpManager.Instance.AddActivePowerUp(other.gameObject.GetComponent<PowerUp>());
             }
-
-        } else if (other.CompareTag("Crystal")) {
-            other.gameObject.GetComponent<Crystal>().Fall();
-
-        } else if (other.CompareTag("PowerUp")) {
-            PowerUpManager.Instance.AddActivePowerUp(other.gameObject.GetComponent<PowerUp>());
         }
     }
 
@@ -54,7 +57,8 @@ public class CharacterCollider : MonoBehaviour {
         }
     }
 
-    public void BlinkPlayer() {
+    public void PlayerRevived() {
+        isDead = false;
         StartCoroutine(BlinkPlayer(2f));
     }
 
@@ -65,10 +69,11 @@ public class CharacterCollider : MonoBehaviour {
             isShieldActive = false;
             StartCoroutine(BlinkPlayer(2f));
         } else {
+            isDead = true;
             GetComponent<Character>().PlayerDeath();
             playerDeath.Play();
             Instantiate(shockwave, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(1.8f);
+            yield return new WaitForSeconds(1.2f);
             GamePlayManager.Instance.OnGameOver();
         }
     }
