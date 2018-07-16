@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9577cd44f4fbb4232aeb224e277f5425
-timeCreated: 1530993799
+timeCreated: 1531765090
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -116,48 +116,6 @@ TextureImporter:
         y: 773
         width: 120
         height: 120
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UISheet_3
-      rect:
-        serializedVersion: 2
-        x: 423
-        y: 727
-        width: 343
-        height: 88
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UISheet_4
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 470
-        width: 378
-        height: 188
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UISheet_5
-      rect:
-        serializedVersion: 2
-        x: 23
-        y: 471
-        width: 370
-        height: 188
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,7 +299,7 @@ TextureImporter:
         width: 372
         height: 112
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -355,7 +313,7 @@ TextureImporter:
         width: 271
         height: 85
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -369,7 +327,7 @@ TextureImporter:
         width: 368
         height: 82
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

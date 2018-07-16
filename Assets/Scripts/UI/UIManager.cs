@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject settingsPanel;
     public GameObject gameOverPanel;
     public GameObject playerRevivePanel;
+    public GameObject backGroundImage;
 
     public void OnPauseButtonClick() {
         Time.timeScale = 0;
@@ -23,7 +24,7 @@ public class UIManager : Singleton<UIManager> {
 
     public void ShowPlatformClear() {
         platformClearPanel.SetActive(true);
-        Invoke("HidePlatformClear", 2f);
+        Invoke("HidePlatformClear", 1.4f);
     }
 
     private void HidePlatformClear() {
@@ -32,14 +33,17 @@ public class UIManager : Singleton<UIManager> {
 
     public void setSettingsPanelState(bool open) {
         settingsPanel.SetActive(open);
+        backGroundImage.SetActive(open);
     }
 
     public void setGameOverPanelState(bool open) {
         gameOverPanel.SetActive(open);
+        backGroundImage.SetActive(open);
     }
 
     public void setPlayerRevivePanelState(bool open) {
         playerRevivePanel.SetActive(open);
+        backGroundImage.SetActive(open);
     }
 
     public void setStartTextState(bool shown) {

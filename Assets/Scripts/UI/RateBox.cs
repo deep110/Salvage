@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class RateBox : Singleton<RateBox> {
 
@@ -19,8 +19,8 @@ public class RateBox : Singleton<RateBox> {
     public string playStoreId;
 
     private GameObject ui;
-    private Text titleTextUI;
-    private Text messageTextUI;
+    private TMP_Text titleTextUI;
+    private TMP_Text messageTextUI;
     private bool isInternet;
     private DataManager dataManager;
 
@@ -29,8 +29,8 @@ public class RateBox : Singleton<RateBox> {
         dataManager = DataManager.Instance;
 
         ui = transform.GetChild(0).gameObject;
-        titleTextUI = ui.transform.GetChild(1).GetComponent<Text>();
-        messageTextUI = ui.transform.GetChild(2).GetComponent<Text>();
+        titleTextUI = ui.transform.GetChild(1).GetComponent<TMP_Text>();
+        messageTextUI = ui.transform.GetChild(2).GetComponent<TMP_Text>();
         titleTextUI.text = title;
         messageTextUI.text = message;
 

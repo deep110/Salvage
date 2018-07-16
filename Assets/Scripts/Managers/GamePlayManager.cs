@@ -48,6 +48,9 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     }
 
     public void UpdateRevival(bool revivalAccepted) {
+        // disable the revival dialog
+        uiManager.setPlayerRevivePanelState(false);
+
         if (revivalAccepted) {
             Time.timeScale = 1;
             gameState = GameState.RUNNING;

@@ -7,10 +7,7 @@ public class PlayerRevivePanelManager : MonoBehaviour {
         AdsManager.Instance.ShowRewardedAd(handleShowResult);
     }
 
-    public void ReviveRejected() {
-        // disable this dialog
-        gameObject.SetActive(false);
-
+    public void RevivalRejected() {
         // Update revival state failed to GamePlay Manager
         GamePlayManager.Instance.UpdateRevival(false);
     }
@@ -20,13 +17,8 @@ public class PlayerRevivePanelManager : MonoBehaviour {
             // Update revival state success to GamePlay Manager
             GamePlayManager.Instance.UpdateRevival(true);
 
-            // disable this dialog
-            gameObject.SetActive(false);
-
         } else if (result == ShowResult.Skipped || result == ShowResult.Failed) {
-            Debug.LogWarning(result.ToString());
-            
-            ReviveRejected();
+            RevivalRejected();
         }
     }
 }
