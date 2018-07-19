@@ -4,16 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class LoadingSceneManager : MonoBehaviour {
 
+    public float splashDuration = 1.5f;
+
     private IEnumerator Start() {
-        // LocalizationManager.Instance.LoadLocalizedText("english");
-
-        // while (!LocalizationManager.Instance.IsReady()) {
-        //     yield return null;
-        // }
-
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(splashDuration);
 
         SceneManager.LoadScene(1);
     }
-
 }
