@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class HomeSceneManager : MonoBehaviour {
 
     public GameObject settingsPanel;
+    public TMP_Text highScore;
+    public string playStoreId;
+
+    private DataManager dataManager;
+
+    private void Start() {
+        dataManager = DataManager.Instance;
+        highScore.text = dataManager.GetAnalyticsData().highScore.ToString();
+    }
 
     public void LoadGame() {
         SettingsData settingsData = DataManager.Instance.GetSettingsData();
@@ -22,5 +32,15 @@ public class HomeSceneManager : MonoBehaviour {
 
     public void OpenSettings() {
         settingsPanel.SetActive(true);
+    }
+
+    public void RateUs() {
+        // open playstore
+        Application.OpenURL("market://details?id=" + playStoreId);
+
+        // update rate state
+        AnalyticsData analyticsData = dataManager.GetAnalyticsData();
+        analyticsData.isRated = AnalyticsData.RateState.RATED;
+        dataManager.SetAnalyticsData(analyticsData);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : Singleton<UIManager> {
 
-    public Text scorePanel;
+    public TMP_Text scorePanel;
 
     public GameObject startText;
     public GameObject menuPanel;
