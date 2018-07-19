@@ -22,12 +22,18 @@ public class Crystal : MonoBehaviour {
             isFalling = true;
             _rigidbody.velocity = fallVelocity;
             timePassed = Time.timeSinceLevelLoad;
+
+            // play sound
+            AudioManager.Instance.PlaySound("crystal_strike");
         } else if (Time.timeSinceLevelLoad - timePassed > 0.05f) {
             Collect();
         }
     }
 
-    public void Collect() { 
+    public void Collect() {
+        // play sound
+        AudioManager.Instance.PlaySound("crystal_teleport");
+
         Platform platform = GetComponent<Transform>().GetComponentInParent<Platform>();
         if (platform)
             platform.SetCrystalFall();

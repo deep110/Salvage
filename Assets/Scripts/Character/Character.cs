@@ -137,6 +137,7 @@ public class Character : MonoBehaviour {
     public void PlayerDeath() {
         isDead = true;
         _animator.SetTrigger("Death");
+        AudioManager.Instance.PlaySound("player_death");
     }
 
     public void Revive() {

@@ -2106,7 +2106,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -629871655
+  randomSeed: -439353761
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6211,7 +6211,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1295704622
+  randomSeed: 1469830854
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -9899,7 +9899,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1565240415
+  randomSeed: 1529031024
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13389,6 +13389,11 @@ Prefab:
     - target: {fileID: 4558027030189266, guid: f428fbce2caf74998b09896e945847fc, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114405219705892750, guid: f428fbce2caf74998b09896e945847fc,
+        type: 2}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.225
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f428fbce2caf74998b09896e945847fc, type: 2}
@@ -37445,7 +37450,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1153402371
+  randomSeed: -373222695
   InitialModule:
     serializedVersion: 3
     enabled: 1
