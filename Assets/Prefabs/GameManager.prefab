@@ -80,21 +80,29 @@ MonoBehaviour:
   sounds:
   - name: gameplay
     audioClip: {fileID: 8300000, guid: 6612f99bd92d24ee192021c79c4695fc, type: 3}
-    volume: 0.225
+    output: {fileID: 243054371926784408, guid: 833bd3d2d314f41768026b6cb6903ba4, type: 2}
+    volume: 1
     pitch: 1
     loop: 1
+    isSFX: 0
   - name: crystal_strike
     audioClip: {fileID: 8300000, guid: 9f77f79f59411463e928e1f6a4c3b430, type: 3}
+    output: {fileID: 243576423747554392, guid: 833bd3d2d314f41768026b6cb6903ba4, type: 2}
     volume: 1
     pitch: 1
     loop: 0
+    isSFX: 1
   - name: crystal_teleport
     audioClip: {fileID: 8300000, guid: 4836febfb70f54700b84a0fe71016bd9, type: 3}
+    output: {fileID: 243576423747554392, guid: 833bd3d2d314f41768026b6cb6903ba4, type: 2}
     volume: 0.25
     pitch: 1
     loop: 0
+    isSFX: 1
   - name: player_death
     audioClip: {fileID: 8300000, guid: 5bbb94074bce640afba4864f7070dec8, type: 3}
+    output: {fileID: 243576423747554392, guid: 833bd3d2d314f41768026b6cb6903ba4, type: 2}
     volume: 1
     pitch: 1
     loop: 0
+    isSFX: 1

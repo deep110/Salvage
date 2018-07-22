@@ -23,10 +23,10 @@ public class HomeSceneManager : MonoBehaviour {
             DataManager.Instance.SetSettingsData(settingsData);
 
             // load tutorial scene
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(2);
         } else {
             // load game
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
     }
 

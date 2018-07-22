@@ -18,7 +18,7 @@ public class GameOverPanelManager : MonoBehaviour {
     public void OnRestartAccepted() {
         // reload the scene
         Time.timeScale = 1;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
 }

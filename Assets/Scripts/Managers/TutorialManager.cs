@@ -149,6 +149,6 @@ public class TutorialManager : MonoBehaviour {
     }
 
     private void loadGameScene() {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 }
