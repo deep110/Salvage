@@ -78,8 +78,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: gameplay
-    audioClip: {fileID: 8300000, guid: 6612f99bd92d24ee192021c79c4695fc, type: 3}
+  - name: background_music
+    audioClip: {fileID: 8300000, guid: 19265aa5836494fc4a6b207d95e4db63, type: 3}
     output: {fileID: 243054371926784408, guid: 833bd3d2d314f41768026b6cb6903ba4, type: 2}
     volume: 1
     pitch: 1

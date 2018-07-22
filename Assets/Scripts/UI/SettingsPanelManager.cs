@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class SettingsPanelManager : MonoBehaviour {
 
-	public Toggle sound;
-	public Toggle vfx;
+	public Toggle music;
+	public Toggle sfx;
 	public Toggle tutorial;
 
 	private SettingsData settingsData;
@@ -12,18 +12,20 @@ public class SettingsPanelManager : MonoBehaviour {
 	private void OnEnable() {
 		settingsData = DataManager.Instance.GetSettingsData();
 
-		sound.isOn = settingsData.isSoundOn;
-		vfx.isOn = settingsData.isVfxOn;
+		music.isOn = settingsData.isSoundOn;
+		sfx.isOn = settingsData.isVfxOn;
 		tutorial.isOn = settingsData.isTutorialOn;
 	}
 
 	public void ToogleSound(bool isSelected) {
-		Debug.Log("Sound: " + isSelected);
+		if (music.isOn) {
+			AudioManager.Instance.PlaySound("background_music", true);
+		} else {
+			AudioManager.Instance.StopSound("background_music");
+		}
 	}
 
-	public void ToogleVfx(bool isSelected) {
-		Debug.Log("Vfx: "+ isSelected);
-	}
+	public void ToogleVfx(bool isSelected) {}
 
 	public void ToogleTutorial(bool isSelected) {
 		//
@@ -32,8 +34,8 @@ public class SettingsPanelManager : MonoBehaviour {
 	public void closePanel() {
 		gameObject.SetActive(false);
 
-		settingsData.isSoundOn = sound.isOn;
-		settingsData.isVfxOn = vfx.isOn;
+		settingsData.isSoundOn = music.isOn;
+		settingsData.isVfxOn = sfx.isOn;
 		settingsData.isTutorialOn = tutorial.isOn;
 
 		DataManager.Instance.SetSettingsData(settingsData);

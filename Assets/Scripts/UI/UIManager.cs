@@ -15,7 +15,7 @@ public class UIManager : Singleton<UIManager> {
 
     public void OnPauseButtonClick() {
         Time.timeScale = 0;
-        menuPanel.SetActive(true);
+        setMenuPanelState(true);
     }
 
     public void UpdateScoreText(int score) {
@@ -29,6 +29,11 @@ public class UIManager : Singleton<UIManager> {
 
     private void HidePlatformClear() {
         platformClearPanel.SetActive(false);
+    }
+
+    public void setMenuPanelState(bool open) {
+        menuPanel.SetActive(open);
+        backGroundImage.SetActive(open);
     }
 
     public void setSettingsPanelState(bool open) {

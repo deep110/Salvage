@@ -57,15 +57,19 @@ public class AudioManager : PersistentSingleton<AudioManager> {
         dataManager = DataManager.Instance;
     }
 
-    public void PlaySound(string name) {
+    public void PlaySound(string name, bool force = false) {
         for (int i = 0; i < sounds.Length; i++) {
             if (sounds[i].name == name) {
-                if (sounds[i].isSFX) {
-                    if (isSFXActive())
-                        sounds[i].Play();
+                if (force) {
+                    sounds[i].Play();
                 } else {
-                    if (isMusicActive())
-                        sounds[i].Play();
+                    if (sounds[i].isSFX) {
+                        if (isSFXActive())
+                            sounds[i].Play();
+                    } else {
+                        if (isMusicActive())
+                            sounds[i].Play();
+                    }
                 }
                 return;
             }

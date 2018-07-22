@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 224525759438501974}
   - component: {fileID: 114910723520989228}
   m_Layer: 5
-  m_Name: Sound
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -481,8 +481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c8ddc7eeb8a476d911e7b2c8887ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 114910723520989228}
-  vfx: {fileID: 114390359665119942}
+  music: {fileID: 114910723520989228}
+  sfx: {fileID: 114390359665119942}
   tutorial: {fileID: 114651533408988496}
 --- !u!114 &114569759120396648
 MonoBehaviour:

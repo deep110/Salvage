@@ -13,6 +13,9 @@ public class HomeSceneManager : MonoBehaviour {
     private void Start() {
         dataManager = DataManager.Instance;
         highScore.text = dataManager.GetAnalyticsData().highScore.ToString();
+
+        // play background music
+        AudioManager.Instance.PlaySound("background_music");
     }
 
     public void LoadGame() {

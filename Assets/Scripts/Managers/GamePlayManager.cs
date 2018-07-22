@@ -33,7 +33,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
     }
 
     private IEnumerator Start() {
-        AudioManager.Instance.PlaySound("gameplay");
+        AudioManager.Instance.PlaySound("background_music");
 
         EventManager.CrystalCollectEvent += onCrystalCollected;
         EventManager.PlatformClimbEvent += onPlatformClimbed;
@@ -59,7 +59,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
             PlayerManager.Instance.RevivePlayers();
 
             // revival accepted, play music again
-            AudioManager.Instance.PlaySound("gameplay");
+            AudioManager.Instance.PlaySound("background_music");
         } else {
             // end the game
             makeGameEnd();
@@ -72,7 +72,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         // update analytics to local storage
         updateAnalytics();
         // stop background music
-        AudioManager.Instance.StopSound("gameplay");
+        AudioManager.Instance.StopSound("background_music");
 
         if (revialChancesLeft > 0 && AdsManager.Instance.IsReady(true)) {
             revialChancesLeft = revialChancesLeft - 1;
