@@ -106,3 +106,10 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     isSFX: 1
+  - name: button_click
+    audioClip: {fileID: 8300000, guid: 9fed169c2a7df4609a34163035c53ca2, type: 3}
+    output: {fileID: 243576423747554392, guid: 833bd3d2d314f41768026b6cb6903ba4, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    isSFX: 1

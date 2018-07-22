@@ -15,6 +15,7 @@ public class UIManager : Singleton<UIManager> {
 
     public void OnPauseButtonClick() {
         Time.timeScale = 0;
+        AudioManager.Instance.PlaySound("button_click");
         setMenuPanelState(true);
     }
 

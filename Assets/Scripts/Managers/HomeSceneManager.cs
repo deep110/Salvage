@@ -19,6 +19,8 @@ public class HomeSceneManager : MonoBehaviour {
     }
 
     public void LoadGame() {
+        AudioManager.Instance.PlaySound("button_click");
+
         SettingsData settingsData = DataManager.Instance.GetSettingsData();
         if (settingsData.isTutorialOn) {
             // update Settings Data
@@ -34,10 +36,12 @@ public class HomeSceneManager : MonoBehaviour {
     }
 
     public void OpenSettings() {
+        AudioManager.Instance.PlaySound("button_click");
         settingsPanel.SetActive(true);
     }
 
     public void RateUs() {
+        AudioManager.Instance.PlaySound("button_click");
         // open playstore
         Application.OpenURL("market://details?id=" + playStoreId);
 

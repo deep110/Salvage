@@ -32,6 +32,7 @@ public class SettingsPanelManager : MonoBehaviour {
 	}
 
 	public void closePanel() {
+		AudioManager.Instance.PlaySound("button_click");
 		gameObject.SetActive(false);
 
 		settingsData.isSoundOn = music.isOn;
