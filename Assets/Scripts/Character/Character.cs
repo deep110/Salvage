@@ -63,13 +63,12 @@ public class Character : MonoBehaviour {
     }
 
     public void Jump() {
-        if (!isJumping && !isDead) {
+        if (!isJumping) {
             isJumping = true;
             _collider.isTrigger = true;
             // add a force in the up direction
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.AddRelativeForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            // play the jump sound
         }
     }
 
@@ -155,10 +154,5 @@ public class Character : MonoBehaviour {
 
     private void allowJump() {
         isJumping = false;
-    }
-
-    private void Print(string message) {
-        if (!isFirstPlayer)
-            Debug.Log(message);
     }
 }

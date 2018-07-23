@@ -18,12 +18,12 @@ public class CharacterCollider : MonoBehaviour {
     private bool isInvincible;
     private bool isDead;
 
-    void Awake() {
+    private void Awake() {
         shield = transform.GetChild(0).gameObject;
         cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
-    void OnTriggerStay2D(Collider2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         if (!isDead) {
             if (other.CompareTag("Enemy")) {
                 Enemy enemy = other.GetComponent<Enemy>();
@@ -43,7 +43,7 @@ public class CharacterCollider : MonoBehaviour {
 
     public void ActivateShield() {
         isShieldActive = true;
-        shield.SetActive(true); //TODO: animate shield appearance
+        shield.SetActive(true);
     }
 
     public void DeActivateShield() {
@@ -53,7 +53,7 @@ public class CharacterCollider : MonoBehaviour {
         } else {
             // player has collided with enemy
             // just sync shield state visually
-            shield.SetActive(false); //TODO: animate shield disappearance
+            shield.SetActive(false);
         }
     }
 
@@ -73,8 +73,10 @@ public class CharacterCollider : MonoBehaviour {
             GetComponent<Character>().PlayerDeath();
             playerDeath.Play();
             Instantiate(shockwave, transform.position, Quaternion.identity);
+            
             yield return new WaitForSeconds(1.2f);
-            GamePlayManager.Instance.OnGameOver();
+            
+            PlayerManager.Instance.PlayerCollided();
         }
     }
 

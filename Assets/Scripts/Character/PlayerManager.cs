@@ -15,6 +15,7 @@ public class PlayerManager : Singleton<PlayerManager> {
     private InputManager inputManager;
     private bool jump;
     private float jumpActiveTimeElasped;
+    private bool playersCollided;
 
 
     protected override void Awake() {
@@ -68,8 +69,20 @@ public class PlayerManager : Singleton<PlayerManager> {
     }
 
     public void RevivePlayers() {
+        // reset positions
+        playerTwo.transform.position = playerOne.transform.position - new Vector3(0, 1.76f, 0);
+
         playerOneController.Revive();
         playerTwoController.Revive();
+
+        playersCollided = false;
+    }
+
+    public void PlayerCollided() {
+        if (!playersCollided) {
+            GamePlayManager.Instance.OnGameOver();
+            playersCollided = true;
+        }
     }
 
     private void jumpPlayers() {

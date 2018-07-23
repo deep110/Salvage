@@ -31,14 +31,12 @@ public class EnemyManager : Singleton<EnemyManager> {
         EventManager.PlatformClimbEvent += platformClimbed;
 
         playerOneController = PlayerManager.Instance.playerOneController;
-
         createEnemyPooler();
         StartCoroutine(SpawnEnemies());
     }
 
     private void OnDestroy() {
         EventManager.PlatformClimbEvent -= platformClimbed;
-
         StopAllCoroutines();
     }
 
