@@ -6,7 +6,7 @@ TextureImporter:
     21300002: UISheet_3
     21300004: UISheet_4
     21300006: UISheet_5
-    21300008: UISheet_6
+    21300008: plant_bud
     21300010: button_pause_clicked
     21300012: button_replay_clicked
     21300014: button_close_clicked
@@ -145,7 +145,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UISheet_6
+      name: plant_bud
       rect:
         serializedVersion: 2
         x: 42

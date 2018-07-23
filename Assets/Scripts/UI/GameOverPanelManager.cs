@@ -16,6 +16,7 @@ public class GameOverPanelManager : MonoBehaviour {
     }
 
     public void OnRestartAccepted() {
+        AudioManager.Instance.PlaySound("button_click");
         // reload the scene
         Time.timeScale = 1;
         SceneManager.LoadScene(3);

@@ -1,15 +1,17 @@
 fileFormatVersion: 2
-guid: 90b1730e7cf6c4f0e8a5a2b36b5a88f8
+guid: c2ae20816e0fd4595b68b07110b9e800
 TextureImporter:
   fileIDToRecycleName:
-    21300000: collectible_3
-    21300002: collectible_0
-    21300004: collectible_1
-    21300006: collectible_2
-    21300008: collectible_4
-    21300010: collectible_5
-    21300012: collectible_6
-    21300014: collectible_0
+    21300000: spiky_ivy_0
+    21300002: spiky_ivy_1
+    21300004: spiky_ivy_2
+    21300006: spiky_ivy_3
+    21300008: spiky_ivy_8
+    21300010: spiky_ivy_4
+    21300012: spiky_ivy_5
+    21300014: spiky_ivy_6
+    21300016: spiky_ivy_7
+    21300018: spiky_ivy_9
   externalObjects: {}
   serializedVersion: 6
   mipmaps:
@@ -114,141 +116,201 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: collectible_3
+      name: spiky_ivy_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 26
-        width: 90
-        height: 115
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 620
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2acbcbdacdb4a438991d9856b7e5a1e6
+      spriteID: d04c391d7adcc47da8e08503307eb546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: collectible_1
+      name: spiky_ivy_1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 489
-        width: 110
-        height: 110
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 319
+        y: 620
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55c8e1c9d16c44386b07ba6b2eff7c0d
+      spriteID: 6d2e8b48080e7449f943e7f0b43a6b4c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: collectible_2
+      name: spiky_ivy_2
       rect:
         serializedVersion: 2
-        x: 13
-        y: 256
-        width: 90
-        height: 113
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 638
+        y: 620
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 989ee551c42104568b4128ecae854366
+      spriteID: dc065d4e2a66f4eda98d489e8e816cb5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: collectible_4
+      name: spiky_ivy_3
       rect:
         serializedVersion: 2
-        x: 124
-        y: 717
-        width: 98
-        height: 114
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 957
+        y: 620
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4bab790a8387480f91fc08bd4b2edb5
+      spriteID: eed09291999284e6ea2b9ea52e4d1d76
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: collectible_5
+      name: spiky_ivy_8
       rect:
         serializedVersion: 2
-        x: 117
-        y: 486
-        width: 111
-        height: 115
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1276
+        y: 620
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f3ef691ad8d04bdc865d08f295804a1
+      spriteID: 2c6557bbd2d384b5aa632e7f8a4f6095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: collectible_6
+      name: spiky_ivy_4
       rect:
         serializedVersion: 2
-        x: 115
-        y: 256
-        width: 116
-        height: 112
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 0
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecabdef7911e64ac49e731cbb3775da1
+      spriteID: 43b5abf5d807e46238da433e7975ab0f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: collectible_0
+      name: spiky_ivy_5
       rect:
         serializedVersion: 2
-        x: 115
-        y: 26
-        width: 116
-        height: 115
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 319
+        y: 0
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55823916b5e004d10876d4e3170086f3
+      spriteID: 065608cde0e0c4ebd9b05e826f17e16e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spiky_ivy_6
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 0
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa16cfdfbc2aa42658ccd79cd7ecbda7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spiky_ivy_7
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 0
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28f18030f07344169a89947592566436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spiky_ivy_9
+      rect:
+        serializedVersion: 2
+        x: 1276
+        y: 0
+        width: 319.6
+        height: 620
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df5b726f1461c43c7b58eba1462748a5
       vertices: []
       indices: 
       edges: []
@@ -256,12 +318,12 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d88d2a75aeb274cc48a43e42309f29d7
     vertices: []
     indices: 
     edges: []
     weights: []
-  spritePackingTag: background
+  spritePackingTag: enemy
   userData: 
   assetBundleName: 
   assetBundleVariant: 

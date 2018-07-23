@@ -8,6 +8,7 @@ public class PlayerRevivePanelManager : MonoBehaviour {
     }
 
     public void RevivalRejected() {
+        AudioManager.Instance.PlaySound("button_click");
         // Update revival state failed to GamePlay Manager
         GamePlayManager.Instance.UpdateRevival(false);
     }

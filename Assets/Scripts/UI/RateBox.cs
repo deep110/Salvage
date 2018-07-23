@@ -48,6 +48,7 @@ public class RateBox : Singleton<RateBox> {
     }
 
     public void OnRateAccepted() {
+        AudioManager.Instance.PlaySound("button_click");
         // open playstore
         Application.OpenURL("market://details?id=" + playStoreId);
 
@@ -60,6 +61,7 @@ public class RateBox : Singleton<RateBox> {
     }
 
     public void OnRatePostponed() {
+        AudioManager.Instance.PlaySound("button_click");
         dataManager.ResetCoolDownTime();
 
         // update rate state
@@ -72,6 +74,7 @@ public class RateBox : Singleton<RateBox> {
     }
 
     public void OnRateRejected() {
+        AudioManager.Instance.PlaySound("button_click");
         AnalyticsData analyticsData = dataManager.GetAnalyticsData();
         analyticsData.isRated = AnalyticsData.RateState.DENIED;
         dataManager.SetAnalyticsData(analyticsData);
