@@ -261,7 +261,7 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-  spritePackingTag: background
+  spritePackingTag: atlas
   userData: 
   assetBundleName: 
   assetBundleVariant: 

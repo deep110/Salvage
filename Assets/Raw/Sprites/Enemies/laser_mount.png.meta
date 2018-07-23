@@ -218,7 +218,7 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-  spritePackingTag: enemy
+  spritePackingTag: atlas
   userData: 
   assetBundleName: 
   assetBundleVariant: 
