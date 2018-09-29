@@ -3,9 +3,7 @@ using UnityEngine.Advertisements;
 
 public class AdsManager : Singleton<AdsManager> {
 
-    #if UNITY_ANDROID
     private string gameId = "1744253";
-    #endif
 
     private string placementIdSimple = "video";
     private string placementIdRewarded = "rewardedVideo";

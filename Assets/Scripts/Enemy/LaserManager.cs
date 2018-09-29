@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class LaserManager : MonoBehaviour, IAttackable {
@@ -22,9 +22,8 @@ public class LaserManager : MonoBehaviour, IAttackable {
 
     private Vector3 hiddenPosition;
     private Vector3 seenPosition;
-    private bool attackCalled;
 
-    void Awake() {
+    private void Awake() {
         transform.SetParent(Camera.main.transform);
         transform.localPosition = new Vector3(0, 1, 10);
         lasers = new Laser[NumberOfLasers];
@@ -38,27 +37,7 @@ public class LaserManager : MonoBehaviour, IAttackable {
         seenPosition = hiddenPosition - new Vector3(0, moveDistance, 0);
     }
 
-    private void OnEnable() {
-        if (attackCalled) {
-            const float initialDelay = 2f;
-            timeElapsed = 0;
-            current = LaserSetState.TO_BE_SEEN;
-            int index = Random.Range(0, pattern.Length / NumberOfLasers);
-            float duration = 0;
-            for (int i = 0; i < NumberOfLasers; i++) {
-                if (pattern[index, i] > duration) {
-                    duration = pattern[index, i];
-                }
-                StartCoroutine(ActivateLaser(i, pattern[index, i] + initialDelay));
-            }
-            //for last laser will turn on till 2 sec then turn off + 1 sec wait before lasers disappear
-            duration += 3;
-            duration += initialDelay;
-            Invoke("DeactivateLaser", duration);
-        }
-    }
-
-    void Update() {
+    private void Update() {
         switch (current) {
             case LaserSetState.TO_BE_SEEN:
                 transform.localPosition = Vector3.Lerp(hiddenPosition, seenPosition, timeElapsed);
@@ -85,7 +64,21 @@ public class LaserManager : MonoBehaviour, IAttackable {
 
     public void Attack(int difficultyLevel, Vector2 playerPosition, int platformLevel) {
         //The first laser starts initialDelay seconds after it is enabled
-        attackCalled = true;
+        const float initialDelay = 2f;
+        timeElapsed = 0;
+        current = LaserSetState.TO_BE_SEEN;
+        int index = Random.Range(0, pattern.Length / NumberOfLasers);
+        float duration = 0;
+        for (int i = 0; i < NumberOfLasers; i++) {
+            if (pattern[index, i] > duration) {
+                duration = pattern[index, i];
+            }
+            StartCoroutine(ActivateLaser(i, pattern[index, i] + initialDelay));
+        }
+        //for last laser will turn on till 2 sec then turn off + 1 sec wait before lasers disappear
+        duration += 3;
+        duration += initialDelay;
+        Invoke("DeactivateLaser", duration);
     }
 
     private IEnumerator ActivateLaser(int laserIndex, float delay) {
@@ -95,9 +88,6 @@ public class LaserManager : MonoBehaviour, IAttackable {
 
     private void DeactivateLaser() {
         current = LaserSetState.TO_BE_HIDDEN;
-
-        // reset attack called
-        attackCalled = false;
     }
 
 }

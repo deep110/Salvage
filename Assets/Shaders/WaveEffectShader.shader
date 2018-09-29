@@ -1,4 +1,4 @@
-﻿Shader "Effects/WaveEffect" {
+Shader "Effects/WaveEffect" {
 
 	Properties {
 	[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}

@@ -1,4 +1,4 @@
-﻿public class AnalyticsData {
+public class AnalyticsData {
 
 	public enum RateState {
 		DENIED, RATED, POSTPONED, NONE

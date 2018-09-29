@@ -1,4 +1,4 @@
-﻿
+
 public static class EventManager {
 
     public delegate void Call();

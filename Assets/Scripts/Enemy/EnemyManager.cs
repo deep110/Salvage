@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,12 +65,12 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     private void spawnEnemy(int sequenceLevel, EnemySequence.EnemyData enemyData) {
         GameObject enemy = enemyPooler[enemyData.enemyType].GetPooledObject();
+        enemy.SetActive(true);
         enemy.GetComponent<IAttackable>().Attack(
             sequenceLevel,
             playerOneController.GetLastStablePosition(),
             enemyData.platformLevel
         );
-        enemy.SetActive(true);
     }
 
     private EnemySequence getRandomSequence() {

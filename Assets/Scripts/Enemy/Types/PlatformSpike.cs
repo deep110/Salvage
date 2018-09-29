@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class PlatformSpike : Enemy {
 
@@ -16,14 +16,16 @@ public class PlatformSpike : Enemy {
     private Vector2 position = Vector2.zero;
     private float timeElasped;
 
-    void Start() {
+    private const string SPIKE_TAG = "Spike Trig";
+
+    private void Start() {
         currentState = State.OPEN;
         position.x = transform.localPosition.x;
         isActive = true;
         GetComponent<SpriteRenderer>().sprite = spikes[Random.Range(0, spikes.Length)];
     }
 
-    void Update() {
+    private void Update() {
         switch (currentState) {
             case State.OPEN_UP:
                 if (position.y >= 0) {
@@ -53,16 +55,16 @@ public class PlatformSpike : Enemy {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.CompareTag("Spike Trig")) {
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (col.CompareTag(SPIKE_TAG)) {
             currentState = State.CLOSE_UP;
             timeElasped = 0;
             isActive = false;
         }
     }
 
-    void OnTriggerExit2D(Collider2D col) {
-        if (col.gameObject.CompareTag("Spike Trig")) {
+    private void OnTriggerExit2D(Collider2D col) {
+        if (col.CompareTag(SPIKE_TAG)) {
             currentState = State.OPEN_UP;
             timeElasped = 0;
             isActive = true;

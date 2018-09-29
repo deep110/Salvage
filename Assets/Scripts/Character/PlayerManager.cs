@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [RequireComponent(typeof(InputManager))]
 public class PlayerManager : Singleton<PlayerManager> {
