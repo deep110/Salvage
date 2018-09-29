@@ -104,7 +104,7 @@ public class EnemyManager : Singleton<EnemyManager> {
     }
 
     private float getRandomWaitTime(int enemyLevel) {
-        float waitSequenceTime = Random.Range(1.2f, 2.0f);
+        float waitSequenceTime = Random.Range(1.2f, 1.6f);
         if (enemyLevel == 1) {
             waitSequenceTime -= 0.5f;
         } else if (enemyLevel == 2) {
@@ -127,12 +127,12 @@ public class EnemyManager : Singleton<EnemyManager> {
     private void updateRandomizer(int currentLevel) {
         if (currentLevel == 1 && randomizerLevel != 1) {
             weightedRandomizer = new WeightedRandomizer<int>(new Dictionary<int, int> {
-                {0, 60}, {1, 40}
+                {0, 50}, {1, 50}
             });
             randomizerLevel = 1;
         } else if (currentLevel == 2 && randomizerLevel != 2) {
             weightedRandomizer = new WeightedRandomizer<int>(new Dictionary<int, int> {
-                {0, 45}, {1, 30}, {2, 25}
+                {0, 40}, {1, 30}, {2, 30}
             });
             randomizerLevel = 2;
         }
