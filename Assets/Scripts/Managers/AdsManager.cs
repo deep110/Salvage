@@ -9,9 +9,9 @@ public class AdsManager : Singleton<AdsManager> {
     private string placementIdRewarded = "rewardedVideo";
 
 
-    void Start() {
+    private void Start() {
         if (Advertisement.isSupported) {
-            Advertisement.Initialize(gameId, false);
+            Advertisement.Initialize(gameId, true);
         }
     }
 
