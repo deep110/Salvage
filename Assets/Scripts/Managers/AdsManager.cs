@@ -11,7 +11,7 @@ public class AdsManager : Singleton<AdsManager> {
 
     void Start() {
         if (Advertisement.isSupported) {
-            Advertisement.Initialize(gameId, true);
+            Advertisement.Initialize(gameId, false);
         }
     }
 
