@@ -11,7 +11,7 @@ TextureImporter:
     21300012: collectible_6
     21300014: collectible_0
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -200,7 +200,7 @@ TextureImporter:
         x: 117
         y: 486
         width: 111
-        height: 115
+        height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,9 +217,9 @@ TextureImporter:
       name: collectible_6
       rect:
         serializedVersion: 2
-        x: 115
+        x: 117
         y: 256
-        width: 116
+        width: 110
         height: 112
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -237,10 +237,10 @@ TextureImporter:
       name: collectible_0
       rect:
         serializedVersion: 2
-        x: 115
+        x: 116
         y: 26
-        width: 116
-        height: 115
+        width: 112
+        height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -256,12 +256,14 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0a92f57d115104e0d8cfc16e554a4bee
     vertices: []
     indices: 
     edges: []
     weights: []
   spritePackingTag: atlas
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -21,6 +21,10 @@ TextureImporter:
     21300032: dialog_menu_background
     21300034: text_paused
     21300036: text_game_over
+    21300038: button_rate_us
+    21300040: settings_checkbox
+    21300042: settings_checkbox_tick
+    21300044: button_background
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -79,7 +83,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -90,7 +94,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Standalone
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -101,7 +105,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: Android
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -112,7 +116,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: WebGL
-    maxTextureSize: 1024
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -128,10 +132,10 @@ TextureImporter:
       name: button_ads
       rect:
         serializedVersion: 2
-        x: 135
-        y: 773
+        x: 14
+        y: 801
         width: 120
-        height: 120
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -408,10 +412,10 @@ TextureImporter:
       name: text_paused
       rect:
         serializedVersion: 2
-        x: 63
-        y: 672
-        width: 271
-        height: 85
+        x: 454
+        y: 742
+        width: 283
+        height: 87
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -440,6 +444,66 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c315356bdc02141e684cc12e68afcd6b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_rate_us
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 801
+        width: 115
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e524a98df3d244b58f4b1a7cde4d1bb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: settings_checkbox
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 700
+        width: 85
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e45a9af19b9c484389e6d67c0de76fb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: settings_checkbox_tick
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 600
+        width: 66
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa921c76a120e49318ff21cc7f5cddbb
       vertices: []
       indices: 
       edges: []
