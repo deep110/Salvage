@@ -54,6 +54,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         if (revivalAccepted) {
             Time.timeScale = 1;
             gameState = GameState.RUNNING;
+            uiManager.setPauseButtonState(true);
 
             // revive players
             PlayerManager.Instance.RevivePlayers();
@@ -73,6 +74,7 @@ public class GamePlayManager : Singleton<GamePlayManager> {
         updateAnalytics();
         // stop background music
         AudioManager.Instance.StopSound("background_music");
+        uiManager.setPauseButtonState(false);
 
         if (revialChancesLeft > 0 && AdsManager.Instance.IsReady(true)) {
             revialChancesLeft = revialChancesLeft - 1;

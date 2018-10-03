@@ -25,6 +25,7 @@ TextureImporter:
     21300040: settings_checkbox
     21300042: settings_checkbox_tick
     21300044: button_background
+    21300046: button_home
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -504,6 +505,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: fa921c76a120e49318ff21cc7f5cddbb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_home
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 586
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c4b977f44026489e9fa8e700c26d821
       vertices: []
       indices: 
       edges: []

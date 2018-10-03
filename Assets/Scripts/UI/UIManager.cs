@@ -1,10 +1,16 @@
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
 public class UIManager : Singleton<UIManager> {
 
-    public TMP_Text scorePanel;
+    public TMP_Text scoreText;
 
+    [Header("Buttons")]
+    public GameObject pauseButton;
+    public GameObject homeButton;
+
+    [Header("Panels")]
     public GameObject startText;
     public GameObject menuPanel;
     public GameObject platformClearPanel;
@@ -19,8 +25,14 @@ public class UIManager : Singleton<UIManager> {
         setMenuPanelState(true);
     }
 
+    public void OnHomeButtonClick() {
+        Time.timeScale = 1;
+        AudioManager.Instance.PlaySound("button_click");
+        SceneManager.LoadScene(1);
+    }
+
     public void UpdateScoreText(int score) {
-        scorePanel.text = score.ToString();
+        scoreText.text = score.ToString();
     }
 
     public void ShowPlatformClear() {
@@ -54,5 +66,15 @@ public class UIManager : Singleton<UIManager> {
 
     public void setStartTextState(bool shown) {
         startText.SetActive(shown);
+    }
+
+    public void setPauseButtonState(bool shown) {
+        if (shown) {
+            pauseButton.SetActive(true);
+            homeButton.SetActive(false);
+        } else {
+            pauseButton.SetActive(false);
+            homeButton.SetActive(true);
+        }
     }
 }
