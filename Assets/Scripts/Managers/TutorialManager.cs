@@ -95,13 +95,19 @@ public class TutorialManager : MonoBehaviour {
                 case 5:
                     powerupsPanel.SetActive(true);
                     yield return new WaitForSeconds(3f);
-                    tutorialText.SetText("You Rock !!");
                     powerupsPanel.SetActive(false);
+                    tutorialText.SetText("Avoid touching the\nenemies");
                     tutorialStep++;
-                    yield return new WaitForSeconds(2f);
+                    break;
+                
+                case 6:
+                    yield return new WaitForSeconds(3f);
+                    tutorialText.SetText("You Rock !!");
+                    tutorialStep++;
                     break;
 
                 default:
+                    yield return new WaitForSeconds(2f);
                     isTutorialRunning = false;
                     loadGameScene();
                     break;
