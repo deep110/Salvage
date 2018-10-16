@@ -6029,7 +6029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerOne: {fileID: 261850704}
   playerTwo: {fileID: 1122470963}
-  tutorialText: {fileID: 877828234}
+  tutorialText: {fileID: 877828237}
   playerRightPosition: {fileID: 1557539048}
   playerLeftPosition: {fileID: 1807212639}
   crystal: {fileID: 1673588230}

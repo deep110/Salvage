@@ -8,7 +8,7 @@ public class TutorialManager : MonoBehaviour {
 
     public Transform playerOne;
     public Transform playerTwo;
-    public TMP_Text tutorialText;
+    public AnimateText tutorialText;
 
     [Header("Step One")]
     public GameObject playerRightPosition;
@@ -48,11 +48,11 @@ public class TutorialManager : MonoBehaviour {
                     if (checkIsRightDragComplete()) {
                         tutorialStep++;
                         playerRightPosition.SetActive(false);
-                        tutorialText.text = "Awesome !!";
+                        tutorialText.SetText("Awesome !!");
                         yield return new WaitForSeconds(1f);
 
                         // make things ready for next step
-                        tutorialText.text = "Drag the finger to move\nleft";
+                        tutorialText.SetText("Drag the finger to move\nleft");
                         playerLeftPosition.SetActive(true);
                     }
                     break;
@@ -61,22 +61,22 @@ public class TutorialManager : MonoBehaviour {
                     if (checkIsLeftDragComplete()) {
                         tutorialStep++;
                         playerLeftPosition.SetActive(false);
-                        tutorialText.text = "Awesome !!";
+                        tutorialText.SetText("Awesome !!");
                         yield return new WaitForSeconds(1f);
 
                         // make things ready for next step
-                        tutorialText.text = "Now\nTap to jump!";
+                        tutorialText.SetText("Now\nTap to jump!");
                     }
                     break;
 
                 case 3:
                     if (jumpPlayers()) {
                         tutorialStep++;
-                        tutorialText.text = "Awesome !!";
+                        tutorialText.SetText("Awesome !!");
                         yield return new WaitForSeconds(1f);
 
                         // make things ready for next step
-                        tutorialText.text = "Knock the crystal to collect";
+                        tutorialText.SetText("Knock the crystal to collect");
                         EventManager.CrystalCollectEvent += onCrystalCollected;
                         crystal.SetActive(true);
                     }
@@ -85,7 +85,7 @@ public class TutorialManager : MonoBehaviour {
                 case 4:
                     yield return new WaitUntil(() => crystalCollected);
                     tutorialStep++;
-                    tutorialText.text = "You Rock !!";
+                    tutorialText.SetText("You Rock !!");
                     EventManager.CrystalCollectEvent -= onCrystalCollected;
                     yield return new WaitForSeconds(2f);
                     break;

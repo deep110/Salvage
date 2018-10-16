@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: WaveEffectMaterial
   m_Shader: {fileID: 4800000, guid: 5e88ed109e2e98b42ab9b8a6be2d36f0, type: 3}
@@ -49,7 +49,7 @@ Material:
     - _NoiseTex:
         m_Texture: {fileID: 2800000, guid: 1028b1be859f33e49868d9bdc65e12ff, type: 3}
         m_Scale: {x: 0, y: 0}
-        m_Offset: {x: 0.01, y: 0.01}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
