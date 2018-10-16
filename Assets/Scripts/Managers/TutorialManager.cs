@@ -19,6 +19,9 @@ public class TutorialManager : MonoBehaviour {
     [Header("Step Four")]
     public GameObject crystal;
 
+    [Header("Step Five")]
+    public GameObject powerupsPanel;
+
     private Character playerOneController;
     private Character playerTwoController;
     private InputManager inputManager;
@@ -85,8 +88,16 @@ public class TutorialManager : MonoBehaviour {
                 case 4:
                     yield return new WaitUntil(() => crystalCollected);
                     tutorialStep++;
-                    tutorialText.SetText("You Rock !!");
+                    tutorialText.SetText("Look out for these\nPowerups");
                     EventManager.CrystalCollectEvent -= onCrystalCollected;
+                    break;
+                
+                case 5:
+                    powerupsPanel.SetActive(true);
+                    yield return new WaitForSeconds(3f);
+                    tutorialText.SetText("You Rock !!");
+                    powerupsPanel.SetActive(false);
+                    tutorialStep++;
                     yield return new WaitForSeconds(2f);
                     break;
 
